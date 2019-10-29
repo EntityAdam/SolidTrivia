@@ -1,0 +1,16 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+@inject SolidTrivia.Game.ISolidTrivia SolidTrivia
+
+<div id="splash" class="animation-fadein">
+    <h1>Geoparody!</h1>
+    <button @onclick="NavigateToLobby">Host New Game</button>
+</div>
+
+@code {
+    private void NavigateToLobby()
+    {
+        var sessionId = SolidTrivia.CreateNewSession().Id;
+        NavigationManager.NavigateTo("Lobby/" + sessionId);
+    }
+}

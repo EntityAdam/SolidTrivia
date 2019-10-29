@@ -1,0 +1,30 @@
+﻿@page "/Admin"
+@inject SolidTrivia.Game.ISolidTrivia SolidTrivia
+
+<h1>Active Sessions: @SolidTrivia.ActiveSessions()</h1>
+
+@if (SolidTrivia.ActiveSessions() == 0)
+{
+
+}
+else
+{
+<div>
+    @foreach (var session in SolidTrivia.GetSessionsInfo())
+    {
+    <div>
+        <p>Game: @session.Id</p>
+        <p>Players: @session.PlayerCount</p>
+    </div>
+    }
+
+</div>
+}
+
+
+
+@code {
+    protected override void OnInitialized()
+    {
+    }
+}

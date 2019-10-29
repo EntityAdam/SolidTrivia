@@ -1,0 +1,296 @@
+@media(max-width:40em) {
+    html {
+        font-size: 40%
+    }
+}
+
+@media(min-width:40em) {
+    html {
+        font-size: 40%
+    }
+}
+
+@media(min-width:50em) {
+    html {
+        font-size: 50%
+    }
+}
+
+@media(min-width:60em) {
+    html {
+        font-size: 60%
+    }
+}
+
+@media(min-width:100em) {
+    html {
+        font-size: 100%
+    }
+}
+
+html {
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+body {
+    background-color: gray;
+    color: white;
+}
+
+
+#splash {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+    #splash h1 {
+        font-size: 10em;
+    }
+
+    #splash button {
+        margin: 2%;
+        padding: 0.2em;
+        font-size: 5em;
+        color: white;
+        background-color: black;
+        border: 2px solid lightslategray;
+        text-decoration: none;
+    }
+
+        #splash button:hover {
+            background-color: lightslategray;
+            border: 2px solid white;
+        }
+
+.row-board {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.row-category {
+    background-color: black;
+    padding: 5px;
+    color: white;
+    height: 7.4rem;
+    font-size: 3rem;
+    font-weight: 600;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+    .row-category div {
+        background-color: darkblue;
+        width: 16%;
+        text-align: center;
+    }
+
+.row-answer {
+    background-color: black;
+    padding: 5px;
+    font-size: 4rem;
+    color: gold;
+}
+
+    .row-answer div {
+        background-color: darkblue;
+        border: 2px solid darkblue;
+        width: 16%;
+        height: 7rem;
+        /*text-align: center;*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .row-answer div:hover {
+            background-color: darkblue;
+            border: 2px solid white;
+            font-size: 4rem;
+            color: white;
+        }
+
+.leaderboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .leaderboard div {
+        transform-origin: left top;
+    }
+
+
+.player {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin: 5px;
+    align-items: center;
+    background-color: white;
+    color: black;
+}
+
+    .player p {
+        margin: 0;
+        padding: 0;
+        font-size: 2rem;
+    }
+
+        .player p:nth-child(1) {
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+            .player p:nth-child(1)::before {
+                content: "#";
+            }
+
+#answer-container {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+#answer {
+    background-color: darkblue;
+}
+
+#timer {
+    background-color: green;
+}
+
+
+
+.modal {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgb(141, 179, 251);
+}
+
+    .modal.open {
+        border: 5px solid green;
+        display: grid;
+        grid-template-rows: 100px auto 100px;
+    }
+
+/*color simulation: want colors to stick to each player, not position*/
+.leaderboard .player:nth-child(1) {
+    background-color: green;
+}
+
+.leaderboard .player:nth-child(2) {
+    background-color: orange;
+}
+
+.leaderboard .player:nth-child(3) {
+    background-color: blue;
+}
+
+.leaderboard .player:nth-child(3) {
+    background-color: darkcyan;
+}
+
+.leaderboard .player:nth-child(4) {
+    background-color: purple;
+}
+
+.leaderboard .player:nth-child(5) {
+    background-color: maroon;
+}
+
+.leaderboard .player:nth-child(n+6) {
+    background-color: gray;
+}
+
+#lobby {
+    margin-left: 17%;
+    margin-right: 17%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    background-color: black;
+}
+
+#lobby-players {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+    #lobby-players .player {
+        font-family: monospace;
+        height: 4em;
+        width: 12em;
+        background-color: gray;
+        border: 2px solid black;
+    }
+
+        #lobby-players .player:hover {
+            border: 2px solid white;
+        }
+
+#lobby h1 {
+    font-size: 4em;
+}
+
+#lobby button {
+    margin: 2%;
+    padding: 0.2em;
+    font-size: 4em;
+    width: 5em;
+    color: white;
+    background-color: black;
+    border: 2px solid lightslategray;
+    text-decoration: none;
+}
+
+#lobby .command {
+    font-family: monospace;
+    color: red;
+}
+
+#lobby button:hover {
+    background-color: lightslategray;
+    border: 2px solid white;
+}
+
+
+/* ------------------ animations ------------------ */
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animation-fadein {
+    animation: 2s fadeIn linear forwards;
+    -webkit-animation: 2s fadeIn linear forwards;
+}

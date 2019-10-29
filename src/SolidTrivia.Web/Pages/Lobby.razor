@@ -1,0 +1,41 @@
+﻿@page "/lobby/{SessionId}"
+
+@using SolidTrivia.Web.Data
+@inject DummyLobbyService DummyLobbyService
+
+<div id="lobby">
+    <h1>Text <span class="command">JOIN @SessionId</span> to 919-555-5555</h1>
+
+    @if (players.Count() == 0)
+    {
+        <h1>Waiting for players..</h1>
+    }
+    else
+    {
+        <div id="lobby-players">
+            @foreach (var player in players)
+            {
+                <div class="player animation-fadein">@player</div>
+            }
+        </div>
+    }
+    @*@if (players.Count() > 0)
+        {
+        <button @onclick="Start">Start</button>
+        }*@
+    <button @onclick="AddPlayer">Start</button>
+</div>
+
+@code {
+
+    [Parameter]
+    public string SessionId { get; set; }
+
+    List<string> players = new List<string>();
+
+    private async Task AddPlayer()
+    {
+        var player = await DummyLobbyService.AddPlayer();
+        players.Add(player);
+    }
+}

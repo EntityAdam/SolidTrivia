@@ -1,0 +1,37 @@
+﻿@page "/board/{SessionId}"
+@inject SolidTrivia.Game.ISolidTrivia SolidTrivia
+
+<div class="row-board row-category">
+    @foreach (var category in Session.CurrentBoard.Categories)
+    {
+        <div>@category</div>
+    }
+</div>
+
+@foreach (var value in Session.CurrentBoard.Values)
+{
+    <div class="row-board row-answer">
+        @foreach (var category in Session.CurrentBoard.Categories)
+        {
+        <div @onclick="() => Test(category, value)">$@(value * Session.RoundMultiplier)</div>
+        }
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string SessionId { get; set; }
+
+    private SolidTrivia.Game.GameSession Session { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Session = SolidTrivia.GetSession(SessionId);
+    }
+
+    private void Test(string category, int value)
+    {
+        var x = Session.CurrentBoard.Answers.FirstOrDefault(a=>a.Category == category && a.Value == value);
+        x.IsAnswered = true;
+    }
+}
