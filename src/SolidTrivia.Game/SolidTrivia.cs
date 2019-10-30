@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidTrivia.Game.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -112,6 +113,11 @@ namespace SolidTrivia.Game
                 Id = s.Id,
                 PlayerCount = s.Players.Count()
             });
+        }
+
+        public GameResponse ProcessUserMessage(string smsNumber, string body)
+        {
+            throw new NotImplementedException();
         }
     }
 }

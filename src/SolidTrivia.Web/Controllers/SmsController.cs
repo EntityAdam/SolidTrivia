@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SolidTrivia.Game;
+using Twilio;
 using Twilio.AspNet.Common;
 using Twilio.AspNet.Core;
 using Twilio.TwiML;
@@ -12,9 +13,8 @@ using Twilio.TwiML;
 namespace SolidTrivia.Web.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class SmsController : TwilioController
-    {
+    {              
         public SmsController(ISolidTrivia game)
         {
             Game = game;
@@ -22,14 +22,20 @@ namespace SolidTrivia.Web.Controllers
 
         public ISolidTrivia Game { get; }
 
-        public TwiMLResult Index(SmsRequest incomingMessage)
+
+        public IActionResult Index(SmsRequest incomingMessage)
         {
+            var smsNumber = incomingMessage.From;
+            var body = incomingMessage.Body;
 
-            var messagingResponse = new MessagingResponse();
-            messagingResponse.Message("The copy cat says: " +
-                                      incomingMessage.Body);
-
-            return TwiML(messagingResponse);
+            var response = Game.ProcessUserMessage(smsNumber, body);
+            if (response.HasResponse)
+            {
+                var messagingResponse = new MessagingResponse();
+                messagingResponse.Message(response.Body);
+                return TwiML(messagingResponse);
+            }
+            return new OkResult();
         }
     }
 }

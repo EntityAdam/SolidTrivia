@@ -14,5 +14,7 @@ namespace SolidTrivia.Game
 
         (bool, string) Join(string smsNumber, string sessionId);
         (bool, string) Leave(string smsNumber);
+        
+        GameResponse ProcessUserMessage(string smsNumber, string body);
     }
 }
