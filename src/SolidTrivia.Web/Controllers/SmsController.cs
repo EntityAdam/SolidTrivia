@@ -21,8 +21,8 @@ namespace SolidTrivia.Web.Controllers
             var smsNumber = incomingMessage.From;
             var body = incomingMessage.Body;
 
-            var response = Game.ProcessUserMessage(smsNumber, body);
-            if (response.HasResponse)
+            var response = Game.ProcessUserSmsMessage(smsNumber, body);
+            if (response.HasMessage)
             {
                 var messagingResponse = new MessagingResponse();
                 messagingResponse.Message(response.Body);

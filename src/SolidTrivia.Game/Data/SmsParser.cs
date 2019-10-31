@@ -19,9 +19,9 @@ namespace SolidTrivia.Game.Data
                 return result;
             }
 
-            result.SmsCommand = GetCommandType(text);
+            result.UserCommand = GetCommandType(text);
 
-            if (result.SmsCommand == SmsCommandType.Join)
+            if (result.UserCommand == UserCommandType.Join)
             {
                 result.Session = GetSession(text);
             }
@@ -53,27 +53,27 @@ namespace SolidTrivia.Game.Data
             return session;
         }
 
-        private static SmsCommandType GetCommandType(string text)
+        private static UserCommandType GetCommandType(string text)
         {
             var arr = text.Split(' ');
             var firstWord = arr[0];
 
             if (string.Equals("join", firstWord, StringComparison.InvariantCultureIgnoreCase))
             {
-                return SmsCommandType.Join;
+                return UserCommandType.Join;
             }
 
             if (string.Equals("leave", firstWord, StringComparison.InvariantCultureIgnoreCase) && (arr.Length == 1))
             {
-                return SmsCommandType.Leave;
+                return UserCommandType.Leave;
             }
 
             if (string.Equals("dispute", firstWord, StringComparison.InvariantCultureIgnoreCase) || string.Equals("judges", firstWord, StringComparison.InvariantCultureIgnoreCase))
             {
-                return SmsCommandType.Dispute;
+                return UserCommandType.Dispute;
             }
 
-            return SmsCommandType.Response;
+            return UserCommandType.Response;
         }
     }
 
@@ -83,12 +83,12 @@ namespace SolidTrivia.Game.Data
 
         public string FormattedString { get; set; }
 
-        public SmsCommandType SmsCommand { get; set; }
+        public UserCommandType UserCommand { get; set; }
 
         public string Session { get; set; }
     }
 
-    public enum SmsCommandType
+    public enum UserCommandType
     {
         Unknown,
         Join,

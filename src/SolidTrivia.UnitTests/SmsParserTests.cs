@@ -9,7 +9,7 @@ namespace SolidTrivia.UnitTests
         public void Defaults()
         {
             var sms = new SmsResult();
-            Assert.Equal(SmsCommandType.Unknown, sms.SmsCommand);
+            Assert.Equal(UserCommandType.Unknown, sms.UserCommand);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace SolidTrivia.UnitTests
         public void Join(string smsBody)
         {
             var result = SmsParser.Parse(smsBody);
-            Assert.Equal(SmsCommandType.Join, result.SmsCommand);
+            Assert.Equal(UserCommandType.Join, result.UserCommand);
             Assert.Equal("one-two", result.Session);
         }
 
@@ -33,7 +33,7 @@ namespace SolidTrivia.UnitTests
         public void Leave(string smsBody)
         {
             var result = SmsParser.Parse(smsBody);
-            Assert.Equal(SmsCommandType.Leave, result.SmsCommand);
+            Assert.Equal(UserCommandType.Leave, result.UserCommand);
         }
 
         [Theory]
@@ -44,7 +44,7 @@ namespace SolidTrivia.UnitTests
         public void DontAccidentallyLeave(string smsBody)
         {
             var result = SmsParser.Parse(smsBody);
-            Assert.Equal(SmsCommandType.Response, result.SmsCommand);
+            Assert.Equal(UserCommandType.Response, result.UserCommand);
         }
     }
 }

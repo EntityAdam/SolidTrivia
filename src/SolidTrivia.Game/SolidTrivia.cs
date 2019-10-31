@@ -114,20 +114,19 @@ namespace SolidTrivia.Game
             });
         }
 
-        public GameResponse ProcessUserMessage(string smsNumber, string body)
+        public SmsResponseMessage ProcessUserSmsMessage(string smsNumber, string body)
         {
-            var response = new GameResponse();
+            var response = new SmsResponseMessage();
+            var parsedResult = SmsParser.Parse(body);
 
-            var smsResult = SmsParser.Parse(body);
-
-            if (smsResult.SmsCommand == SmsCommandType.Join)
+            if (parsedResult.UserCommand == UserCommandType.Join)
             {
-                var joinResult = Join(smsNumber, smsResult.Session);
+                var joinResult = Join(smsNumber, parsedResult.Session);
                 response.Body = joinResult.Item2;
             }
-            else if (smsResult.SmsCommand == SmsCommandType.Leave)
+            else if (parsedResult.UserCommand == UserCommandType.Leave)
             {
-                var leaveResult = Join(smsNumber, smsResult.Session);
+                var leaveResult = Join(smsNumber, parsedResult.Session);
                 response.Body = leaveResult.Item2;
             }
 

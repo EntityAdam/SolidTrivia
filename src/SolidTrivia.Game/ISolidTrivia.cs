@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SolidTrivia.Game.Models;
+using System.Collections.Generic;
 
 namespace SolidTrivia.Game
 {
@@ -18,6 +19,6 @@ namespace SolidTrivia.Game
 
         (bool, string) Leave(string smsNumber);
 
-        GameResponse ProcessUserMessage(string smsNumber, string body);
+        SmsResponseMessage ProcessUserSmsMessage(string smsNumber, string body);
     }
 }
