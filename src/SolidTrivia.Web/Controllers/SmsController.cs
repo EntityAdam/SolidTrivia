@@ -33,7 +33,8 @@ namespace SolidTrivia.Web.Controllers
             {
                 var messagingResponse = new MessagingResponse();
                 messagingResponse.Message(response.Body);
-                return TwiML(messagingResponse);
+                //return TwiML(messagingResponse);
+                return new OkResult();
             }
             return new OkResult();
         }

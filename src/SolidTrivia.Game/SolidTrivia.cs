@@ -117,7 +117,23 @@ namespace SolidTrivia.Game
 
         public GameResponse ProcessUserMessage(string smsNumber, string body)
         {
-            throw new NotImplementedException();
+            var response = new GameResponse();
+
+            var smsResult = SmsParser.Parse(body);
+
+            if (smsResult.SmsCommand == SmsCommandType.Join)
+            {
+                var joinResult = Join(smsNumber, smsResult.Session);
+                response.Body = joinResult.Item2;
+            }
+            else if (smsResult.SmsCommand == SmsCommandType.Leave)
+            {
+                var leaveResult = Join(smsNumber, smsResult.Session);
+                response.Body = leaveResult.Item2;
+            }
+
+
+            return response;
         }
     }
 }

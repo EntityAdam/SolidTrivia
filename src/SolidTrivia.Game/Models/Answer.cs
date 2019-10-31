@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SolidTrivia.Game.Models;
+using System;
 
 namespace SolidTrivia.Game
 {
 
-    public class Answer
+    public class Answer : BindableBase
     {
         public Answer(string body, string category, int value, string[] acceptableResponses)
         {
@@ -25,7 +26,18 @@ namespace SolidTrivia.Game
 
         public bool IsAnswering { get; set; }
 
-        public bool IsAnswered { get; set; }
+        private bool isAnswered;
+        public bool IsAnswered
+        {
+            get => isAnswered;
+            set
+            {
+                if (isAnswered != value)
+                {
+                    SetField(ref isAnswered, value);
+                }
+            }
+        }
 
         public void MarkAsAnswered()
         {

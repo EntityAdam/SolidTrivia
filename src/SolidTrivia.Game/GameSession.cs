@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SolidTrivia.Game.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace SolidTrivia.Game
 {
-    public class GameSession
+    public class GameSession : BindableBase
     {
         public GameSession(string id)
         {
@@ -17,14 +19,14 @@ namespace SolidTrivia.Game
 
             };
             Responses = new List<Response>();
-            Players = new List<Player>();
+            Players = new ObservableCollection<Player>();
         }
 
         public string Id { get; }
 
         public List<Response> Responses { get; set; }
 
-        public List<Player> Players { get; set; }
+        public ObservableCollection<Player> Players { get; set; }
 
         public List<AnswerBoard> Rounds { get; set; }
 
@@ -83,6 +85,7 @@ namespace SolidTrivia.Game
         internal void Join(Player player)
         {
             Players.Add(player);
+            OnPropertyChanged(nameof(Players));
         }
 
         internal void Leave(Player player)

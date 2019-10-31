@@ -1,11 +1,12 @@
 ﻿using SolidTrivia.Game.Data;
+using SolidTrivia.Game.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SolidTrivia.Game
 {
-    public class AnswerBoard
+    public class AnswerBoard : BindableBase
     {
         public AnswerBoard(string title, int round)
         {

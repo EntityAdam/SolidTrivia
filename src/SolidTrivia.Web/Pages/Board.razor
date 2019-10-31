@@ -13,7 +13,7 @@
     <div class="row-board row-answer">
         @foreach (var category in Session.CurrentBoard.Categories)
         {
-        <div @onclick="() => Test(category, value)">$@(value * Session.RoundMultiplier)</div>
+            <div @onclick="() => Test(category, value)">$@(value * Session.RoundMultiplier)</div>
         }
     </div>
 }
@@ -23,15 +23,19 @@
     public string SessionId { get; set; }
 
     private SolidTrivia.Game.GameSession Session { get; set; }
+    private SolidTrivia.Game.AnswerBoard GameBoard { get; set; }
+
 
     protected override void OnInitialized()
     {
         Session = SolidTrivia.GetSession(SessionId);
+        GameBoard = Session.CurrentBoard;
+        GameBoard.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
     }
 
     private void Test(string category, int value)
     {
-        var x = Session.CurrentBoard.Answers.FirstOrDefault(a=>a.Category == category && a.Value == value);
+        var x = Session.CurrentBoard.Answers.FirstOrDefault(a => a.Category == category && a.Value == value);
         x.IsAnswered = true;
     }
 }
