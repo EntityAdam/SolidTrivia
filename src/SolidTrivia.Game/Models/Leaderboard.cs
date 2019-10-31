@@ -1,4 +1,4 @@
-﻿namespace SolidTrivia.Game
+﻿namespace SolidTrivia.Game.Models
 {
     public class Leaderboard
     {

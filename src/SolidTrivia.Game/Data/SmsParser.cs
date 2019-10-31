@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SolidTrivia.Game.Data
 {
@@ -47,10 +45,10 @@ namespace SolidTrivia.Game.Data
             {
                 return session = originalString.Split(' ')[1];
             }
-            
-            if (arr.Length >= 3) {
-                return session = $"{arr[1]}-{arr[2]}";
 
+            if (arr.Length >= 3)
+            {
+                return session = $"{arr[1]}-{arr[2]}";
             }
             return session;
         }
@@ -82,14 +80,14 @@ namespace SolidTrivia.Game.Data
     public class SmsResult
     {
         public string OriginalString { get; set; }
-        
+
         public string FormattedString { get; set; }
 
         public SmsCommandType SmsCommand { get; set; }
-        
+
         public string Session { get; set; }
-        
     }
+
     public enum SmsCommandType
     {
         Unknown,

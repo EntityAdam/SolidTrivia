@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SolidTrivia.Game.Models;
+using System.Collections.Generic;
 
 namespace SolidTrivia.Game.Data
 {

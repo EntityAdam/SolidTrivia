@@ -1,6 +1,5 @@
 ﻿using SolidTrivia.Game;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -8,7 +7,7 @@ namespace SolidTrivia.UnitTests
 {
     public class SolidTriviaTests
     {
-        SolidTriviaGame game;
+        private SolidTriviaGame game;
 
         public SolidTriviaTests()
         {
@@ -29,7 +28,6 @@ namespace SolidTrivia.UnitTests
 
             Assert.Equal(2, game.ActiveSessions());
         }
-
 
         [Fact]
         public void EndSession()
@@ -63,7 +61,6 @@ namespace SolidTrivia.UnitTests
             joinResult = game.Join("1", "INVALID SESSION");
             Assert.False(joinResult.Item1);
             Assert.StartsWith("session does not exist", joinResult.Item2);
-
 
             joinResult = game.Join("1", session1.Id);
             Assert.True(joinResult.Item1);
@@ -140,6 +137,5 @@ namespace SolidTrivia.UnitTests
             Assert.NotNull(session.Players);
             Assert.Equal("Round One", session.CurrentBoard.Title);
         }
-
     }
 }

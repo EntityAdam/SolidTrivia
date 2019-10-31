@@ -38,7 +38,6 @@ body {
     color: white;
 }
 
-
 #splash {
     margin-left: 20%;
     margin-right: 20%;
@@ -126,7 +125,6 @@ body {
         transform-origin: left top;
     }
 
-
 .player {
     display: flex;
     flex-direction: column;
@@ -165,8 +163,6 @@ body {
 #timer {
     background-color: green;
 }
-
-
 
 .modal {
     display: none;
@@ -266,9 +262,7 @@ body {
     border: 2px solid white;
 }
 
-
 /* ------------------ animations ------------------ */
-
 
 @keyframes fadeIn {
     from {

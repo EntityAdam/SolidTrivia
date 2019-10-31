@@ -1,16 +1,16 @@
 using SolidTrivia.Game;
+using SolidTrivia.Game.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using static SolidTrivia.UnitTests.SolidTriviaTests;
 
 namespace SolidTrivia.UnitTests
 {
     public class SessionTests
     {
-        SolidTriviaGame game;
-        GameSession session;
+        private SolidTriviaGame game;
+        private GameSession session;
 
         public SessionTests()
         {
@@ -30,7 +30,7 @@ namespace SolidTrivia.UnitTests
             Assert.Equal("Final Round", round3.Title);
 
             Assert.Equal(session.CurrentBoard, round1);
-            
+
             round1.IsComplete = true;
             Assert.Equal(session.CurrentBoard, round2);
 
@@ -51,9 +51,7 @@ namespace SolidTrivia.UnitTests
             Assert.Equal(3, answer.Value);
             Assert.True(answer.IsAnswering);
 
-
             Assert.Throws<InvalidOperationException>(() => answer = session.SelectAnswer("numbers", 1));
-
 
             answer.MarkAsAnswered();
 
@@ -119,9 +117,9 @@ namespace SolidTrivia.UnitTests
 
             //Assert.NotEqual(answer1, answer2);
 
-            //game.Response("1", "blue"); 
-            //game.Response("1", "yellow"); 
-            //game.Response("2", "yellow"); 
+            //game.Response("1", "blue");
+            //game.Response("1", "yellow");
+            //game.Response("2", "yellow");
             //game.CloseAnswer(session.Id);
             //game.Response("3", "blue");
 

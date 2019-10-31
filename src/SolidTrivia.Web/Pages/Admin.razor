@@ -9,19 +9,16 @@
 }
 else
 {
-<div>
-    @foreach (var session in SolidTrivia.GetSessionsInfo())
-    {
     <div>
-        <p>Game: @session.Id</p>
-        <p>Players: @session.PlayerCount</p>
+        @foreach (var session in SolidTrivia.GetSessionsInfo())
+        {
+            <div>
+                <p>Game: @session.Id</p>
+                <p>Players: @session.PlayerCount</p>
+            </div>
+        }
     </div>
-    }
-
-</div>
 }
-
-
 
 @code {
     protected override void OnInitialized()

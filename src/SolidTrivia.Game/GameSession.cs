@@ -16,7 +16,6 @@ namespace SolidTrivia.Game
                 new AnswerBoard("Round One", 1),
                 new AnswerBoard("Round Two", 2),
                 new AnswerBoard("Final Round", 3)
-
             };
             Responses = new List<Response>();
             Players = new ObservableCollection<Player>();
@@ -46,8 +45,10 @@ namespace SolidTrivia.Game
                 {
                     case 0:
                         return 100;
+
                     case 1:
                         return 200;
+
                     default:
                         throw new InvalidOperationException();
                 }
@@ -59,7 +60,6 @@ namespace SolidTrivia.Game
             var rnd = new Random();
             var index = rnd.Next(Players.Count());
             return Players[index];
-
         }
 
         public Answer SelectAnswer(string category, int value)
@@ -79,7 +79,6 @@ namespace SolidTrivia.Game
 
             answer.IsAnswering = true;
             return answer;
-
         }
 
         internal void Join(Player player)
@@ -121,6 +120,5 @@ namespace SolidTrivia.Game
         {
             return (answer.AcceptableResponses.Contains(text));
         }
-
     }
 }

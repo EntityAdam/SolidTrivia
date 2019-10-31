@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SolidTrivia.Game
+﻿namespace SolidTrivia.Game
 {
     public class SessionInfo
     {

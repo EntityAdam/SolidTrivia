@@ -1,6 +1,4 @@
-﻿using SolidTrivia.Game.Models;
-
-namespace SolidTrivia.Game
+﻿namespace SolidTrivia.Game.Models
 {
     public class Player : BindableBase
     {
@@ -18,6 +16,7 @@ namespace SolidTrivia.Game
         public string Id { get; set; }
 
         private Score score;
+
         public Score Score
         {
             get => score;

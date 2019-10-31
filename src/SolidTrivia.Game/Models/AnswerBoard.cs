@@ -1,10 +1,8 @@
 ﻿using SolidTrivia.Game.Data;
-using SolidTrivia.Game.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SolidTrivia.Game
+namespace SolidTrivia.Game.Models
 {
     public class AnswerBoard : BindableBase
     {

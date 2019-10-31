@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace SolidTrivia.Game
+namespace SolidTrivia.Game.Models
 {
     //todo: handle per round score?
     public class Response
@@ -17,9 +16,9 @@ namespace SolidTrivia.Game
         public string PlayerId { get; }
 
         public string SessionId { get; }
-        
+
         public bool IsCorrect { get; }
-        
+
         public DateTime Time { get; }
     }
 }

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-
 namespace SolidTrivia.Game.Models
 {
     public abstract class BindableBase : INotifyPropertyChanged

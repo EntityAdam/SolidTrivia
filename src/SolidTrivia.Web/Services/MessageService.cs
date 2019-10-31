@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SolidTrivia.Web.Services
+﻿namespace SolidTrivia.Web.Services
 {
     public class MessageService
     {

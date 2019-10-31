@@ -1,14 +1,12 @@
-﻿using SolidTrivia.Game.Models;
-using System;
+﻿using System;
 
-namespace SolidTrivia.Game
+namespace SolidTrivia.Game.Models
 {
-
     public class Answer : BindableBase
     {
-        public Answer(string body, string category, int value, string[] acceptableResponses)
+        public Answer(string answerText, string category, int value, string[] acceptableResponses)
         {
-            AnswerText = body;
+            AnswerText = answerText;
             AcceptableResponses = acceptableResponses;
             Category = category;
             Value = value;
@@ -27,6 +25,7 @@ namespace SolidTrivia.Game
         public bool IsAnswering { get; set; }
 
         private bool isAnswered;
+
         public bool IsAnswered
         {
             get => isAnswered;

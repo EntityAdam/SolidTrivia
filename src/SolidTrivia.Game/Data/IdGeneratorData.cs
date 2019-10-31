@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-
-namespace SolidTrivia.Game.Data
+﻿namespace SolidTrivia.Game.Data
 {
     public static class IdGeneratorData
     {

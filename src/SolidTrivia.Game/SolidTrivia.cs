@@ -1,4 +1,5 @@
 ﻿using SolidTrivia.Game.Data;
+using SolidTrivia.Game.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,6 @@ namespace SolidTrivia.Game
             if (string.IsNullOrEmpty(sessionId)) throw new ArgumentNullException(nameof(sessionId));
             var session = GetSession(sessionId);
             gameSessions.Remove(session);
-
         }
 
         public GameSession GetSession(string sessionId)
@@ -41,7 +41,6 @@ namespace SolidTrivia.Game
             }
             catch (Exception ex)
             {
-
                 throw new ArgumentOutOfRangeException("Session does not exist.", ex);
             }
         }
@@ -131,7 +130,6 @@ namespace SolidTrivia.Game
                 var leaveResult = Join(smsNumber, smsResult.Session);
                 response.Body = leaveResult.Item2;
             }
-
 
             return response;
         }

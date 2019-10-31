@@ -1,7 +1,6 @@
 ﻿using SolidTrivia.Game.Data;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SolidTrivia.Game
 {
@@ -30,7 +29,7 @@ namespace SolidTrivia.Game
             var duplicates = 0;
             string result = null;
             var set = new HashSet<string>(ids);
-            while (set.Count < ids.Count+1)
+            while (set.Count < ids.Count + 1)
             {
                 result = Get();
                 if (!set.Add(result))

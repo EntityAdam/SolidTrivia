@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SolidTrivia.Game.Data;
 using Xunit;
-using SolidTrivia.Game.Data;
 
 namespace SolidTrivia.UnitTests
 {
