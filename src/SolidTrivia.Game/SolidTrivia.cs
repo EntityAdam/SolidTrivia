@@ -28,11 +28,11 @@ namespace SolidTrivia.Game
         public void EndGameSession(string sessionId)
         {
             if (string.IsNullOrEmpty(sessionId)) throw new ArgumentNullException(nameof(sessionId));
-            var session = GetSession(sessionId);
+            var session = GetSessionById(sessionId);
             gameSessions.Remove(session);
         }
 
-        public GameSession GetSession(string sessionId)
+        public GameSession GetSessionById(string sessionId)
         {
             if (string.IsNullOrEmpty(sessionId)) throw new ArgumentNullException(nameof(sessionId));
             try
@@ -45,12 +45,18 @@ namespace SolidTrivia.Game
             }
         }
 
+        private GameSession GetSessionIdBySms(string smsNumber)
+        {
+            var sessionId = AllPlayers().Single(p=>p.SmsNumber == smsNumber).SessionId;
+            return GetSessionById(sessionId);
+        }
+
         //outcomes
         //true : playerId
         //false : errorMessage
         public (bool, string) Join(string smsNumber, string sessionId)
         {
-            string errorMessage = null;
+            string message = null;
 
             if (string.IsNullOrEmpty(sessionId)) throw new ArgumentNullException(nameof(sessionId));
             if (smsNumber == null) throw new ArgumentNullException(nameof(smsNumber));
@@ -59,26 +65,28 @@ namespace SolidTrivia.Game
 
             if (session == null)
             {
-                errorMessage = $"session does not exist. {sessionId}";
-                return (false, errorMessage);
+                message = $"session does not exist. {sessionId}";
+                return (false, message);
             }
 
             var players = AllPlayers();
 
             if (players.Any(p => p.SmsNumber.Contains(smsNumber)))
             {
-                errorMessage = $"you are already registered for a game, to join a new game send command LEAVE";
-                return (false, errorMessage);
+                message = $"you are already registered for a game, to join a new game send command LEAVE";
+                return (false, message);
             }
 
             var player = new Player(smsNumber, session.Id, IdGenerator.GetNext(players.Select(p => p.Id).ToList()));
+            
             session.Join(player);
-            return (true, player.Id);
+            message = $"you have joined the game {sessionId}, text LEAVE to quit at any time";
+            return (true, message);
         }
 
         public (bool, string) Leave(string smsNumber)
         {
-            string errorMessage = null;
+            string message = null;
 
             if (string.IsNullOrEmpty(smsNumber)) throw new ArgumentNullException(nameof(smsNumber));
 
@@ -87,8 +95,7 @@ namespace SolidTrivia.Game
 
             if (player == null)
             {
-                errorMessage = $"I don't know you";
-                return (false, errorMessage);
+                return (false, message);
             }
 
             var session = gameSessions.Single(p => p.Id == player.SessionId);
@@ -97,7 +104,8 @@ namespace SolidTrivia.Game
             //todo: add SessionExists?
 
             session.Leave(player);
-            return (true, "You have left the game");
+            message = "you have left the game, and I have forgotten everything about you";
+            return (true, message);
         }
 
         public IEnumerable<Player> AllPlayers()
@@ -121,15 +129,23 @@ namespace SolidTrivia.Game
 
             if (parsedResult.UserCommand == UserCommandType.Join)
             {
-                var joinResult = Join(smsNumber, parsedResult.Session);
+                var joinResult = Join(smsNumber, parsedResult.SessionToJoin);
+                response.Success = joinResult.Item1;
                 response.Body = joinResult.Item2;
             }
             else if (parsedResult.UserCommand == UserCommandType.Leave)
             {
-                var leaveResult = Join(smsNumber, parsedResult.Session);
+                var leaveResult = Leave(smsNumber);
+                response.Success = leaveResult.Item1;
                 response.Body = leaveResult.Item2;
             }
-
+            else if (parsedResult.UserCommand == UserCommandType.Response)
+            {
+                var session = GetSessionIdBySms(smsNumber);
+                var sessionResponse = session.AddResponse(smsNumber, parsedResult.FormattedString);
+                //var sessionResponse = session.Response
+                //determine if we want to send a message back to the user
+            }
             return response;
         }
     }

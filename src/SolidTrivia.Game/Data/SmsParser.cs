@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidTrivia.Game.Models;
+using System;
 
 namespace SolidTrivia.Game.Data
 {
@@ -16,16 +17,20 @@ namespace SolidTrivia.Game.Data
 
             if (string.IsNullOrWhiteSpace(text))
             {
-                return result;
+                return null;
             }
 
             result.UserCommand = GetCommandType(text);
 
             if (result.UserCommand == UserCommandType.Join)
             {
-                result.Session = GetSession(text);
+                var session = GetSession(text);
+                if (session == null)
+                {
+                    return null;
+                }
+                result.SessionToJoin = session;
             }
-
             return result;
         }
 
@@ -37,8 +42,12 @@ namespace SolidTrivia.Game.Data
         private static string GetSession(string originalString)
         {
             var session = "";
-
             var arr = originalString.Split(' ');
+
+            if (arr.Length <= 1)
+            {
+                return null;
+            }
 
             //check if hypen is present
             if (arr[1].IndexOf('-') > 0)
@@ -50,7 +59,7 @@ namespace SolidTrivia.Game.Data
             {
                 return session = $"{arr[1]}-{arr[2]}";
             }
-            return session;
+            return null;
         }
 
         private static UserCommandType GetCommandType(string text)
@@ -75,17 +84,6 @@ namespace SolidTrivia.Game.Data
 
             return UserCommandType.Response;
         }
-    }
-
-    public class SmsResult
-    {
-        public string OriginalString { get; set; }
-
-        public string FormattedString { get; set; }
-
-        public UserCommandType UserCommand { get; set; }
-
-        public string Session { get; set; }
     }
 
     public enum UserCommandType

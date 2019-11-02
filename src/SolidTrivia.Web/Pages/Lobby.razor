@@ -30,7 +30,7 @@
 
     protected override void OnInitialized()
     {
-        Session = SolidTrivia.GetSession(SessionId);
+        Session = SolidTrivia.GetSessionById(SessionId);
         Session.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
     }
 

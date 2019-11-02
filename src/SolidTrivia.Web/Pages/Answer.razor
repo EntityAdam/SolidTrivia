@@ -1,73 +1,74 @@
-﻿
-@page "/board/{SessionId}/answer/{AnswerId:guid}"
+﻿@*
+    @page "/board/{SessionId}/answer/{AnswerId:guid}"
 
-@using System.Threading;
-@inject NavigationManager NavigationManager
-@inject SolidTrivia.Game.ISolidTrivia SolidTrivia
+    @using System.Threading;
+    @inject NavigationManager NavigationManager
+    @inject SolidTrivia.Game.ISolidTrivia SolidTrivia
 
-<div id="answer-container">
-    <div id="header">
-        <div id="timer">
-            @Timer remaining
+    <div id="answer-container">
+        <div id="header">
+            <div id="timer">
+                @Timer remaining
+            </div>
+            <div id="stats">
+                <p>Responses: 10</p>
+                <p>Players:&nbsp;&nbsp; @Session.Players.Count()</p>
+            </div>
+            <div id="boardnav">
+                <button @onclick="MarkAsAnswered">Continue -></button>
+            </div>
         </div>
-        <div id="stats">
-            <p>Responses: 10</p>
-            <p>Players:&nbsp;&nbsp; @Session.Players.Count()</p>
+        <div id="answer">
+            This file, commonly referred to only by it's file extension excludes files from a Git repository.
         </div>
-        <div id="boardnav">
-            <button @onclick="MarkAsAnswered">Continue -></button>
+        <div id="answer-code">
+    <pre class="prettyprint">@(@"
+    public async Task<bool> CanDoStuff()
+    {
+        Console.WriteLine(""This is a test"");
+    }")
+    </pre>
         </div>
     </div>
-    <div id="answer">
-        This file, commonly referred to only by it's file extension excludes files from a Git repository.
-    </div>
-    <div id="answer-code">
-<pre class="prettyprint">@(@"
-public async Task<bool> CanDoStuff() 
-{
-    Console.WriteLine(""This is a test"");
-}")
-</pre>
-    </div>
-</div>
 
-@code {
-    [Parameter]
-    public Guid AnswerId { get; set; }
+    @code {
+        [Parameter]
+        public Guid AnswerId { get; set; }
 
-    [Parameter]
-    public string SessionId { get; set; }
+        [Parameter]
+        public string SessionId { get; set; }
 
-    private SolidTrivia.Game.GameSession Session { get; set; }
-    private SolidTrivia.Game.Models.AnswerBoard GameBoard { get; set; }
+        private SolidTrivia.Game.GameSession Session { get; set; }
+        private SolidTrivia.Game.Models.AnswerBoard GameBoard { get; set; }
 
-    private int Timer { get; set; } = 120;
+        private int Timer { get; set; } = 120;
 
-    protected override void OnInitialized()
-    {
-
-        Session = SolidTrivia.GetSession(SessionId);
-        GameBoard = Session.CurrentBoard;
-        GameBoard.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
-        CountDown();
-
-    }
-
-    protected void MarkAsAnswered()
-    {
-        Session.MarkAsAnswered(AnswerId);
-        NavigationManager.NavigateTo($"Board/{SessionId}");
-    }
-
-    private void CountDown()
-    {
-        var timer = new Timer(new TimerCallback(_ =>
+        protected override void OnInitialized()
         {
-            if (Timer > 0)
+
+            Session = SolidTrivia.GetSession(SessionId);
+            GameBoard = Session.CurrentBoard;
+            GameBoard.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
+            CountDown();
+
+        }
+
+        protected void MarkAsAnswered()
+        {
+            Session.MarkAsAnswered(AnswerId);
+            NavigationManager.NavigateTo($"Board/{SessionId}");
+        }
+
+        private void CountDown()
+        {
+            var timer = new Timer(new TimerCallback(_ =>
             {
-                Timer--;
-                base.InvokeAsync(StateHasChanged);
-            }
-        }), null, 1000, 1000);
+                if (Timer > 0)
+                {
+                    Timer--;
+                    base.InvokeAsync(StateHasChanged);
+                }
+            }), null, 1000, 1000);
+        }
     }
-}
+*@

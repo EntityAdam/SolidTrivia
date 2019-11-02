@@ -4,19 +4,16 @@ namespace SolidTrivia.Game.Models
 {
     public class Answer : BindableBase
     {
-        public Answer(string answerText, string category, int value, string[] acceptableResponses)
+        public Answer(string answerText, int weight, string[] acceptableResponses)
         {
             AnswerText = answerText;
             AcceptableResponses = acceptableResponses;
-            Category = category;
-            Value = value;
+            Weight = weight;
         }
 
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public string Category { get; set; }
-
-        public int Value { get; set; }
+        public int Weight { get; set; }
 
         public string AnswerText { get; set; }
 

@@ -20,113 +20,78 @@ namespace SolidTrivia.UnitTests
         }
 
         [Fact]
-        public void CurrentRound()
-        {
-            var round1 = session.Rounds.First();
-            var round2 = session.Rounds.Skip(1).First();
-            var round3 = session.Rounds.Skip(2).First();
-            Assert.Equal("Round One", round1.Title);
-            Assert.Equal("Round Two", round2.Title);
-            Assert.Equal("Final Round", round3.Title);
-
-            Assert.Equal(session.CurrentBoard, round1);
-
-            round1.IsComplete = true;
-            Assert.Equal(session.CurrentBoard, round2);
-
-            round2.IsComplete = true;
-            Assert.Equal(session.CurrentBoard, round3);
-
-            round3.IsComplete = true;
-            //what now?
-        }
-
-        [Fact]
-        public void SelectAnswer_Happy()
+        public void SelectAnswer()
         {
             Answer answer;
 
-            answer = session.SelectAnswer("letters", 3);
-            Assert.Equal("letters", answer.Category);
-            Assert.Equal(3, answer.Value);
+            Assert.Throws<ArgumentNullException>(() => answer = session.SelectAnswer(null, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => answer = session.SelectAnswer("LINQ", -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => answer = session.SelectAnswer("INVALID CATEGORY", 1));
+
+            answer = session.SelectAnswer("Potporri", 3);
+            Assert.Equal(3, answer.Weight);
             Assert.True(answer.IsAnswering);
 
-            Assert.Throws<InvalidOperationException>(() => answer = session.SelectAnswer("numbers", 1));
-
+            Assert.True(session.IsAnswerInProgress());
+            Assert.Throws<InvalidOperationException>(() => answer = session.SelectAnswer("LINQ", 5));
             answer.MarkAsAnswered();
+            Assert.False(session.IsAnswerInProgress());
 
-            answer = session.SelectAnswer("numbers", 1);
-            Assert.Equal("numbers", answer.Category);
-            Assert.Equal(1, answer.Value);
+            answer = session.SelectAnswer("LINQ", 1);
+            Assert.Equal(1, answer.Weight);
             Assert.True(answer.IsAnswering);
         }
 
         [Fact]
-        public void SelectAnswer_Sad()
+        public void CurrentAnswer()
         {
             Answer answer;
+            
+            Assert.Null(session.CurrentAnswer());
+            
+            answer = session.SelectAnswer("Potporri", 3);
+            Assert.Equal(3, answer.Weight);
+            Assert.True(answer.IsAnswering);
+           
+            var currentAnswer = session.CurrentAnswer();
 
-            answer = session.SelectAnswer("letters", 4);
-            Assert.Equal("letters", answer.Category);
-            Assert.Equal(4, answer.Value);
+            Assert.Equal(currentAnswer, answer);
 
-            Assert.Throws<InvalidOperationException>(() => answer = session.SelectAnswer("letters", 4));
-        }
-
-        [Fact]
-        public void SelectAnswer_Sad2()
-        {
-            Answer answer;
-
-            Assert.Throws<ArgumentNullException>(() => answer = session.SelectAnswer("", 5));
-            Assert.Throws<ArgumentOutOfRangeException>(() => answer = session.SelectAnswer("invalid category", 0));
-            Assert.Throws<KeyNotFoundException>(() => answer = session.SelectAnswer("letters", 6));
+            session.MarkCurrentAnswerAsAnswered();
+            Assert.Null(session.CurrentAnswer());
         }
 
         [Fact]
         public void Scenario1()
         {
-            //var game = new SolidTriviaGame();
-            //var session = game.CreateNewGameSession();
+            var firstChoicePlayer = session.SelectRandonPlayer();
+            Assert.NotNull(firstChoicePlayer);
 
-            ////temp;
-            //var scores = new List<Response>();
+            SmsResponseMessage response;
 
-            //game.OpenRegistration(session.Id);
-            //game.Join("1", session.Id);
-            //game.Join("2", session.Id);
-            //game.Join("3", session.Id);
-            //game.CloseRegistration(session.Id);
+            //player is invalid / not playing
+            response = session.AddResponse("INVALID PLAYER", "INVALID RESPONSE");
+            Assert.False(response.Success);
 
-            //var firstChoicePlayer = session.SelectRandonPlayer();
-            //Assert.NotNull(firstChoicePlayer);
 
-            //var answer = session.SelectAnswer("fundamentals", 1);
+            //no answer is being answered
+            response = session.AddResponse("1", "INVALID RESPONSE");
+            Assert.False(response.Success);
+            Assert.StartsWith("no answer to respond to", response.Body);
 
-            //game.Response("1", "blue"); //first answer correct
-            //game.Response("1", "yellow"); //second answer discarded
-            //game.Response("2", "yellow"); //first answer incorrect
-            ////session.EndQuestion();
-            //game.Response("3", "blue"); //late answer discarded
+            var answer = session.SelectAnswer("LINQ", 2);
+            Assert.True(session.IsAnswerInProgress());
 
-            //scores = game.Scores(session.Id);
-            //Assert.Equal(1, scores.Where(r=>r.IsCorrect).Count());
-            //Assert.Equal(1, scores.Where(r => r.IsCorrect).Count());
+            Assert.False(session.HasPlayerResponded("1", answer));
+            response = session.AddResponse("1", "valid response");
+            Assert.True(response.Success);
+            Assert.StartsWith("your response has been accepted", response.Body);
 
-            //var answer2 = game.NextAnswer(session.Id);
+            Assert.True(session.HasPlayerResponded("1", answer));
+            response = session.AddResponse("1", "valid response");
+            Assert.False(response.Success);
+            Assert.StartsWith("you have already provided a response to this answer", response.Body);
 
-            //Assert.NotEqual(answer1, answer2);
-
-            //game.Response("1", "blue");
-            //game.Response("1", "yellow");
-            //game.Response("2", "yellow");
-            //game.CloseAnswer(session.Id);
-            //game.Response("3", "blue");
-
-            ////todo: validate leaderboard
-            ////var scores2 = game.Scores(session.Id);
-
-            //var answer3 = game.NextAnswer(session.Id); //todo: error: no answer yet, must begin next round
         }
     }
 }

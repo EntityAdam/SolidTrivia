@@ -75,6 +75,7 @@ namespace SolidTrivia.UnitTests
         {
             var session1 = game.CreateNewSession();
             var session2 = game.CreateNewSession();
+            var sessionInfo = game.GetSessionsInfo();
 
             TestHelper.AddPlayers(game, session1, 10);
             TestHelper.AddPlayers(game, session2, 10);
@@ -88,10 +89,13 @@ namespace SolidTrivia.UnitTests
             Assert.Equal(8, session1.Players.Count());
             Assert.Equal(18, game.AllPlayers().Count());
 
+            Assert.Equal(8, sessionInfo.First().PlayerCount);
+            Assert.Equal(10, sessionInfo.Skip(1).Take(1).First().PlayerCount);
+
             var leaveResult = (false, "");
             leaveResult = game.Leave("invalid player");
             Assert.False(leaveResult.Item1);
-            Assert.Equal("I don't know you", leaveResult.Item2);
+            Assert.Null(leaveResult.Item2);
         }
 
         [Fact]
@@ -99,9 +103,13 @@ namespace SolidTrivia.UnitTests
         {
             var session1 = game.CreateNewSession();
             var session2 = game.CreateNewSession();
+            var sessionInfo = game.GetSessionsInfo();
 
             TestHelper.AddPlayers(game, session1, 10);
             TestHelper.AddPlayers(game, session2, 10);
+
+            Assert.Equal(10, sessionInfo.First().PlayerCount);
+            Assert.Equal(10, sessionInfo.Skip(1).Take(1).First().PlayerCount);
 
             Assert.Equal(10, session1.Players.Count());
             Assert.Equal(10, session2.Players.Count());
@@ -114,7 +122,7 @@ namespace SolidTrivia.UnitTests
             var leaveResult = (false, "");
             leaveResult = game.Leave("invalid player");
             Assert.False(leaveResult.Item1);
-            Assert.Equal("I don't know you", leaveResult.Item2);
+            Assert.Null(leaveResult.Item2);
         }
 
         [Fact]
@@ -130,12 +138,9 @@ namespace SolidTrivia.UnitTests
         public void NewSessionState()
         {
             var session = game.CreateNewSession();
-
-            Assert.Equal(3, session.Rounds.Count());
             Assert.NotNull(session.Id);
             Assert.NotNull(session.Responses);
             Assert.NotNull(session.Players);
-            Assert.Equal("Round One", session.CurrentBoard.Title);
         }
     }
 }

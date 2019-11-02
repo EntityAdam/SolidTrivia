@@ -1,4 +1,5 @@
 ﻿using SolidTrivia.Game.Data;
+using SolidTrivia.Game.Models;
 using Xunit;
 
 namespace SolidTrivia.UnitTests
@@ -23,7 +24,7 @@ namespace SolidTrivia.UnitTests
         {
             var result = SmsParser.Parse(smsBody);
             Assert.Equal(UserCommandType.Join, result.UserCommand);
-            Assert.Equal("one-two", result.Session);
+            Assert.Equal("one-two", result.SessionToJoin);
         }
 
         [Theory]
@@ -45,6 +46,23 @@ namespace SolidTrivia.UnitTests
         {
             var result = SmsParser.Parse(smsBody);
             Assert.Equal(UserCommandType.Response, result.UserCommand);
+        }
+
+
+        [Fact]
+        public void Test()
+        {
+            //nothing sent.. probably can't happen.
+            var result1 = SmsParser.Parse(""); 
+            Assert.Null(result1);
+
+            //join with no session id supplied
+            var result2 = SmsParser.Parse("join");
+            Assert.Null(result2);
+
+            //join with half a session id?
+            var result3 = SmsParser.Parse("join invalid");
+            Assert.Null(result3);
         }
     }
 }

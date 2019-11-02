@@ -11,7 +11,7 @@ namespace SolidTrivia.Game
 
         int ActiveSessions();
 
-        GameSession GetSession(string sessionId);
+        GameSession GetSessionById(string sessionId);
 
         IEnumerable<SessionInfo> GetSessionsInfo();
 

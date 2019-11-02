@@ -14,16 +14,5 @@
         public string SessionId { get; set; }
 
         public string Id { get; set; }
-
-        private Score score;
-
-        public Score Score
-        {
-            get => score;
-            set
-            {
-                SetField(ref score, value);
-            }
-        }
     }
 }

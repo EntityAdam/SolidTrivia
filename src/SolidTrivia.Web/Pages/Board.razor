@@ -1,44 +1,48 @@
-﻿@page "/board/{SessionId}"
-@inject NavigationManager NavigationManager
-@inject SolidTrivia.Game.ISolidTrivia SolidTrivia
+﻿@*
 
-<div class="row-board row-category">
-    @foreach (var category in Session.CurrentBoard.Categories)
-    {
-        <div>@category</div>
-    }
-</div>
+    @page "/board/{SessionId}"
+    @inject NavigationManager NavigationManager
+    @inject SolidTrivia.Game.ISolidTrivia SolidTrivia
 
-@foreach (var value in Session.CurrentBoard.Values)
-{
-    <div class="row-board row-answer">
+    <div class="row-board row-category">
         @foreach (var category in Session.CurrentBoard.Categories)
         {
-            <div @onclick="() => NavigateToAnswer(category, value)">$@(value * Session.RoundMultiplier)</div>
+            <div>@category</div>
         }
     </div>
-}
 
-@code {
-    [Parameter]
-    public string SessionId { get; set; }
-
-    private SolidTrivia.Game.GameSession Session { get; set; }
-    private SolidTrivia.Game.Models.AnswerBoard GameBoard { get; set; }
-
-    const string hiddenAnswerClass = "answered";
-
-    protected override void OnInitialized()
+    @foreach (var value in Session.CurrentBoard.Values)
     {
-        Session = SolidTrivia.GetSession(SessionId);
-        GameBoard = Session.CurrentBoard;
-        GameBoard.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
+        <div class="row-board row-answer">
+            @foreach (var category in Session.CurrentBoard.Categories)
+            {
+                <div @onclick="() => NavigateToAnswer(category, value)">$@(value * Session.RoundMultiplier)</div>
+            }
+        </div>
     }
 
-    private void NavigateToAnswer(string category, int value)
-    {
-        var answer = Session.CurrentBoard.Answers.FirstOrDefault(a => a.Category == category && a.Value == value);
-        answer.IsAnswering = true;
-        NavigationManager.NavigateTo($"Board/{SessionId}/Answer/{answer.Id}");
+    @code {
+        [Parameter]
+        public string SessionId { get; set; }
+
+        private SolidTrivia.Game.GameSession Session { get; set; }
+        private SolidTrivia.Game.Models.AnswerBoard GameBoard { get; set; }
+
+        const string hiddenAnswerClass = "answered";
+
+        protected override void OnInitialized()
+        {
+            Session = SolidTrivia.GetSession(SessionId);
+            GameBoard = Session.CurrentBoard;
+            GameBoard.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
+        }
+
+        private void NavigateToAnswer(string category, int value)
+        {
+            var answer = Session.CurrentBoard.Answers.FirstOrDefault(a => a.Category == category && a.Weight == value);
+            answer.IsAnswering = true;
+            NavigationManager.NavigateTo($"Board/{SessionId}/Answer/{answer.Id}");
+        }
     }
-}
+
+*@

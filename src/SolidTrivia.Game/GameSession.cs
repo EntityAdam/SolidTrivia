@@ -1,4 +1,5 @@
-﻿using SolidTrivia.Game.Models;
+﻿using SolidTrivia.Game.Data;
+using SolidTrivia.Game.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,14 +12,11 @@ namespace SolidTrivia.Game
         public GameSession(string id)
         {
             Id = id;
-            Rounds = new List<AnswerBoard>()
-            {
-                new AnswerBoard("Round One", 1),
-                new AnswerBoard("Round Two", 2),
-                new AnswerBoard("Final Round", 3)
-            };
             Responses = new List<Response>();
             Players = new ObservableCollection<Player>();
+
+            //TODO:
+            this.Categories = TestData.Answers();
         }
 
         public string Id { get; }
@@ -27,33 +25,7 @@ namespace SolidTrivia.Game
 
         public ObservableCollection<Player> Players { get; set; }
 
-        public List<AnswerBoard> Rounds { get; set; }
-
-        public AnswerBoard CurrentBoard
-        {
-            get
-            {
-                return Rounds.First(r => !r.IsComplete);
-            }
-        }
-
-        public int RoundMultiplier
-        {
-            get
-            {
-                switch (Rounds.IndexOf(CurrentBoard))
-                {
-                    case 0:
-                        return 100;
-
-                    case 1:
-                        return 200;
-
-                    default:
-                        throw new InvalidOperationException();
-                }
-            }
-        }
+        public IEnumerable<Category> Categories { get; set; }
 
         public Player SelectRandonPlayer()
         {
@@ -62,27 +34,25 @@ namespace SolidTrivia.Game
             return Players[index];
         }
 
-        public Answer GetAnswerById(Guid id)
-        {
-            return CurrentBoard.Answers.Single(p => p.Id == id);
-        }
+        private IEnumerable<Answer> Answers() => Categories.SelectMany(c => c.Answers);
 
-        public void MarkAsAnswered(Guid id)
-        {
-            var answer = GetAnswerById(id);
-            answer.IsAnswered = true;
-        }
+        public bool IsAnswerInProgress() => Answers().Any(a => a.IsAnswering);
 
-        public Answer SelectAnswer(string category, int value)
+        public Answer CurrentAnswer() => Answers().SingleOrDefault(a => a.IsAnswering == true);
+
+        public void MarkCurrentAnswerAsAnswered() => CurrentAnswer().MarkAsAnswered();
+
+        public Answer SelectAnswer(string category, int weight)
         {
             if (string.IsNullOrEmpty(category)) throw new ArgumentNullException(nameof(category));
-            if (value <= 0) throw new ArgumentOutOfRangeException(nameof(value));
+            if (weight <= 0) throw new ArgumentOutOfRangeException(nameof(weight));
 
-            if (!CurrentBoard.Categories.Contains(category)) throw new ArgumentOutOfRangeException(nameof(category));
+            if (!Categories.Any(c => c.Title == category)) throw new ArgumentOutOfRangeException(nameof(category));
 
-            if (CurrentBoard.IsAnswerInProgress) throw new InvalidOperationException("An answer has already been selected");
+            if (IsAnswerInProgress()) throw new InvalidOperationException("An answer is in progress");
 
-            var answer = CurrentBoard.Answers.FirstOrDefault(p => p.Category == category && p.Value == value);
+            var cat = Categories.Single(c => c.Title == category);
+            var answer = cat.Answers.FirstOrDefault(p => p.Weight == weight);
 
             if (answer == null) throw new KeyNotFoundException(nameof(category));
 
@@ -102,24 +72,56 @@ namespace SolidTrivia.Game
         {
             Players.Remove(player);
         }
-
-        public void EndQuestion(string sessionId)
+        public SmsResponseMessage AddResponse(string smsNumber, string text)
         {
-            throw new NotImplementedException();
+            var player = Players.SingleOrDefault(p => p.SmsNumber == smsNumber);
+            if (player == null)
+            {
+                return new SmsResponseMessage()
+                {
+                    Success = false
+                };
+            }
+
+
+            var currentAnswer = CurrentAnswer();
+            if (currentAnswer == null)
+            {
+                return new SmsResponseMessage()
+                {
+                    Success = false,
+                    Body = "no answer to respond to"
+                };
+            }
+
+            var hasPlayerResponded = HasPlayerResponded(smsNumber, currentAnswer);
+            if (hasPlayerResponded)
+            {
+                return new SmsResponseMessage()
+                {
+                    Success = false,
+                    Body = "you have already provided a response to this answer"
+                };
+            }
+
+            var isCorrect = IsResponseCorrect(CurrentAnswer(), text);
+
+            var response = new Response(player.Id, CurrentAnswer().Id, isCorrect, DateTime.Now);
+            Responses.Add(response);
+
+            return new SmsResponseMessage()
+            {
+                Success = true,
+                Body = "your response has been accepted"
+            };
+
         }
 
-        //public void Response(string smsNumber, string text)
-        //{
-        //    var player = Players.Single(p => p.SmsNumber == smsNumber); //todo: don't error, ignore answers from unknown players
-
-        //    if (player == null) { return; }
-
-        //    //var session = gameSessions.Single(s => s.Id == player.SessionId); //todo: don't error, ignore answers with no body
-
-        //    if (session == null) { return; }
-
-        //    session.Response(smsNumber, text);
-        //}
+        public bool HasPlayerResponded(string smsNumber, Answer answer)
+        {
+            var player = Players.SingleOrDefault(p=>p.SmsNumber == smsNumber);
+            return Responses.Any(r => r.PlayerId == player.Id && r.AnswerId == answer.Id);
+        }
 
         public void Scores(string sessionId)
         {

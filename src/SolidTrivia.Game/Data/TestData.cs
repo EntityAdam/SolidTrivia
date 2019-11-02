@@ -5,45 +5,65 @@ namespace SolidTrivia.Game.Data
 {
     public static class TestData
     {
-        public static List<Answer> Answers()
+        public static List<Category> Answers()
         {
-            return new List<Answer>()
+            var cat1 = new List<Answer>()
             {
-                new Answer("This is the first letter", "letters", 1, new[] { "A" }),
-                new Answer("This is the second letter", "letters", 2, new[] { "B" }),
-                new Answer("This is the third letter", "letters", 3, new[] { "C" }),
-                new Answer("This is the fourth letter", "letters", 4, new[] { "D" }),
-                new Answer("This is the fifth letter", "letters", 5, new[] { "E" }),
+                new Answer("This is the first letter", 1, new[] { "A" }),
+                new Answer("This is the second letter", 2, new[] { "B" }),
+                new Answer("This is the third letter", 3, new[] { "C" }),
+                new Answer("This is the fourth letter", 4, new[] { "D" }),
+                new Answer("This is the fifth letter", 5, new[] { "E" }),
+            };
+            var cat2 = new List<Answer>()
+            {
+                new Answer("This is the first number", 1, new[] { "1" }),
+                new Answer("This is the second number", 2, new[] { "2" }),
+                new Answer("This is the third number", 3, new[] { "3" }),
+                new Answer("This is the fourth number", 4, new[] { "4" }),
+                new Answer("This is the fifth number", 5, new[] { "5" }),
+            };
+            var cat3 = new List<Answer>()
+            {
+                new Answer("This is the first letter", 1, new[] { "A" }),
+                new Answer("This is the second letter", 2, new[] { "B" }),
+                new Answer("This is the third letter", 3, new[] { "C" }),
+                new Answer("This is the fourth letter", 4, new[] { "D" }),
+                new Answer("This is the fifth letter", 5, new[] { "E" }),
+            };
+            var cat4 = new List<Answer>()
+            {
+                new Answer("This is the first number", 1, new[] { "1" }),
+                new Answer("This is the second number", 2, new[] { "2" }),
+                new Answer("This is the third number", 3, new[] { "3" }),
+                new Answer("This is the fourth number", 4, new[] { "4" }),
+                new Answer("This is the fifth number", 5, new[] { "5" }),
+            };
+            var cat5 = new List<Answer>()
+            {
+                new Answer("This is the first number", 1, new[] { "1" }),
+                new Answer("This is the second number", 2, new[] { "2" }),
+                new Answer("This is the third number", 3, new[] { "3" }),
+                new Answer("This is the fourth number", 4, new[] { "4" }),
+                new Answer("This is the fifth number", 5, new[] { "5" }),
+            };
+            var cat6 = new List<Answer>()
+            {
+                new Answer("This is the first number", 1, new[] { "1" }),
+                new Answer("This is the second number", 2, new[] { "2" }),
+                new Answer("This is the third number", 3, new[] { "3" }),
+                new Answer("This is the fourth number", 4, new[] { "4" }),
+                new Answer("This is the fifth number", 5, new[] { "5" }),
+            };
 
-                new Answer("This is the first number", "numbers", 1, new[] { "1" }),
-                new Answer("This is the second number", "numbers", 2, new[] { "2" }),
-                new Answer("This is the third number", "numbers", 3, new[] { "3" }),
-                new Answer("This is the fourth number", "numbers", 4, new[] { "4" }),
-                new Answer("This is the fifth number", "numbers", 5, new[] { "5" }),
-
-                new Answer("This is the first letter", "letters2", 1, new[] { "A" }),
-                new Answer("This is the second letter", "letters2", 2, new[] { "B" }),
-                new Answer("This is the third letter", "letters2", 3, new[] { "C" }),
-                new Answer("This is the fourth letter", "letters2", 4, new[] { "D" }),
-                new Answer("This is the fifth letter", "letters2", 5, new[] { "E" }),
-
-                new Answer("This is the first number", "numbers2", 1, new[] { "1" }),
-                new Answer("This is the second number", "numbers2", 2, new[] { "2" }),
-                new Answer("This is the third number", "numbers2", 3, new[] { "3" }),
-                new Answer("This is the fourth number", "numbers2", 4, new[] { "4" }),
-                new Answer("This is the fifth number", "numbers2", 5, new[] { "5" }),
-
-                new Answer("This is the first letter", "letters3", 1, new[] { "A" }),
-                new Answer("This is the second letter", "letters3", 2, new[] { "B" }),
-                new Answer("This is the third letter", "letters3", 3, new[] { "C" }),
-                new Answer("This is the fourth letter", "letters3", 4, new[] { "D" }),
-                new Answer("This is the fifth letter", "letters3", 5, new[] { "E" }),
-
-                new Answer("This is the first number", "numbers3", 1, new[] { "1" }),
-                new Answer("This is the second number", "numbers3", 2, new[] { "2" }),
-                new Answer("This is the third number", "numbers3", 3, new[] { "3" }),
-                new Answer("This is the fourth number", "numbers3", 4, new[] { "4" }),
-                new Answer("This is the fifth number", "numbers3", 5, new[] { "5" }),
+            return new List<Category>()
+            {
+                new Category("Design Patterns", cat1),
+                new Category("SOLID", cat2),
+                new Category("Testing", cat3),
+                new Category("GIT", cat4),
+                new Category("LINQ", cat5),
+                new Category("Potporri", cat6)
             };
         }
     }
