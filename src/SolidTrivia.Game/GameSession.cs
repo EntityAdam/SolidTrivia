@@ -62,6 +62,17 @@ namespace SolidTrivia.Game
             return Players[index];
         }
 
+        public Answer GetAnswerById(Guid id)
+        {
+            return CurrentBoard.Answers.Single(p => p.Id == id);
+        }
+
+        public void MarkAsAnswered(Guid id)
+        {
+            var answer = GetAnswerById(id);
+            answer.IsAnswered = true;
+        }
+
         public Answer SelectAnswer(string category, int value)
         {
             if (string.IsNullOrEmpty(category)) throw new ArgumentNullException(nameof(category));

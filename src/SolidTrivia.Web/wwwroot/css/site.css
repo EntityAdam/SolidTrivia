@@ -98,6 +98,10 @@ body {
     color: gold;
 }
 
+    .row-answer .answered {
+        visibility: hidden;
+    }
+
     .row-answer div {
         background-color: darkblue;
         border: 2px solid darkblue;
@@ -261,6 +265,72 @@ body {
     background-color: lightslategray;
     border: 2px solid white;
 }
+
+#answer-container {
+    display: flex;
+    flex-flow: column wrap;
+    min-height: 100vh;
+    background-color: black;
+}
+
+#header {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+#timer {
+    font-family: Consolas,monaco,monospace;
+    margin: 1%;
+    text-align: center;
+    font-size: 200%;
+    width: 100%;
+}
+
+#stats {
+    font-family: Consolas,monaco,monospace;
+    text-align: center;
+    width: 100%;
+    font-size: 200%;
+    line-height: 0%;
+}
+
+#answer {
+    padding-top: 1%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: darkblue;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#answer-code {
+    font-family: Consolas,monaco,monospace;
+    background-color: darkblue;
+    flex: 1;
+    padding: 10px;
+    font-size: 1.5rem;
+}
+
+#boardnav {
+    text-align: center;
+    width: 100%;
+}
+
+    #boardnav button {
+        margin: 3%;
+        width: 10em;
+        padding: 0.2em;
+        font-size: 1.5em;
+        color: white;
+        background-color: black;
+        border: 2px solid lightslategray;
+        text-decoration: none;
+    }
+
+        #boardnav button:hover {
+            background-color: lightslategray;
+            border: 2px solid white;
+        }
 
 /* ------------------ animations ------------------ */
 

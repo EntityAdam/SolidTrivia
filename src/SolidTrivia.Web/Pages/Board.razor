@@ -1,4 +1,5 @@
 ﻿@page "/board/{SessionId}"
+@inject NavigationManager NavigationManager
 @inject SolidTrivia.Game.ISolidTrivia SolidTrivia
 
 <div class="row-board row-category">
@@ -13,7 +14,7 @@
     <div class="row-board row-answer">
         @foreach (var category in Session.CurrentBoard.Categories)
         {
-            <div @onclick="() => Test(category, value)">$@(value * Session.RoundMultiplier)</div>
+            <div @onclick="() => NavigateToAnswer(category, value)">$@(value * Session.RoundMultiplier)</div>
         }
     </div>
 }
@@ -25,6 +26,8 @@
     private SolidTrivia.Game.GameSession Session { get; set; }
     private SolidTrivia.Game.Models.AnswerBoard GameBoard { get; set; }
 
+    const string hiddenAnswerClass = "answered";
+
     protected override void OnInitialized()
     {
         Session = SolidTrivia.GetSession(SessionId);
@@ -32,9 +35,10 @@
         GameBoard.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
     }
 
-    private void Test(string category, int value)
+    private void NavigateToAnswer(string category, int value)
     {
-        var x = Session.CurrentBoard.Answers.FirstOrDefault(a => a.Category == category && a.Value == value);
-        x.IsAnswered = true;
+        var answer = Session.CurrentBoard.Answers.FirstOrDefault(a => a.Category == category && a.Value == value);
+        answer.IsAnswering = true;
+        NavigationManager.NavigateTo($"Board/{SessionId}/Answer/{answer.Id}");
     }
 }
