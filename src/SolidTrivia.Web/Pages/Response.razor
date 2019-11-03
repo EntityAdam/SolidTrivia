@@ -1,0 +1,52 @@
+﻿@page "/board/{SessionId}/response/{AnswerId:guid}"
+@inject NavigationManager NavigationManager
+@inject SolidTrivia.Game.ISolidTrivia SolidTrivia
+
+<div class="responses-wrapper">
+    <div class="answer-content">
+        @ThisAnswer.AnswerText
+    </div>
+    <div class="correct-responses">
+        <h1>Acceptable Responses:</h1>
+        <h2>@ThisAnswerList()</h2>
+    </div>
+    <div class="response-list">
+        <div>User ID</div>
+        <div>Response</div>
+        @foreach (var response in Session.Responses.Where(r => r.AnswerId == ThisAnswer.Id))
+        {
+            <div>@response.PlayerId</div>
+            <div>@response.Text</div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Guid AnswerId { get; set; }
+
+    [Parameter]
+    public string SessionId { get; set; }
+
+    private SolidTrivia.Game.GameSession Session { get; set; }
+    private SolidTrivia.Game.Models.Answer ThisAnswer { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+
+        Session = SolidTrivia.GetSessionById(SessionId);
+        Session.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
+        ThisAnswer = Session.CurrentAnswer();
+    }
+
+    protected string ThisAnswerList()
+    {
+        var sb = new System.Text.StringBuilder();
+        foreach(var ar in ThisAnswer.AcceptableResponses)
+        {
+            sb.Append(sb).Append("; ");
+        }
+        return sb.ToString();
+    }
+}

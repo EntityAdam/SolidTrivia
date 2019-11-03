@@ -1,48 +1,46 @@
-﻿@*
+﻿@page "/board/{SessionId}"
+@inject NavigationManager NavigationManager
+@inject SolidTrivia.Game.ISolidTrivia SolidTrivia
 
-    @page "/board/{SessionId}"
-    @inject NavigationManager NavigationManager
-    @inject SolidTrivia.Game.ISolidTrivia SolidTrivia
 
-    <div class="row-board row-category">
-        @foreach (var category in Session.CurrentBoard.Categories)
-        {
-            <div>@category</div>
-        }
-    </div>
-
-    @foreach (var value in Session.CurrentBoard.Values)
+<div class="board-wrapper">
+    @foreach (var category in Session.Categories)
     {
-        <div class="row-board row-answer">
-            @foreach (var category in Session.CurrentBoard.Categories)
+        <div class="board-column">
+            <div>@category.Title</div>
+            @foreach (var answer in category.Answers)
             {
-                <div @onclick="() => NavigateToAnswer(category, value)">$@(value * Session.RoundMultiplier)</div>
+                <div class="@HiddenAnswer(answer.IsAnswered)" @onclick="() => NavigateToAnswer(answer)">$@(answer.Weight * 100)</div>
             }
         </div>
     }
+</div>
 
-    @code {
-        [Parameter]
-        public string SessionId { get; set; }
+@code {
+    [Parameter]
+    public string SessionId { get; set; }
 
-        private SolidTrivia.Game.GameSession Session { get; set; }
-        private SolidTrivia.Game.Models.AnswerBoard GameBoard { get; set; }
+    private SolidTrivia.Game.GameSession Session { get; set; }
 
-        const string hiddenAnswerClass = "answered";
+    private string HiddenAnswer(bool isAnswered) => isAnswered ? "answered" : "";
 
-        protected override void OnInitialized()
+    protected override void OnInitialized()
+    {
+        Session = SolidTrivia.GetSessionById(SessionId);
+        Session.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
+    }
+
+    private void NavigateToAnswer(SolidTrivia.Game.Models.Answer answer)
+    {
+        if (Session.IsAnswerInProgress())
         {
-            Session = SolidTrivia.GetSession(SessionId);
-            GameBoard = Session.CurrentBoard;
-            GameBoard.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
+            //todo: some kind of error?
+            NavigationManager.NavigateTo($"Board/{SessionId}/Answer/{Session.CurrentAnswer().Id}");
         }
-
-        private void NavigateToAnswer(string category, int value)
+        else
         {
-            var answer = Session.CurrentBoard.Answers.FirstOrDefault(a => a.Category == category && a.Weight == value);
-            answer.IsAnswering = true;
+            Session.SelectAnswer(answer);
             NavigationManager.NavigateTo($"Board/{SessionId}/Answer/{answer.Id}");
         }
     }
-
-*@
+}

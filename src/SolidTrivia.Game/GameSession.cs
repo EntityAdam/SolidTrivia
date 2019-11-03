@@ -33,7 +33,6 @@ namespace SolidTrivia.Game
             var index = rnd.Next(Players.Count());
             return Players[index];
         }
-
         private IEnumerable<Answer> Answers() => Categories.SelectMany(c => c.Answers);
 
         public bool IsAnswerInProgress() => Answers().Any(a => a.IsAnswering);
@@ -41,6 +40,14 @@ namespace SolidTrivia.Game
         public Answer CurrentAnswer() => Answers().SingleOrDefault(a => a.IsAnswering == true);
 
         public void MarkCurrentAnswerAsAnswered() => CurrentAnswer().MarkAsAnswered();
+
+        public void SelectAnswer(Answer answer)
+        {
+            if (answer == null) throw new ArgumentNullException(nameof(answer));
+            if (IsAnswerInProgress()) throw new InvalidOperationException("An answer is in progress");
+            if (answer.IsAnswered || answer.IsAnswering) throw new InvalidOperationException("That answer has already been selected");
+            answer.IsAnswering = true;
+        }
 
         public Answer SelectAnswer(string category, int weight)
         {
@@ -106,7 +113,7 @@ namespace SolidTrivia.Game
 
             var isCorrect = IsResponseCorrect(CurrentAnswer(), text);
 
-            var response = new Response(player.Id, CurrentAnswer().Id, isCorrect, DateTime.Now);
+            var response = new Response(player.Id, CurrentAnswer().Id, text, isCorrect, DateTime.Now);
             Responses.Add(response);
 
             return new SmsResponseMessage()
