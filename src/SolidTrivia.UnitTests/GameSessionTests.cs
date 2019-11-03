@@ -159,6 +159,8 @@ namespace SolidTrivia.UnitTests
 
             var x = session.Leaderboard();
             //todo: finish testing
+
+            //todo: user leaves game, all responses are removed
         }
     }
 }
