@@ -12,7 +12,7 @@ namespace SolidTrivia.Game
         public GameSession(string id)
         {
             Id = id;
-            Responses = new List<Response>();
+            Responses = new ObservableCollection<Response>();
             Players = new ObservableCollection<Player>();
 
             //TODO:
@@ -21,7 +21,7 @@ namespace SolidTrivia.Game
 
         public string Id { get; }
 
-        public List<Response> Responses { get; set; }
+        public ObservableCollection<Response> Responses { get; set; }
 
         public ObservableCollection<Player> Players { get; set; }
 
@@ -90,7 +90,6 @@ namespace SolidTrivia.Game
                 };
             }
 
-
             var currentAnswer = CurrentAnswer();
             if (currentAnswer == null)
             {
@@ -128,11 +127,6 @@ namespace SolidTrivia.Game
         {
             var player = Players.SingleOrDefault(p=>p.SmsNumber == smsNumber);
             return Responses.Any(r => r.PlayerId == player.Id && r.AnswerId == answer.Id);
-        }
-
-        public void Scores(string sessionId)
-        {
-            throw new NotImplementedException();
         }
 
         //todo: account for possible spelling mistakes?

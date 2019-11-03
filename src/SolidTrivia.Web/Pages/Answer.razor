@@ -9,7 +9,7 @@
                 @Timer remaining
             </div>
             <div class="answer-stats">
-                <p>Responses: 0</p>
+                <p>Responses: @Session.Responses.Count(r=>r.AnswerId == ThisAnswer.Id)</p>
                 <p>Players:&nbsp;&nbsp; @Session.Players.Count()</p>
             </div>
             <div class="answer-nav">

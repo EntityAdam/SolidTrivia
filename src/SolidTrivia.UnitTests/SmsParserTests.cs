@@ -48,6 +48,17 @@ namespace SolidTrivia.UnitTests
             Assert.Equal(UserCommandType.Response, result.UserCommand);
         }
 
+        [Theory]
+        [InlineData("a")]
+        [InlineData(" b")]
+        [InlineData("1")]
+        [InlineData(" 2")]
+        public void Responses(string smsBody)
+        {
+            var result = SmsParser.Parse(smsBody);
+            Assert.Equal(UserCommandType.Response, result.UserCommand);
+        }
+
 
         [Fact]
         public void Test()

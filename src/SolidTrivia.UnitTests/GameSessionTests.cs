@@ -93,5 +93,31 @@ namespace SolidTrivia.UnitTests
             Assert.StartsWith("you have already provided a response to this answer", response.Body);
 
         }
+
+        [Fact]
+        public void Scenario2()
+        {
+            var answer = session.SelectAnswer("LINQ", 2);            
+            
+            //correct response
+            game.ProcessUserSmsMessage("1", "2");
+            var responses = session.Responses.Where(r => r.AnswerId == answer.Id);
+            Assert.Single(responses);
+            Assert.True(responses.First().IsCorrect);
+            Assert.Equal("2", responses.First().Text);
+
+            //incorrect response
+            game.ProcessUserSmsMessage("2", "wrong answer");
+            var responses1 = session.Responses.Where(r => r.AnswerId == answer.Id);
+            Assert.Equal(2, responses1.Count());
+            Assert.False(responses1.Skip(1).Take(1).First().IsCorrect);
+
+        }
+
+        [Fact]
+        public void Scores()
+        { 
+            //todo:
+        }
     }
 }
