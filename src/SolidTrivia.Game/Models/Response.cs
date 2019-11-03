@@ -8,6 +8,7 @@ namespace SolidTrivia.Game.Models
         {
             PlayerId = playerId;
             AnswerId = answerId;
+            Text = text;
             IsCorrect = isCorrect;
             Time = time;
         }
