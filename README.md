@@ -1,9 +1,7 @@
-# Jeoparady!
-
+# Jeoparody!
 A trivia game loosley resembling a popular game show.
 
 # Table of contents
-
 1. Introduction
     1. Privacy
 2. Gameplay
@@ -23,16 +21,14 @@ A trivia game loosley resembling a popular game show.
 7. License
 
 ## 1. Introduction
+This game was designed specifically for coding trivia, usually in a venue with a large display or projector. If you'd like to use this in any other capacity your mileage may vary. This game is designed to be hosted by a single person in a venue with many participants. There is no limit on the number of participants other than network and server capability. Participants join, leave and respond to answers by standard SMS text messaging.
 
-1. This game was designed specifically for coding trivia, usually in a venue with a large display or projector. If you'd like to use this in any other capacity your mileage may vary. This game is designed to be hosted by a single person in a venue with many participants. There is no limit on the number of participants other than network and server capability. Participants join, leave and respond to answers by standard SMS text messaging.
-
-    1. Privacy: This game was designed with privacy in mind.  While you do need to interact with the game with an actual SMS capable device with a valid phone number, this number is not exposed at any point during the game, nor is it stored in any manner (including application logs).  While you are participating in a session, the game assigns you a unique ID which will be sent to you by SMS and can be used to identify yourself on the score board.
+Privacy: This game was designed with privacy in mind.  While you do need to interact with the game with an actual SMS capable device with a valid phone number, this number is not exposed at any point during the game, nor is it stored in any manner (including application logs).  While you are participating in a session, the game assigns you a unique ID which will be sent to you by SMS and can be used to identify yourself on the score board.
 
 ## 2. Gameplay
-
 1. Roles
-    1. Host: The host is to be the sole operator of the gameboard. The host explains the rules, starts and stops the game, navigates between the game board, answer, response and leaderboard screens.  Most importantly the host should be engaging the audience to make this a fun experience. 
-    1. Participants: Participants interact with the game via standard SMS messaging from any carrier service. Standard text messaging rates apply.  Participants may join and leave an in progress game and supply responses to the answers displayed.
+    - Host: The host is to be the sole operator of the gameboard. The host explains the rules, starts and stops the game, navigates between the game board, answer, response and leaderboard screens.  Most importantly the host should be engaging the audience to make this a fun experience. 
+    - Participants: Participants interact with the game via standard SMS messaging from any carrier service. Standard text messaging rates apply.  Participants may join and leave an in progress game and supply responses to the answers displayed.
 1. Start a new game
     - Host should click 'Host New Game' button.
 1. Join game
@@ -55,27 +51,31 @@ A trivia game loosley resembling a popular game show.
     - You may rejoin the game at any time.
 
 ## 3. Host your own
-    - Coming soon
+Coming soon
 
 ## 4. Answer / Response contributions
-    - Writing good questions and answers is hard work! Answer / Response contributions are appreciated. 
-    - Sample spreadsheet format (coming soon)
+Writing good questions and answers is hard work! Answer / Response contributions are appreciated. 
+
+Sample spreadsheet format (coming soon)
 
 ## 5. Developer contributions
-    - Developer contributions are encouraged!
-    - Technologies used
-        - Language C# 7.3
-        - .NET Core 3.0
-        - ASP.NET Core
-        - Blazor
+Developer contributions are encouraged!
+
+Technologies used
+    - Language C# 7.3
+    - .NET Core 3.0
+    - ASP.NET Core
+    - Blazor
 
 ## 6. Roadmap 
-    - The roadmap is just a big list of todo's for now.
-    - TODO:
-        - [ ] All responses removed when player leaves
-        - [ ] Select random player to select first answer
-            - [ ] Add CSS class to change the selected user to green.
-            - [ ] Determine user with fastest correct response for subequent answers
-        - [ ] Import question / response file?
-        - [ ] Move phone number / Twilio API keys to secrets
-        - [ ] Implement Twilio client to allow server to send SMS messages to users.
+The roadmap is just a big list of todo's for now.
+
+### TODO
+
+- [ ] All responses removed when player leaves
+- [ ] Select random player to select first answer
+    - [ ] Add CSS class to change the selected user to green.
+    - [ ] Determine user with fastest correct response for subequent answers
+- [ ] Import question / response file?
+- [ ] Move phone number / Twilio API keys to secrets
+- [ ] Implement Twilio client to allow server to send SMS messages to users.
