@@ -116,8 +116,49 @@ namespace SolidTrivia.UnitTests
 
         [Fact]
         public void Scores()
-        { 
-            //todo:
+        {
+            session.SelectAnswer("Design Patterns", 1);
+            game.ProcessUserSmsMessage("1", "A");
+            game.ProcessUserSmsMessage("2", "A");
+            game.ProcessUserSmsMessage("3", "A");
+            game.ProcessUserSmsMessage("4", "A");
+            game.ProcessUserSmsMessage("5", "A");
+            session.MarkCurrentAnswerAsAnswered();
+
+            session.SelectAnswer("Design Patterns", 2);
+            game.ProcessUserSmsMessage("1", "B");
+            game.ProcessUserSmsMessage("2", "B");
+            game.ProcessUserSmsMessage("3", "B");
+            game.ProcessUserSmsMessage("4", "B");
+            game.ProcessUserSmsMessage("5", "WRONG ANSWER");
+            session.MarkCurrentAnswerAsAnswered();
+
+            session.SelectAnswer("Design Patterns", 3);
+            game.ProcessUserSmsMessage("1", "C");
+            game.ProcessUserSmsMessage("2", "C");
+            game.ProcessUserSmsMessage("3", "C");
+            game.ProcessUserSmsMessage("4", "WRONG ANSWER");
+            game.ProcessUserSmsMessage("5", "WRONG ANSWER");
+            session.MarkCurrentAnswerAsAnswered();
+
+            session.SelectAnswer("Design Patterns", 4);
+            game.ProcessUserSmsMessage("1", "D");
+            game.ProcessUserSmsMessage("2", "D");
+            game.ProcessUserSmsMessage("3", "WRONG ANSWER");
+            game.ProcessUserSmsMessage("4", "WRONG ANSWER");
+            game.ProcessUserSmsMessage("5", "WRONG ANSWER");
+            session.MarkCurrentAnswerAsAnswered();
+
+            session.SelectAnswer("Design Patterns", 5);
+            game.ProcessUserSmsMessage("1", "E");
+            game.ProcessUserSmsMessage("2", "WRONG ANSWER");
+            game.ProcessUserSmsMessage("3", "WRONG ANSWER");
+            game.ProcessUserSmsMessage("4", "WRONG ANSWER");
+            game.ProcessUserSmsMessage("5", "WRONG ANSWER");
+            session.MarkCurrentAnswerAsAnswered();
+
+            var x = session.Leaderboard();
+            //todo: finish testing
         }
     }
 }

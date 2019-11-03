@@ -112,7 +112,7 @@ namespace SolidTrivia.Game
 
             var isCorrect = IsResponseCorrect(CurrentAnswer(), text);
 
-            var response = new Response(player.Id, CurrentAnswer().Id, text, isCorrect, DateTime.Now);
+            var response = new Response(player.Id, CurrentAnswer().Id, CurrentAnswer().Weight, text, isCorrect, DateTime.Now);
             Responses.Add(response);
 
             return new SmsResponseMessage()
@@ -125,14 +125,37 @@ namespace SolidTrivia.Game
 
         public bool HasPlayerResponded(string smsNumber, Answer answer)
         {
-            var player = Players.SingleOrDefault(p=>p.SmsNumber == smsNumber);
+            var player = Players.SingleOrDefault(p => p.SmsNumber == smsNumber);
             return Responses.Any(r => r.PlayerId == player.Id && r.AnswerId == answer.Id);
         }
 
         //todo: account for possible spelling mistakes?
         private bool IsResponseCorrect(Answer answer, string text)
         {
+            //todo: fix
+            //case insensitive
             return (answer.AcceptableResponses.Contains(text));
         }
+
+        public IEnumerable<Score> Leaderboard()
+        {
+            return Players.Select(GetScoreForPlayer).OrderBy(s=>s.TotalScore);
+        }
+
+        private Score GetScoreForPlayer(Player player)
+        {
+            return new Score()
+            {
+                PlayerId = player.Id,
+                TotalScore = Responses.Where(r=>r.PlayerId == player.Id).Sum(r=>r.Score)
+            };
+        }
+    }
+
+    public class Score
+    {
+        public string PlayerId { get; set; }
+        public int TotalScore { get; set; }
+
     }
 }

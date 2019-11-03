@@ -1,32 +1,19 @@
-﻿<div class="leaderboard-wrapper">
+﻿@inject SolidTrivia.Game.ISolidTrivia SolidTrivia
+
+<div class="leaderboard-wrapper">
     <div class="player-list">
-        <div class="player">
-            <div>derping-dinosaur</div>
-            <div>12000</div>
-        </div>
-        <div class="player">
-            <div>derping-dinosaur</div>
-            <div>12000</div>
-        </div>
-        <div class="player">
-            <div>derping-dinosaur</div>
-            <div>12000</div>
-        </div>
-        <div class="player">
-            <div>derping-dinosaur</div>
-            <div>12000</div>
-        </div>
-        <div class="player">
-            <div>derping-dinosaur</div>
-            <div>12000</div>
-        </div>
-        <div class="player">
-            <div>derping-dinosaur</div>
-            <div>12000</div>
-        </div>
+
+        @foreach (var score in Session.Leaderboard())
+        {
+            <div class="player">
+                <div>@score.PlayerId</div>
+                <div>@($"${score.TotalScore}")</div>
+            </div>
+        }
     </div>
 </div>
 
 @code {
-
+    [CascadingParameter(Name = "Session")]
+    private SolidTrivia.Game.GameSession Session { get; set; }
 }

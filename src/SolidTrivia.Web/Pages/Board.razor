@@ -15,7 +15,9 @@
         </div>
     }
 </div>
-<SolidTrivia.Web.Components.LeaderboardComponent />
+<CascadingValue Value="@Session" Name="Session">
+    <SolidTrivia.Web.Components.LeaderboardComponent />
+</CascadingValue>
 
 @code {
     [Parameter]
