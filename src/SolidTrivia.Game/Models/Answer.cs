@@ -17,6 +17,10 @@ namespace SolidTrivia.Game.Models
 
         public string AnswerText { get; set; }
 
+        public bool HasCode => !string.IsNullOrEmpty(Code);
+
+        public string Code { get; set; }
+
         public string[] AcceptableResponses { get; set; }
 
         public bool IsAnswering { get; set; }
