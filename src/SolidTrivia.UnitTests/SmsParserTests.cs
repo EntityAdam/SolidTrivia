@@ -59,12 +59,11 @@ namespace SolidTrivia.UnitTests
             Assert.Equal(UserCommandType.Response, result.UserCommand);
         }
 
-
         [Fact]
         public void Test()
         {
             //nothing sent.. probably can't happen.
-            var result1 = SmsParser.Parse(""); 
+            var result1 = SmsParser.Parse("");
             Assert.Null(result1);
 
             //join with no session id supplied

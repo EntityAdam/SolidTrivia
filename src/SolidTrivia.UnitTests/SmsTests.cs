@@ -1,16 +1,12 @@
 ﻿using SolidTrivia.Game;
 using SolidTrivia.Game.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace SolidTrivia.UnitTests
 {
     public class SmsTests
     {
-
         private SolidTriviaGame game;
         private GameSession session;
 
@@ -24,7 +20,7 @@ namespace SolidTrivia.UnitTests
         public void Test()
         {
             Assert.Empty(game.AllPlayers());
-            
+
             SmsResponseMessage response = new SmsResponseMessage();
 
             //successful join

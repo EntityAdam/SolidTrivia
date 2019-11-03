@@ -1,7 +1,6 @@
 using SolidTrivia.Game;
 using SolidTrivia.Game.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -46,13 +45,13 @@ namespace SolidTrivia.UnitTests
         public void CurrentAnswer()
         {
             Answer answer;
-            
+
             Assert.Null(session.CurrentAnswer());
-            
+
             answer = session.SelectAnswer("Potporri", 3);
             Assert.Equal(3, answer.Weight);
             Assert.True(answer.IsAnswering);
-           
+
             var currentAnswer = session.CurrentAnswer();
 
             Assert.Equal(currentAnswer, answer);
@@ -73,7 +72,6 @@ namespace SolidTrivia.UnitTests
             response = session.AddResponse("INVALID PLAYER", "INVALID RESPONSE");
             Assert.False(response.Success);
 
-
             //no answer is being answered
             response = session.AddResponse("1", "INVALID RESPONSE");
             Assert.False(response.Success);
@@ -91,14 +89,13 @@ namespace SolidTrivia.UnitTests
             response = session.AddResponse("1", "valid response");
             Assert.False(response.Success);
             Assert.StartsWith("you have already provided a response to this answer", response.Body);
-
         }
 
         [Fact]
         public void Scenario2()
         {
-            var answer = session.SelectAnswer("LINQ", 2);            
-            
+            var answer = session.SelectAnswer("LINQ", 2);
+
             //correct response
             game.ProcessUserSmsMessage("1", "2");
             var responses = session.Responses.Where(r => r.AnswerId == answer.Id);
@@ -111,7 +108,6 @@ namespace SolidTrivia.UnitTests
             var responses1 = session.Responses.Where(r => r.AnswerId == answer.Id);
             Assert.Equal(2, responses1.Count());
             Assert.False(responses1.Skip(1).Take(1).First().IsCorrect);
-
         }
 
         [Fact]

@@ -3,28 +3,28 @@
 @inject NavigationManager NavigationManager
 @inject SolidTrivia.Game.ISolidTrivia SolidTrivia
 
-    <div class="answer-wrapper">
-        <div class="answer-header">
-            <div class="answer-timer">
-                @Timer remaining
-            </div>
-            <div class="answer-stats">
-                <p>Responses: @Session.Responses.Count(r=>r.AnswerId == ThisAnswer.Id)</p>
-                <p>Players:&nbsp;&nbsp; @Session.Players.Count()</p>
-            </div>
-            <div class="answer-nav">
-                <button @onclick="NavigateToResponse">Responses</button>
-                <button @onclick="MarkAsAnswered">Continue -></button>
-            </div>
+<div class="answer-wrapper">
+    <div class="answer-header">
+        <div class="answer-timer">
+            @Timer remaining
         </div>
-        <div class="answer-content">
-            @ThisAnswer.AnswerText
+        <div class="answer-stats">
+            <p>Responses: @Session.Responses.Count(r => r.AnswerId == ThisAnswer.Id)</p>
+            <p>Players:&nbsp;&nbsp; @Session.Players.Count()</p>
         </div>
-        @if (ThisAnswer.HasCode)
-        {
-            <SolidTrivia.Web.Components.AnswerCodeComponent />
-        }
+        <div class="answer-nav">
+            <button @onclick="NavigateToResponse">Responses</button>
+            <button @onclick="MarkAsAnswered">Continue -></button>
+        </div>
     </div>
+    <div class="answer-content">
+        @ThisAnswer.AnswerText
+    </div>
+    @if (ThisAnswer.HasCode)
+    {
+        <SolidTrivia.Web.Components.AnswerCodeComponent />
+    }
+</div>
 
 @code {
     [Parameter]

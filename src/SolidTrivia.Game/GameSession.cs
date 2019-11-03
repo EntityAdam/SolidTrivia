@@ -33,6 +33,7 @@ namespace SolidTrivia.Game
             var index = rnd.Next(Players.Count());
             return Players[index];
         }
+
         private IEnumerable<Answer> Answers() => Categories.SelectMany(c => c.Answers);
 
         public bool IsAnswerInProgress() => Answers().Any(a => a.IsAnswering);
@@ -79,6 +80,7 @@ namespace SolidTrivia.Game
         {
             Players.Remove(player);
         }
+
         public SmsResponseMessage AddResponse(string smsNumber, string text)
         {
             var player = Players.SingleOrDefault(p => p.SmsNumber == smsNumber);
@@ -120,7 +122,6 @@ namespace SolidTrivia.Game
                 Success = true,
                 Body = "your response has been accepted"
             };
-
         }
 
         public bool HasPlayerResponded(string smsNumber, Answer answer)
@@ -139,7 +140,7 @@ namespace SolidTrivia.Game
 
         public IEnumerable<Score> Leaderboard()
         {
-            return Players.Select(GetScoreForPlayer).OrderBy(s=>s.TotalScore);
+            return Players.Select(GetScoreForPlayer).OrderBy(s => s.TotalScore);
         }
 
         private Score GetScoreForPlayer(Player player)
@@ -147,15 +148,8 @@ namespace SolidTrivia.Game
             return new Score()
             {
                 PlayerId = player.Id,
-                TotalScore = Responses.Where(r=>r.PlayerId == player.Id).Sum(r=>r.Score)
+                TotalScore = Responses.Where(r => r.PlayerId == player.Id).Sum(r => r.Score)
             };
         }
-    }
-
-    public class Score
-    {
-        public string PlayerId { get; set; }
-        public int TotalScore { get; set; }
-
     }
 }

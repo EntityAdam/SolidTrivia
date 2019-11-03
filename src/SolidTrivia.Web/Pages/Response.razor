@@ -31,7 +31,6 @@
     private SolidTrivia.Game.GameSession Session { get; set; }
     private SolidTrivia.Game.Models.Answer ThisAnswer { get; set; }
 
-
     protected override void OnInitialized()
     {
 
@@ -43,7 +42,7 @@
     protected string ThisAnswerList()
     {
         var sb = new System.Text.StringBuilder();
-        foreach(var ar in ThisAnswer.AcceptableResponses)
+        foreach (var ar in ThisAnswer.AcceptableResponses)
         {
             sb.Append(ar).Append("; ");
         }

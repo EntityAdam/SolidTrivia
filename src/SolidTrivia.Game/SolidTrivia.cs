@@ -47,7 +47,7 @@ namespace SolidTrivia.Game
 
         private GameSession GetSessionIdBySms(string smsNumber)
         {
-            var sessionId = AllPlayers().Single(p=>p.SmsNumber == smsNumber).SessionId;
+            var sessionId = AllPlayers().Single(p => p.SmsNumber == smsNumber).SessionId;
             return GetSessionById(sessionId);
         }
 
@@ -78,7 +78,7 @@ namespace SolidTrivia.Game
             }
 
             var player = new Player(smsNumber, session.Id, IdGenerator.GetNext(players.Select(p => p.Id).ToList()));
-            
+
             session.Join(player);
             message = $"you have joined the game {sessionId}, text LEAVE to quit at any time";
             return (true, message);
