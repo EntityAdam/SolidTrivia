@@ -46,7 +46,7 @@ Privacy: This game was designed with privacy in mind.  While you do need to inte
     - Responses will be sent by the participants by SMS messaage. No command is required. Send the response only.
     - Responses should be in the form of a question, however for the sake of brevity, the pronouns are implicitly omitted.
 1. Leave game
-    - Participants may leave the game at any time by sending the SMS command `LEAVE'.
+    - Participants may leave the game at any time by sending the SMS command `LEAVE`.
     - All data is removed from the game and your score is forefit.
     - You may rejoin the game at any time.
 
