@@ -28,7 +28,6 @@ namespace SolidTrivia.Web
             services.AddControllers();
 
             //add game
-            services.AddSingleton<DummyLobbyService>();
             services.AddSingleton<ISolidTrivia, SolidTriviaGame>();
         }
 
