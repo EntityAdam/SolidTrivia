@@ -56,7 +56,13 @@ Privacy: This game was designed with privacy in mind.  While you do need to inte
 
 1. Running locally
     1. Clone
+    2. Swap in your Twilio phone number
+      - Open code in your favorite code editor
+      - Navigate to `SolidTrivia.Web/Pages/Lobby.razor`
+      - Change `919-555-5555` to your phone number.
+      - `<h1>Text <span class="command">JOIN @SessionId</span> to 919-555-5555</h1>`
     2. Start the web app
+      - In a command prompt
       - Navigate to `\SolidTrivia.Web\` folder
       - Execute `dotnet run`
     2. Start ngrok tunnel: `ngrok http 5000`
