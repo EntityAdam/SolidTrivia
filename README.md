@@ -12,11 +12,13 @@ A trivia game loosley resembling a popular game show.
     1. [Participant] Answer response 
     1. [Participant] Leave game
 3. Host your own
+    1. Running locally
     1. Twilio
     1. App Configuration
     1. Answer / Response
 4. Answer / Response contributions
 5. Developer contributions
+    1. Running Locally
 6. Roadmap 
 7. License
 
@@ -27,31 +29,38 @@ Privacy: This game was designed with privacy in mind.  While you do need to inte
 
 ## 2. Gameplay
 1. Roles
-    - Host: The host is to be the sole operator of the gameboard. The host explains the rules, starts and stops the game, navigates between the game board, answer, response and leaderboard screens.  Most importantly the host should be engaging the audience to make this a fun experience. 
-    - Participants: Participants interact with the game via standard SMS messaging from any carrier service. Standard text messaging rates apply.  Participants may join and leave an in progress game and supply responses to the answers displayed.
+  - Host: The host is to be the sole operator of the gameboard. The host explains the rules, starts and stops the game, navigates between the game board, answer, response and leaderboard screens.  Most importantly the host should be engaging the audience to make this a fun experience. 
+  - Participants: Participants interact with the game via standard SMS messaging from any carrier service. Standard text messaging rates apply.  Participants may join and leave an in progress game and supply responses to the answers displayed.
 1. Start a new game
-    - Host should click 'Host New Game' button.
+  - Host should click 'Host New Game' button.
 1. Join game
-    - Participants must send a text message with the `JOIN <session>` to the number displayed on the Lobby screen. The message is case insensitive and you may omit the hyphen example; `join jumpy-cat` or `join jumpy cat` will both work.
-    - As the participants are joining the game, they will automatically show up in the Lobby screen.
-    - When participants have joined, click the Start button to proceed to the game board.
-    - Participants may still join the game after the Start button has been pressed.
+  - Participants must send a text message with the `JOIN <session>` to the number displayed on the Lobby screen. The message is case insensitive and you may omit the hyphen example; `join jumpy-cat` or `join jumpy cat` will both work.
+  - As the participants are joining the game, they will automatically show up in the Lobby screen.
+  - When participants have joined, click the Start button to proceed to the game board.
+  - Participants may still join the game after the Start button has been pressed.
 1. Game Board
-    - On the game board there are 6 categories and 5 items in each category progressing in value and difficulty.
-    - Each board item is presented in the form of an answer, and responses should be in the form of a question.
+  - On the game board there are 6 categories and 5 items in each category progressing in value and difficulty.
+  - Each board item is presented in the form of an answer, and responses should be in the form of a question.
 1. Answer Selection
-    - A player will be chosen at random to pick the first question on the answer board.  Their card on the leaderboard will have a green background.
-    - For subsequent answers, the first player to respond correctly to the current answer will select the next answer from the board.
+  - A player will be chosen at random to pick the first question on the answer board.  Their card on the leaderboard will have a green background.
+  - For subsequent answers, the first player to respond correctly to the current answer will select the next answer from the board.
 1. Answer response
-    - Responses will be sent by the participants by SMS messaage. No command is required. Send the response only.
-    - Responses should be in the form of a question, however for the sake of brevity, the pronouns are implicitly omitted.
+  - Responses will be sent by the participants by SMS messaage. No command is required. Send the response only.
+  - Responses should be in the form of a question, however for the sake of brevity, the pronouns are implicitly omitted.
 1. Leave game
-    - Participants may leave the game at any time by sending the SMS command `LEAVE`.
-    - All data is removed from the game and your score is forefit.
-    - You may rejoin the game at any time.
+  - Participants may leave the game at any time by sending the SMS command `LEAVE`.
+  - All data is removed from the game and your score is forefit.
+  - You may rejoin the game at any time.
 
 ## 3. Host your own
-Coming soon
+
+1. Running locally
+    1. Clone
+    2. Start the web app
+      - Navigate to `\SolidTrivia.Web\` folder
+      - Execute `dotnet run`
+    2. Start ngrok tunnel: `ngrok http 5000`
+    3. Add ngrok HTTPS url to Twilio Phone number console -> https://www.twilio.com/console/phone-numbers/
 
 ## 4. Answer / Response contributions
 Writing good questions and answers is hard work! Answer / Response contributions are appreciated. 
@@ -62,10 +71,10 @@ Sample spreadsheet format (coming soon)
 Developer contributions are encouraged!
 
 Technologies used
-    - Language C# 7.3
-    - .NET Core 3.0
-    - ASP.NET Core
-    - Blazor
+  - Language C# 7.3
+  - .NET Core 3.0
+  - ASP.NET Core
+  - Blazor
 
 ## 6. Roadmap 
 The roadmap is just a big list of todo's for now.
