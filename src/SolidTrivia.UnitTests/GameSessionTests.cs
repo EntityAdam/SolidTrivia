@@ -8,8 +8,8 @@ namespace SolidTrivia.UnitTests
 {
     public class SessionTests
     {
-        private SolidTriviaGame game;
-        private GameSession session;
+        private readonly SolidTriviaGame game;
+        private readonly GameSession session;
 
         public SessionTests()
         {

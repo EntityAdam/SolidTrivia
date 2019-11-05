@@ -26,6 +26,6 @@ namespace SolidTrivia.Game.Models
 
         private int Weight { get; }
 
-        public int Score => IsCorrect ? Weight : Weight * -1;
+        public int Score => IsCorrect ? (Weight * 100) : (Weight * -1 * 100);
     }
 }

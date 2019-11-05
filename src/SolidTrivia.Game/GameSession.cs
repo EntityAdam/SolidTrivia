@@ -133,9 +133,8 @@ namespace SolidTrivia.Game
         //todo: account for possible spelling mistakes?
         private bool IsResponseCorrect(Answer answer, string text)
         {
-            //todo: fix
-            //case insensitive
-            return (answer.AcceptableResponses.Contains(text));
+            var ar = answer.AcceptableResponses.Select(a => a.ToLower());
+            return (ar.Contains(text.ToLower()));
         }
 
         public IEnumerable<Score> Leaderboard()
