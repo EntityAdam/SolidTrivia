@@ -66,9 +66,19 @@ namespace SolidTrivia.Game
 
             if (answer.IsAnswered || answer.IsAnswering) throw new InvalidOperationException("That answer has already been selected");
 
-            answer.IsAnswering = true;
+            answer.MarkAsCurrentAnswer();
             return answer;
         }
+
+        private Response GetResponseByUsername(string rngUsername)
+        {
+            var answer = CurrentAnswer();
+            return Responses.Single(r => r.AnswerId == answer.Id && r.PlayerId == rngUsername);
+        }
+
+        public void GradeCorrect(string rngUsername) => GetResponseByUsername(rngUsername).GradeCorrect();
+
+        public void GradeIncorrect(string rngUsername) => GetResponseByUsername(rngUsername).GradeCorrect();
 
         internal void Join(Player player)
         {

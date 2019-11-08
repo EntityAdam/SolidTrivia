@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SolidTrivia.Game;
-using SolidTrivia.Web.Data;
 
 namespace SolidTrivia.Web
 {

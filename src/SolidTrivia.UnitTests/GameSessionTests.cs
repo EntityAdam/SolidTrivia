@@ -3,6 +3,7 @@ using SolidTrivia.Game.Models;
 using System;
 using System.Linq;
 using Xunit;
+using static SolidTrivia.Game.Models.Response;
 
 namespace SolidTrivia.UnitTests
 {
@@ -157,6 +158,29 @@ namespace SolidTrivia.UnitTests
             //todo: finish testing
 
             //todo: user leaves game, all responses are removed
+        }
+
+        [Fact]
+        public void Test()
+        {
+            session.SelectAnswer("Design Patterns", 1);
+            game.ProcessUserSmsMessage("1", "A");
+            game.ProcessUserSmsMessage("2", "A");
+            game.ProcessUserSmsMessage("3", "A");
+            game.ProcessUserSmsMessage("4", "A");
+            game.ProcessUserSmsMessage("5", "A");
+
+            ////todo: response relies on the CurrentAnswer AKA the one answer that has a flag of IsAnswering = true
+            //session.MarkCurrentAnswerAsAnswered();
+
+            string playerName = game.GetPlayerRngIdBySms("1");
+
+            var response = session.Responses.Single(r => r.AnswerId == session.CurrentAnswer().Id && r.PlayerId == playerName);
+            Assert.Equal(GradeType.NotGraded, response.Grade);
+
+
+            session.GradeCorrect(playerName);
+            Assert.Equal(GradeType.Correct, response.Grade);
         }
     }
 }

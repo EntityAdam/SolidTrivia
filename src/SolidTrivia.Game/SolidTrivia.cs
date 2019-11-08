@@ -148,5 +148,11 @@ namespace SolidTrivia.Game
             }
             return response;
         }
+
+        public string GetPlayerRngIdBySms(string smsNumber)
+        {
+            if (smsNumber == null) throw new ArgumentNullException(nameof(smsNumber));
+            return AllPlayers().Single(p=>p.SmsNumber == smsNumber).Id;
+        }
     }
 }

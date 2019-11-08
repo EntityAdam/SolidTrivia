@@ -39,6 +39,11 @@ namespace SolidTrivia.Game.Models
             }
         }
 
+        public void MarkAsCurrentAnswer()
+        {
+            this.IsAnswering = true;
+        }
+
         public void MarkAsAnswered()
         {
             this.IsAnswering = false;
