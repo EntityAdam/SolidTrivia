@@ -7,9 +7,14 @@ namespace SolidTrivia.Game.Data
     {
         public static List<Category> Answers()
         {
+
             var cat1 = new List<Answer>()
             {
-                new Answer("This is the first letter", 1, new[] { "A" }),
+                new Answer("This is the first letter", 1, 
+@"public async Task<string> CanDoStuff()
+{
+    Console.WriteLine(""This is a test"");
+}", new[] { "A" }),
                 new Answer("This is the second letter", 2, new[] { "B" }),
                 new Answer("This is the third letter", 3, new[] { "C" }),
                 new Answer("This is the fourth letter", 4, new[] { "D" }),

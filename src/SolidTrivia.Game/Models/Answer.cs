@@ -11,6 +11,11 @@ namespace SolidTrivia.Game.Models
             Weight = weight;
         }
 
+        public Answer(string answerText, int weight, string code, string[] acceptableResponses) : this(answerText, weight, acceptableResponses)
+        {
+            Code = code;
+        }
+
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public int Weight { get; set; }
