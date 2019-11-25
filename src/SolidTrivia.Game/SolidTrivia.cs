@@ -10,16 +10,19 @@ namespace SolidTrivia.Game
     {
         private readonly List<GameSession> gameSessions;
 
+        private IdGeneratorService IdGeneratorService;
+
         public SolidTriviaGame()
         {
             gameSessions = new List<GameSession>();
+            IdGeneratorService = new IdGeneratorService();
         }
 
         public int ActiveSessions() => gameSessions.Count();
 
         public GameSession CreateNewSession()
         {
-            var id = IdGenerator.GetNext(gameSessions.Select(g => g.Id).ToList());
+            var id = IdGeneratorService.GetNext();
             var session = new GameSession(id);
             gameSessions.Add(session);
             return session;
@@ -77,7 +80,7 @@ namespace SolidTrivia.Game
                 return (false, message);
             }
 
-            var player = new Player(smsNumber, session.Id, IdGenerator.GetNext(players.Select(p => p.Id).ToList()));
+            var player = new Player(smsNumber, session.Id, IdGeneratorService.GetNext());
 
             session.Join(player);
             message = $"you have joined the game {sessionId}, text LEAVE to quit at any time";
