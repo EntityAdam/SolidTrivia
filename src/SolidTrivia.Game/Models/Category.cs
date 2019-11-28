@@ -5,9 +5,9 @@ namespace SolidTrivia.Game.Models
 {
     public class Category
     {
-        private readonly IEnumerable<Answer> answers;
+        private readonly IEnumerable<Prompt> answers;
 
-        public Category(string title, IEnumerable<Answer> answers)
+        public Category(string title, IEnumerable<Prompt> answers)
         {
             this.Title = title;
             this.answers = answers;
@@ -15,6 +15,6 @@ namespace SolidTrivia.Game.Models
 
         public string Title { get; private set; }
 
-        public IEnumerable<Answer> Answers => answers.OrderBy(a => a.Weight);
+        public IEnumerable<Prompt> Answers => answers.OrderBy(a => a.Weight);
     }
 }

@@ -8,57 +8,57 @@ namespace SolidTrivia.Game.Data
         public static List<Category> Answers()
         {
 
-            var cat1 = new List<Answer>()
+            var cat1 = new List<Prompt>()
             {
-                new Answer("This is the first letter", 1, 
+                new Prompt("This is the first letter", 1, 
 @"public async Task<string> CanDoStuff()
 {
     Console.WriteLine(""This is a test"");
 }", new[] { "A" }),
-                new Answer("This is the second letter", 2, new[] { "B" }),
-                new Answer("This is the third letter", 3, new[] { "C" }),
-                new Answer("This is the fourth letter", 4, new[] { "D" }),
-                new Answer("This is the fifth letter", 5, new[] { "E" }),
+                new Prompt("This is the second letter", 2, new[] { "B" }),
+                new Prompt("This is the third letter", 3, new[] { "C" }),
+                new Prompt("This is the fourth letter", 4, new[] { "D" }),
+                new Prompt("This is the fifth letter", 5, new[] { "E" }),
             };
-            var cat2 = new List<Answer>()
+            var cat2 = new List<Prompt>()
             {
-                new Answer("This is the first number", 1, new[] { "1" }),
-                new Answer("This is the second number", 2, new[] { "2" }),
-                new Answer("This is the third number", 3, new[] { "3" }),
-                new Answer("This is the fourth number", 4, new[] { "4" }),
-                new Answer("This is the fifth number", 5, new[] { "5" }),
+                new Prompt("This is the first number", 1, new[] { "1" }),
+                new Prompt("This is the second number", 2, new[] { "2" }),
+                new Prompt("This is the third number", 3, new[] { "3" }),
+                new Prompt("This is the fourth number", 4, new[] { "4" }),
+                new Prompt("This is the fifth number", 5, new[] { "5" }),
             };
-            var cat3 = new List<Answer>()
+            var cat3 = new List<Prompt>()
             {
-                new Answer("This is the first letter", 1, new[] { "A" }),
-                new Answer("This is the second letter", 2, new[] { "B" }),
-                new Answer("This is the third letter", 3, new[] { "C" }),
-                new Answer("This is the fourth letter", 4, new[] { "D" }),
-                new Answer("This is the fifth letter", 5, new[] { "E" }),
+                new Prompt("This is the first letter", 1, new[] { "A" }),
+                new Prompt("This is the second letter", 2, new[] { "B" }),
+                new Prompt("This is the third letter", 3, new[] { "C" }),
+                new Prompt("This is the fourth letter", 4, new[] { "D" }),
+                new Prompt("This is the fifth letter", 5, new[] { "E" }),
             };
-            var cat4 = new List<Answer>()
+            var cat4 = new List<Prompt>()
             {
-                new Answer("This is the first number", 1, new[] { "1" }),
-                new Answer("This is the second number", 2, new[] { "2" }),
-                new Answer("This is the third number", 3, new[] { "3" }),
-                new Answer("This is the fourth number", 4, new[] { "4" }),
-                new Answer("This is the fifth number", 5, new[] { "5" }),
+                new Prompt("This is the first number", 1, new[] { "1" }),
+                new Prompt("This is the second number", 2, new[] { "2" }),
+                new Prompt("This is the third number", 3, new[] { "3" }),
+                new Prompt("This is the fourth number", 4, new[] { "4" }),
+                new Prompt("This is the fifth number", 5, new[] { "5" }),
             };
-            var cat5 = new List<Answer>()
+            var cat5 = new List<Prompt>()
             {
-                new Answer("This is the first number", 1, new[] { "1" }),
-                new Answer("This is the second number", 2, new[] { "2" }),
-                new Answer("This is the third number", 3, new[] { "3" }),
-                new Answer("This is the fourth number", 4, new[] { "4" }),
-                new Answer("This is the fifth number", 5, new[] { "5" }),
+                new Prompt("This is the first number", 1, new[] { "1" }),
+                new Prompt("This is the second number", 2, new[] { "2" }),
+                new Prompt("This is the third number", 3, new[] { "3" }),
+                new Prompt("This is the fourth number", 4, new[] { "4" }),
+                new Prompt("This is the fifth number", 5, new[] { "5" }),
             };
-            var cat6 = new List<Answer>()
+            var cat6 = new List<Prompt>()
             {
-                new Answer("This is the first number", 1, new[] { "1" }),
-                new Answer("This is the second number", 2, new[] { "2" }),
-                new Answer("This is the third number", 3, new[] { "3" }),
-                new Answer("This is the fourth number", 4, new[] { "4" }),
-                new Answer("This is the fifth number", 5, new[] { "5" }),
+                new Prompt("This is the first number", 1, new[] { "1" }),
+                new Prompt("This is the second number", 2, new[] { "2" }),
+                new Prompt("This is the third number", 3, new[] { "3" }),
+                new Prompt("This is the fourth number", 4, new[] { "4" }),
+                new Prompt("This is the fifth number", 5, new[] { "5" }),
             };
 
             return new List<Category>()

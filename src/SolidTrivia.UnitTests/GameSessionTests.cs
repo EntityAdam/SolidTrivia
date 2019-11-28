@@ -22,7 +22,7 @@ namespace SolidTrivia.UnitTests
         [Fact]
         public void SelectAnswer()
         {
-            Answer answer;
+            Prompt answer;
 
             Assert.Throws<ArgumentNullException>(() => answer = session.SelectAnswer(null, 1));
             Assert.Throws<ArgumentOutOfRangeException>(() => answer = session.SelectAnswer("LINQ", -1));
@@ -45,7 +45,7 @@ namespace SolidTrivia.UnitTests
         [Fact]
         public void CurrentAnswer()
         {
-            Answer answer;
+            Prompt answer;
 
             Assert.Null(session.CurrentAnswer());
 

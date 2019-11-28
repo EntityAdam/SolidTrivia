@@ -34,15 +34,15 @@ namespace SolidTrivia.Game
             return Players[index];
         }
 
-        private IEnumerable<Answer> Answers() => Categories.SelectMany(c => c.Answers);
+        private IEnumerable<Prompt> Answers() => Categories.SelectMany(c => c.Answers);
 
         public bool IsAnswerInProgress() => Answers().Any(a => a.IsAnswering);
 
-        public Answer CurrentAnswer() => Answers().SingleOrDefault(a => a.IsAnswering == true);
+        public Prompt CurrentAnswer() => Answers().SingleOrDefault(a => a.IsAnswering == true);
 
         public void MarkCurrentAnswerAsAnswered() => CurrentAnswer().MarkAsAnswered();
 
-        public void SelectAnswer(Answer answer)
+        public void SelectAnswer(Prompt answer)
         {
             if (answer == null) throw new ArgumentNullException(nameof(answer));
             if (IsAnswerInProgress()) throw new InvalidOperationException("An answer is in progress");
@@ -50,7 +50,7 @@ namespace SolidTrivia.Game
             answer.IsAnswering = true;
         }
 
-        public Answer SelectAnswer(string category, int weight)
+        public Prompt SelectAnswer(string category, int weight)
         {
             if (string.IsNullOrEmpty(category)) throw new ArgumentNullException(nameof(category));
             if (weight <= 0) throw new ArgumentOutOfRangeException(nameof(weight));
@@ -134,14 +134,14 @@ namespace SolidTrivia.Game
             };
         }
 
-        public bool HasPlayerResponded(string smsNumber, Answer answer)
+        public bool HasPlayerResponded(string smsNumber, Prompt answer)
         {
             var player = Players.SingleOrDefault(p => p.SmsNumber == smsNumber);
             return Responses.Any(r => r.PlayerId == player.Id && r.AnswerId == answer.Id);
         }
 
         //todo: account for possible spelling mistakes?
-        private bool IsResponseCorrect(Answer answer, string text)
+        private bool IsResponseCorrect(Prompt answer, string text)
         {
             var ar = answer.AcceptableResponses.Select(a => a.ToLower());
             return (ar.Contains(text.ToLower()));

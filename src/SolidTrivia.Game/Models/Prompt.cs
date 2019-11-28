@@ -2,16 +2,16 @@
 
 namespace SolidTrivia.Game.Models
 {
-    public class Answer : BindableBase
+    public class Prompt : BindableBase
     {
-        public Answer(string answerText, int weight, string[] acceptableResponses)
+        public Prompt(string answerText, int weight, string[] acceptableResponses)
         {
             AnswerText = answerText;
             AcceptableResponses = acceptableResponses;
             Weight = weight;
         }
 
-        public Answer(string answerText, int weight, string code, string[] acceptableResponses) : this(answerText, weight, acceptableResponses)
+        public Prompt(string answerText, int weight, string code, string[] acceptableResponses) : this(answerText, weight, acceptableResponses)
         {
             Code = code;
         }
