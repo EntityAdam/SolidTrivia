@@ -22,43 +22,43 @@ namespace SolidTrivia.UnitTests
         [Fact]
         public void SelectAnswer()
         {
-            Prompt answer;
+            IPrompt prompt;
 
-            Assert.Throws<ArgumentNullException>(() => answer = session.SelectAnswer(null, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => answer = session.SelectAnswer("LINQ", -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => answer = session.SelectAnswer("INVALID CATEGORY", 1));
+            Assert.Throws<ArgumentNullException>(() => prompt = session.SelectPrompt(null, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => prompt = session.SelectPrompt("LINQ", -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => prompt = session.SelectPrompt("INVALID CATEGORY", 1));
 
-            answer = session.SelectAnswer("Potporri", 3);
-            Assert.Equal(3, answer.Weight);
-            Assert.True(answer.IsAnswering);
+            prompt = session.SelectPrompt("Potporri", 3);
+            Assert.Equal(3, prompt.Weight);
+            Assert.True(prompt.IsAnswering);
 
-            Assert.True(session.IsAnswerInProgress());
-            Assert.Throws<InvalidOperationException>(() => answer = session.SelectAnswer("LINQ", 5));
-            answer.MarkAsAnswered();
-            Assert.False(session.IsAnswerInProgress());
+            Assert.True(session.IsPromptInProgress());
+            Assert.Throws<InvalidOperationException>(() => prompt = session.SelectPrompt("LINQ", 5));
+            prompt.MarkAsAnswered();
+            Assert.False(session.IsPromptInProgress());
 
-            answer = session.SelectAnswer("LINQ", 1);
-            Assert.Equal(1, answer.Weight);
-            Assert.True(answer.IsAnswering);
+            prompt = session.SelectPrompt("LINQ", 1);
+            Assert.Equal(1, prompt.Weight);
+            Assert.True(prompt.IsAnswering);
         }
 
         [Fact]
         public void CurrentAnswer()
         {
-            Prompt answer;
+            IPrompt prompt;
 
-            Assert.Null(session.CurrentAnswer());
+            Assert.Null(session.CurrentPrompt());
 
-            answer = session.SelectAnswer("Potporri", 3);
-            Assert.Equal(3, answer.Weight);
-            Assert.True(answer.IsAnswering);
+            prompt = session.SelectPrompt("Potporri", 3);
+            Assert.Equal(3, prompt.Weight);
+            Assert.True(prompt.IsAnswering);
 
-            var currentAnswer = session.CurrentAnswer();
+            var currentAnswer = session.CurrentPrompt();
 
-            Assert.Equal(currentAnswer, answer);
+            Assert.Equal(currentAnswer, prompt);
 
-            session.MarkCurrentAnswerAsAnswered();
-            Assert.Null(session.CurrentAnswer());
+            session.MarkCurrentPromptAsAnswered();
+            Assert.Null(session.CurrentPrompt());
         }
 
         [Fact]
@@ -76,10 +76,10 @@ namespace SolidTrivia.UnitTests
             //no answer is being answered
             response = session.AddResponse("1", "INVALID RESPONSE");
             Assert.False(response.Success);
-            Assert.StartsWith("no answer to respond to", response.Body);
+            Assert.StartsWith("no prompt to respond to", response.Body);
 
-            var answer = session.SelectAnswer("LINQ", 2);
-            Assert.True(session.IsAnswerInProgress());
+            var answer = session.SelectPrompt("LINQ", 2);
+            Assert.True(session.IsPromptInProgress());
 
             Assert.False(session.HasPlayerResponded("1", answer));
             response = session.AddResponse("1", "valid response");
@@ -89,24 +89,24 @@ namespace SolidTrivia.UnitTests
             Assert.True(session.HasPlayerResponded("1", answer));
             response = session.AddResponse("1", "valid response");
             Assert.False(response.Success);
-            Assert.StartsWith("you have already provided a response to this answer", response.Body);
+            Assert.StartsWith("you have already provided a response to this prompt", response.Body);
         }
 
         [Fact]
         public void Scenario2()
         {
-            var answer = session.SelectAnswer("LINQ", 2);
+            var answer = session.SelectPrompt("LINQ", 2);
 
             //correct response
             game.ProcessUserSmsMessage("1", "2");
-            var responses = session.Responses.Where(r => r.AnswerId == answer.Id);
+            var responses = session.Responses.Where(r => r.PromptId == answer.Id);
             Assert.Single(responses);
             Assert.True(responses.First().IsCorrect);
             Assert.Equal("2", responses.First().Text);
 
             //incorrect response
             game.ProcessUserSmsMessage("2", "wrong answer");
-            var responses1 = session.Responses.Where(r => r.AnswerId == answer.Id);
+            var responses1 = session.Responses.Where(r => r.PromptId == answer.Id);
             Assert.Equal(2, responses1.Count());
             Assert.False(responses1.Skip(1).Take(1).First().IsCorrect);
         }
@@ -114,45 +114,45 @@ namespace SolidTrivia.UnitTests
         [Fact]
         public void Scores()
         {
-            session.SelectAnswer("Design Patterns", 1);
+            session.SelectPrompt("Design Patterns", 1);
             game.ProcessUserSmsMessage("1", "A");
             game.ProcessUserSmsMessage("2", "A");
             game.ProcessUserSmsMessage("3", "A");
             game.ProcessUserSmsMessage("4", "A");
             game.ProcessUserSmsMessage("5", "A");
-            session.MarkCurrentAnswerAsAnswered();
+            session.MarkCurrentPromptAsAnswered();
 
-            session.SelectAnswer("Design Patterns", 2);
+            session.SelectPrompt("Design Patterns", 2);
             game.ProcessUserSmsMessage("1", "B");
             game.ProcessUserSmsMessage("2", "B");
             game.ProcessUserSmsMessage("3", "B");
             game.ProcessUserSmsMessage("4", "B");
             game.ProcessUserSmsMessage("5", "WRONG ANSWER");
-            session.MarkCurrentAnswerAsAnswered();
+            session.MarkCurrentPromptAsAnswered();
 
-            session.SelectAnswer("Design Patterns", 3);
+            session.SelectPrompt("Design Patterns", 3);
             game.ProcessUserSmsMessage("1", "C");
             game.ProcessUserSmsMessage("2", "C");
             game.ProcessUserSmsMessage("3", "C");
             game.ProcessUserSmsMessage("4", "WRONG ANSWER");
             game.ProcessUserSmsMessage("5", "WRONG ANSWER");
-            session.MarkCurrentAnswerAsAnswered();
+            session.MarkCurrentPromptAsAnswered();
 
-            session.SelectAnswer("Design Patterns", 4);
+            session.SelectPrompt("Design Patterns", 4);
             game.ProcessUserSmsMessage("1", "D");
             game.ProcessUserSmsMessage("2", "D");
             game.ProcessUserSmsMessage("3", "WRONG ANSWER");
             game.ProcessUserSmsMessage("4", "WRONG ANSWER");
             game.ProcessUserSmsMessage("5", "WRONG ANSWER");
-            session.MarkCurrentAnswerAsAnswered();
+            session.MarkCurrentPromptAsAnswered();
 
-            session.SelectAnswer("Design Patterns", 5);
+            session.SelectPrompt("Design Patterns", 5);
             game.ProcessUserSmsMessage("1", "E");
             game.ProcessUserSmsMessage("2", "WRONG ANSWER");
             game.ProcessUserSmsMessage("3", "WRONG ANSWER");
             game.ProcessUserSmsMessage("4", "WRONG ANSWER");
             game.ProcessUserSmsMessage("5", "WRONG ANSWER");
-            session.MarkCurrentAnswerAsAnswered();
+            session.MarkCurrentPromptAsAnswered();
 
             var x = session.Leaderboard();
             //todo: finish testing
@@ -163,7 +163,7 @@ namespace SolidTrivia.UnitTests
         [Fact]
         public void Test()
         {
-            session.SelectAnswer("Design Patterns", 1);
+            session.SelectPrompt("Design Patterns", 1);
             game.ProcessUserSmsMessage("1", "A");
             game.ProcessUserSmsMessage("2", "A");
             game.ProcessUserSmsMessage("3", "A");
@@ -175,7 +175,7 @@ namespace SolidTrivia.UnitTests
 
             string playerName = game.GetPlayerRngIdBySms("1");
 
-            var response = session.Responses.Single(r => r.AnswerId == session.CurrentAnswer().Id && r.PlayerId == playerName);
+            var response = session.Responses.Single(r => r.PromptId == session.CurrentPrompt().Id && r.PlayerId == playerName);
             Assert.Equal(GradeType.NotGraded, response.Grade);
 
 

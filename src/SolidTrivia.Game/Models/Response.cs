@@ -8,7 +8,7 @@ namespace SolidTrivia.Game.Models
         public Response(string playerId, Guid answerId, int weight, string text, bool isCorrect, DateTime time)
         {
             PlayerId = playerId;
-            AnswerId = answerId;
+            PromptId = answerId;
             Weight = weight;
             Text = text;
             IsCorrect = isCorrect;
@@ -17,7 +17,7 @@ namespace SolidTrivia.Game.Models
 
         public string PlayerId { get; }
 
-        public Guid AnswerId { get; }
+        public Guid PromptId { get; }
 
         public string Text { get; }
 

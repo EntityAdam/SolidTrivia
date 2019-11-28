@@ -5,16 +5,16 @@ namespace SolidTrivia.Game.Models
 {
     public class Category
     {
-        private readonly IEnumerable<Prompt> answers;
+        private readonly IEnumerable<IPrompt> prompts;
 
-        public Category(string title, IEnumerable<Prompt> answers)
+        public Category(string title, IEnumerable<IPrompt> prompts)
         {
             this.Title = title;
-            this.answers = answers;
+            this.prompts = prompts;
         }
 
         public string Title { get; private set; }
 
-        public IEnumerable<Prompt> Answers => answers.OrderBy(a => a.Weight);
+        public IEnumerable<IPrompt> Prompts => prompts.OrderBy(a => a.Weight);
     }
 }

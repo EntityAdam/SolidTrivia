@@ -2,11 +2,11 @@
 
 namespace SolidTrivia.Game.Models
 {
-    public class Prompt : BindableBase
+    public class Prompt : BindableBase, IPrompt
     {
         public Prompt(string answerText, int weight, string[] acceptableResponses)
         {
-            AnswerText = answerText;
+            PromptText = answerText;
             AcceptableResponses = acceptableResponses;
             Weight = weight;
         }
@@ -20,7 +20,7 @@ namespace SolidTrivia.Game.Models
 
         public int Weight { get; set; }
 
-        public string AnswerText { get; set; }
+        public string PromptText { get; set; }
 
         public bool HasCode => !string.IsNullOrEmpty(Code);
 
@@ -44,7 +44,7 @@ namespace SolidTrivia.Game.Models
             }
         }
 
-        public void MarkAsCurrentAnswer()
+        public void MarkAsCurrentPrompt()
         {
             this.IsAnswering = true;
         }

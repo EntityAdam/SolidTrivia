@@ -5,7 +5,7 @@ namespace SolidTrivia.Game.Data
 {
     public static class TestData
     {
-        public static List<Category> Answers()
+        public static List<Category> Prompts()
         {
 
             var cat1 = new List<Prompt>()

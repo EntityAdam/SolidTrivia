@@ -1,5 +1,6 @@
-﻿@page "/board/{SessionId}/answer/{AnswerId:guid}"
+﻿@page "/board/{SessionId}/prompt/{PromptId:guid}"
 @using System.Threading;
+@using SolidTrivia.Web.Components;
 @inject NavigationManager NavigationManager
 @inject SolidTrivia.Game.ISolidTrivia SolidTrivia
 
@@ -9,7 +10,7 @@
             @Timer remaining
         </div>
         <div class="answer-stats">
-            <p>Responses: @Session.Responses.Count(r => r.AnswerId == ThisAnswer.Id)</p>
+            <p>Responses: @Session.Responses.Count(r => r.PromptId == ThisPrompt.Id)</p>
             <p>Players:&nbsp;&nbsp; @Session.Players.Count()</p>
         </div>
         <div class="answer-nav">
@@ -18,23 +19,23 @@
         </div>
     </div>
     <div class="answer-content">
-        @ThisAnswer.AnswerText
+        @ThisPrompt.PromptText
     </div>
-    @if (ThisAnswer.HasCode)
+    @if (ThisPrompt.HasCode)
     {
-        <SolidTrivia.Web.Components.AnswerCodeComponent Code="@ThisAnswer.Code"/>
+        <AnswerCodeComponent Code="@ThisPrompt.Code" />
     }
-</div>
+</div>>
 
 @code {
     [Parameter]
-    public Guid AnswerId { get; set; }
+    public Guid PromptId { get; set; }
 
     [Parameter]
     public string SessionId { get; set; }
 
     private SolidTrivia.Game.GameSession Session { get; set; }
-    private SolidTrivia.Game.Models.Answer ThisAnswer { get; set; }
+    private SolidTrivia.Game.Models.IPrompt ThisPrompt { get; set; }
 
     private int Timer { get; set; } = 120;
 
@@ -42,20 +43,20 @@
     {
 
         Session = SolidTrivia.GetSessionById(SessionId);
-        ThisAnswer = Session.CurrentAnswer();
+        ThisPrompt = Session.CurrentPrompt();
         Session.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
         CountDown();
     }
 
     protected void MarkAsAnswered()
     {
-        Session.MarkCurrentAnswerAsAnswered();
+        Session.MarkCurrentPromptAsAnswered();
         NavigationManager.NavigateTo($"Board/{SessionId}");
     }
 
     protected void NavigateToResponse()
     {
-        NavigationManager.NavigateTo($"Board/{SessionId}/response/{AnswerId}");
+        NavigationManager.NavigateTo($"Board/{SessionId}/response/{PromptId}");
     }
 
     private void CountDown()

@@ -16,7 +16,7 @@ namespace SolidTrivia.Game
             Players = new ObservableCollection<Player>();
 
             //TODO:
-            this.Categories = TestData.Answers();
+            this.Categories = TestData.Prompts();
         }
 
         public string Id { get; }
@@ -34,46 +34,46 @@ namespace SolidTrivia.Game
             return Players[index];
         }
 
-        private IEnumerable<Prompt> Answers() => Categories.SelectMany(c => c.Answers);
+        private IEnumerable<IPrompt> Prompts() => Categories.SelectMany(c => c.Prompts);
 
-        public bool IsAnswerInProgress() => Answers().Any(a => a.IsAnswering);
+        public bool IsPromptInProgress() => Prompts().Any(a => a.IsAnswering);
 
-        public Prompt CurrentAnswer() => Answers().SingleOrDefault(a => a.IsAnswering == true);
+        public IPrompt CurrentPrompt() => Prompts().SingleOrDefault(a => a.IsAnswering == true);
 
-        public void MarkCurrentAnswerAsAnswered() => CurrentAnswer().MarkAsAnswered();
+        public void MarkCurrentPromptAsAnswered() => CurrentPrompt().MarkAsAnswered();
 
-        public void SelectAnswer(Prompt answer)
+        public void SelectPrompt(IPrompt prompt)
         {
-            if (answer == null) throw new ArgumentNullException(nameof(answer));
-            if (IsAnswerInProgress()) throw new InvalidOperationException("An answer is in progress");
-            if (answer.IsAnswered || answer.IsAnswering) throw new InvalidOperationException("That answer has already been selected");
-            answer.IsAnswering = true;
+            if (prompt == null) throw new ArgumentNullException(nameof(prompt));
+            if (IsPromptInProgress()) throw new InvalidOperationException("A prompt is in progress");
+            if (prompt.IsAnswered || prompt.IsAnswering) throw new InvalidOperationException("That prompt has already been selected");
+            prompt.IsAnswering = true;
         }
 
-        public Prompt SelectAnswer(string category, int weight)
+        public IPrompt SelectPrompt(string category, int weight)
         {
             if (string.IsNullOrEmpty(category)) throw new ArgumentNullException(nameof(category));
             if (weight <= 0) throw new ArgumentOutOfRangeException(nameof(weight));
 
             if (!Categories.Any(c => c.Title == category)) throw new ArgumentOutOfRangeException(nameof(category));
 
-            if (IsAnswerInProgress()) throw new InvalidOperationException("An answer is in progress");
+            if (IsPromptInProgress()) throw new InvalidOperationException("A prompt is in progress");
 
             var cat = Categories.Single(c => c.Title == category);
-            var answer = cat.Answers.FirstOrDefault(p => p.Weight == weight);
+            var prompt = cat.Prompts.FirstOrDefault(p => p.Weight == weight);
 
-            if (answer == null) throw new KeyNotFoundException(nameof(category));
+            if (prompt == null) throw new KeyNotFoundException(nameof(category));
 
-            if (answer.IsAnswered || answer.IsAnswering) throw new InvalidOperationException("That answer has already been selected");
+            if (prompt.IsAnswered || prompt.IsAnswering) throw new InvalidOperationException("That prompt has already been selected");
 
-            answer.MarkAsCurrentAnswer();
-            return answer;
+            prompt.MarkAsCurrentPrompt();
+            return prompt;
         }
 
         private Response GetResponseByUsername(string rngUsername)
         {
-            var answer = CurrentAnswer();
-            return Responses.Single(r => r.AnswerId == answer.Id && r.PlayerId == rngUsername);
+            var prompt = CurrentPrompt();
+            return Responses.Single(r => r.PromptId == prompt.Id && r.PlayerId == rngUsername);
         }
 
         public void GradeCorrect(string rngUsername) => GetResponseByUsername(rngUsername).GradeCorrect();
@@ -102,29 +102,29 @@ namespace SolidTrivia.Game
                 };
             }
 
-            var currentAnswer = CurrentAnswer();
-            if (currentAnswer == null)
+            var currentPrompt = CurrentPrompt();
+            if (currentPrompt == null)
             {
                 return new SmsResponseMessage()
                 {
                     Success = false,
-                    Body = "no answer to respond to"
+                    Body = "no prompt to respond to"
                 };
             }
 
-            var hasPlayerResponded = HasPlayerResponded(smsNumber, currentAnswer);
+            var hasPlayerResponded = HasPlayerResponded(smsNumber, currentPrompt);
             if (hasPlayerResponded)
             {
                 return new SmsResponseMessage()
                 {
                     Success = false,
-                    Body = "you have already provided a response to this answer"
+                    Body = "you have already provided a response to this prompt"
                 };
             }
 
-            var isCorrect = IsResponseCorrect(CurrentAnswer(), text);
+            var isCorrect = IsResponseCorrect(CurrentPrompt(), text);
 
-            var response = new Response(player.Id, CurrentAnswer().Id, CurrentAnswer().Weight, text, isCorrect, DateTime.Now);
+            var response = new Response(player.Id, CurrentPrompt().Id, CurrentPrompt().Weight, text, isCorrect, DateTime.Now);
             Responses.Add(response);
 
             return new SmsResponseMessage()
@@ -134,17 +134,17 @@ namespace SolidTrivia.Game
             };
         }
 
-        public bool HasPlayerResponded(string smsNumber, Prompt answer)
+        public bool HasPlayerResponded(string smsNumber, IPrompt prompt)
         {
             var player = Players.SingleOrDefault(p => p.SmsNumber == smsNumber);
-            return Responses.Any(r => r.PlayerId == player.Id && r.AnswerId == answer.Id);
+            return Responses.Any(r => r.PlayerId == player.Id && r.PromptId == prompt.Id);
         }
 
         //todo: account for possible spelling mistakes?
-        private bool IsResponseCorrect(Prompt answer, string text)
+        private bool IsResponseCorrect(IPrompt prompt, string text)
         {
-            var ar = answer.AcceptableResponses.Select(a => a.ToLower());
-            return (ar.Contains(text.ToLower()));
+            var acceptableResponses = prompt.AcceptableResponses.Select(a => a.ToLower());
+            return (acceptableResponses.Contains(text.ToLower()));
         }
 
         public IEnumerable<Score> Leaderboard()

@@ -1,19 +1,19 @@
-﻿@page "/board/{SessionId}/response/{AnswerId:guid}"
+﻿@page "/board/{SessionId}/response/{PromptId:guid}"
 @inject NavigationManager NavigationManager
 @inject SolidTrivia.Game.ISolidTrivia SolidTrivia
 
 <div class="responses-wrapper">
     <div class="answer-content">
-        @ThisAnswer.AnswerText
+        @ThisPrompt.PromptText
     </div>
     <div class="correct-responses">
         <h1>Acceptable Responses:</h1>
-        <h2>@ThisAnswerList()</h2>
+        <h2>@ThisPromptList()</h2>
     </div>
     <div class="response-list">
         <div>User ID</div>
         <div>Response</div>
-        @foreach (var response in Session.Responses.Where(r => r.AnswerId == ThisAnswer.Id))
+        @foreach (var response in Session.Responses.Where(r => r.PromptId == ThisPrompt.Id))
         {
             <div>@response.PlayerId</div>
             <div>@response.Text</div>
@@ -23,26 +23,26 @@
 
 @code {
     [Parameter]
-    public Guid AnswerId { get; set; }
+    public Guid PromptId { get; set; }
 
     [Parameter]
     public string SessionId { get; set; }
 
     private SolidTrivia.Game.GameSession Session { get; set; }
-    private SolidTrivia.Game.Models.Answer ThisAnswer { get; set; }
+    private SolidTrivia.Game.Models.IPrompt ThisPrompt { get; set; }
 
     protected override void OnInitialized()
     {
 
         Session = SolidTrivia.GetSessionById(SessionId);
         Session.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
-        ThisAnswer = Session.CurrentAnswer();
+        ThisPrompt = Session.CurrentPrompt();
     }
 
-    protected string ThisAnswerList()
+    protected string ThisPromptList()
     {
         var sb = new System.Text.StringBuilder();
-        foreach (var ar in ThisAnswer.AcceptableResponses)
+        foreach (var ar in ThisPrompt.AcceptableResponses)
         {
             sb.Append(ar).Append("; ");
         }
