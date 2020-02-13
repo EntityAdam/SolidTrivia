@@ -1,12 +1,8 @@
-﻿using SolidTrivia.Game;
-using SolidTrivia.Game.Data;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
-namespace SolidTrivia.UnitTests
+namespace EntityAdam.IdGenerator.Tests
 {
     public class IdGeneratorTests
     {

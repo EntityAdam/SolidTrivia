@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Game", "SolidTr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.UnitTests", "SolidTrivia.UnitTests\SolidTrivia.UnitTests.csproj", "{1198F979-804C-4DCA-8B7F-8FECF83A6E4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityAdam.IdGenerator", "EntityAdam.IdGenerator\EntityAdam.IdGenerator.csproj", "{71F8CD70-AAD1-4078-8109-5E6A4F958070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityAdam.IdGenerator.Tests", "EntityAdam.IdGenerator.Tests\EntityAdam.IdGenerator.Tests.csproj", "{B1B0CBA8-94E0-450D-BA63-CCA633E4069B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{1198F979-804C-4DCA-8B7F-8FECF83A6E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1198F979-804C-4DCA-8B7F-8FECF83A6E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1198F979-804C-4DCA-8B7F-8FECF83A6E4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F8CD70-AAD1-4078-8109-5E6A4F958070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F8CD70-AAD1-4078-8109-5E6A4F958070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F8CD70-AAD1-4078-8109-5E6A4F958070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F8CD70-AAD1-4078-8109-5E6A4F958070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B0CBA8-94E0-450D-BA63-CCA633E4069B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B0CBA8-94E0-450D-BA63-CCA633E4069B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B0CBA8-94E0-450D-BA63-CCA633E4069B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B0CBA8-94E0-450D-BA63-CCA633E4069B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
