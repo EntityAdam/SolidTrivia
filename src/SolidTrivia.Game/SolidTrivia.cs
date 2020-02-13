@@ -1,4 +1,5 @@
-﻿using SolidTrivia.Game.Data;
+﻿using EntityAdam.IdGenerator;
+using SolidTrivia.Game.Data;
 using SolidTrivia.Game.Models;
 using System;
 using System.Collections.Generic;

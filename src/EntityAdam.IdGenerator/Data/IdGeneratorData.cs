@@ -1,4 +1,4 @@
-﻿namespace SolidTrivia.Game.Data
+﻿namespace EntityAdam.IdGenerator.Data
 {
     public static class IdGeneratorData
     {

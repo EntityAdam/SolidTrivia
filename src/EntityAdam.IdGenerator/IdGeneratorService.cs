@@ -1,16 +1,16 @@
-﻿using SolidTrivia.Game.Data;
+﻿using EntityAdam.IdGenerator.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SolidTrivia.Game
+namespace EntityAdam.IdGenerator
 {
-    public class IdGeneratorService
+    public class IdGeneratorService : IIdGeneratorService
     {
         private Random Random = new Random();
 
         private List<string> Ids { get; set; }
-        
+
         public IdGeneratorService()
         {
             Ids = GetAll();
