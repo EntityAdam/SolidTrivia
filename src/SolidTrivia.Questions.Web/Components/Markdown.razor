@@ -1,0 +1,20 @@
+﻿@using Markdig
+
+@if (Content == null)
+{
+    <span>Loading...</span>
+}
+else
+{
+    @((MarkupString)BuildHtmlFromMarkdown(Content))
+}
+
+@code {
+    [Parameter] public string Content { get; set; }
+
+    private string BuildHtmlFromMarkdown(string value) => Markdig.Markdown.ToHtml(
+        markdown: value,
+        pipeline: new MarkdownPipelineBuilder().UseAdvancedExtensions().Build()
+    );
+
+}

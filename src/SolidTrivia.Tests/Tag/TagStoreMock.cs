@@ -1,0 +1,43 @@
+﻿using SolidTrivia.Questions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SolidTrivia.Tests
+{
+    internal class TagStoreMock : ITagStore
+    {
+        public List<NewTag> Tags { get; set; } = new List<NewTag>();
+        public List<NewTaggedQuestion> TaggedQuestions { get; set; } = new List<NewTaggedQuestion>();
+
+        public TagStoreMock()
+        {
+
+        }
+
+        public void Create(string tagName) => Tags.Add(new NewTag() { Id = NewId(), Name = tagName });
+
+        public IEnumerable<NewTag> ListTags() => Tags;
+
+        public void TagQuestion(int questionId, int tagId) => TaggedQuestions.Add(new NewTaggedQuestion() { QuestionId = questionId, TagId = tagId });
+
+        public bool Exists(string tagName) => Tags.Any(t => t.Name == tagName);
+
+        public IEnumerable<NewTag> ListAvailableTags(int questionId) => Tags.Where(t => !TaggedQuestions.Any(tq => tq.QuestionId == questionId && tq.TagId == t.Id));
+
+        private int NewId()
+        {
+            var id = 1;
+            if (Tags.Count() > 0)
+            {
+                id = Tags.Max(c => c.Id) + 1;
+            }
+            return id;
+        }
+
+        public bool Exists(int tagId) => Tags.Any(t => t.Id == tagId);
+
+        public bool IsTagged(int questionId, int tagId) => TaggedQuestions.Any(tq => tq.QuestionId == questionId && tq.TagId == tagId);
+    }
+}
