@@ -6,5 +6,6 @@ namespace SolidTrivia.Questions
 {
     public interface IQuestionFacade
     {
+        void CreateQuestion(string question);
     }
 }

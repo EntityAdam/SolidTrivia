@@ -7,7 +7,7 @@ namespace SolidTrivia.UnitTests
 {
     public class SolidTriviaTests
     {
-        private SolidTriviaGame game;
+        private readonly SolidTriviaGame game;
 
         public SolidTriviaTests()
         {

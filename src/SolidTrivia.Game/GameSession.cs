@@ -141,7 +141,7 @@ namespace SolidTrivia.Game
         }
 
         //todo: account for possible spelling mistakes?
-        private bool IsResponseCorrect(IPrompt prompt, string text)
+        private static bool IsResponseCorrect(IPrompt prompt, string text)
         {
             var acceptableResponses = prompt.AcceptableResponses.Select(a => a.ToLower());
             return (acceptableResponses.Contains(text.ToLower()));

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlSanitizer" Version="5.0.298" />
+    <PackageReference Include="Markdig" Version="0.18.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolidTrivia.Questions\SolidTrivia.Questions.csproj" />
+  </ItemGroup>
+
+</Project>

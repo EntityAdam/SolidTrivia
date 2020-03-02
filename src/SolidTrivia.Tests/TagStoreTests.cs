@@ -29,7 +29,7 @@ namespace SolidTrivia.Tests
         {
             var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
 
-            facade.CreateQuestion(new NewQuestion() { Id = 1 });
+            facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
             facade.CreateTag("tag1");
             facade.CreateTag("tag2");
             facade.CreateTag("tag3");
@@ -43,7 +43,7 @@ namespace SolidTrivia.Tests
 
             facade.TagQuestion(1, 2);
             availableTags = facade.ListAvailableTags(1);
-            Assert.Equal(1, availableTags.Count());
+            Assert.Single(availableTags);
 
             Assert.Throws<ArgumentException>(() => facade.TagQuestion(1, 2));
         }

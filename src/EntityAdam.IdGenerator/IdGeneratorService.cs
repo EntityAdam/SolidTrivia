@@ -7,7 +7,7 @@ namespace EntityAdam.IdGenerator
 {
     public class IdGeneratorService : IIdGeneratorService
     {
-        private Random Random = new Random();
+        private readonly Random Random = new Random();
 
         private List<string> Ids { get; set; }
 

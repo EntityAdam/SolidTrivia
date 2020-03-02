@@ -24,7 +24,12 @@ namespace SolidTrivia.Questions
 
 
         //questions
-        public void CreateQuestion(NewQuestion question)
+        public void CreateQuestion(string question)
+        {
+            if (string.IsNullOrEmpty(question)) throw new ArgumentNullException(nameof(question));
+            CreateNewQuestion(new NewQuestion() { MarkdownContent = question });
+        }
+        public void CreateNewQuestion(NewQuestion question)
         {
             if (question is null) throw new ArgumentNullException(nameof(question));
             questionStore.Create(question);

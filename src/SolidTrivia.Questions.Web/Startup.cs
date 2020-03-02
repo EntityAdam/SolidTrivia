@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SolidTrivia.Common;
 using SolidTrivia.Questions.Web.Data;
+using SolidTrivia.Tests; // MOCKS FOR DEVELOPMENT!
 
 namespace SolidTrivia.Questions.Web
 {
@@ -24,15 +26,30 @@ namespace SolidTrivia.Questions.Web
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+
+
+            //game
+            services.AddSingleton<IQuestionFacade, QuestionFacade>();
+            services.AddSingleton<IQuestionStore, QuestionStoreMock>(); //MOCKS FOR DEVELOPMENT
+            services.AddSingleton<IBoardStore, BoardStoreMock>(); //MOCKS FOR DEVELOPMENT
+            services.AddSingleton<ICommentStore, CommentStoreMock>(); //MOCKS FOR DEVELOPMENT
+            services.AddSingleton<ITagStore, TagStoreMock>(); //MOCKS FOR DEVELOPMENT
+            services.AddSingleton<ICategoryStore, CategoryStoreMock>(); //MOCKS FOR DEVELOPMENT
+            services.AddSingleton<IVoteStore, VoteStoreMock>(); //MOCKS FOR DEVELOPMENT
+
+
+
+            //ui
+            services.AddScoped<ICreateQuestionViewModel, CreateQuestionViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

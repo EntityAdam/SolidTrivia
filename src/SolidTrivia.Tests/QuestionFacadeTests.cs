@@ -3,6 +3,10 @@ using System;
 using Xunit;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("SolidTrivia.Common.Tests"),
+           InternalsVisibleTo("SolidTrivia.Questions.Web")] //TODO : TEMPORARY FOR DEVELOPMENT, MUST DELETE AND REGISTER REAL COMPONENTS
 
 namespace SolidTrivia.Tests
 {
@@ -41,7 +45,7 @@ namespace SolidTrivia.Tests
         public void CreateComment()
         {
             var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreMock(), new CategoryStoreDummy(), new BoardStoreDummy());
-            facade.CreateQuestion(new NewQuestion() { Id = 1 });
+            facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
 
             facade.ReplyToQuestion(1, "comment1");
             facade.ReplyToQuestion(1, "comment2");

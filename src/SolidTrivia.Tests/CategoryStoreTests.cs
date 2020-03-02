@@ -21,7 +21,7 @@ namespace SolidTrivia.Tests
         public void CreateCategory()
         {
             var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreDummy());
-            facade.CreateQuestion(new NewQuestion() { Id = 1 });
+            facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
             facade.CreateCategory("category1");
             facade.CreateCategory("category2");
             facade.CreateCategory("category3");
@@ -34,7 +34,7 @@ namespace SolidTrivia.Tests
         public void DeleteCategory()
         {
             var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreDummy());
-            facade.CreateQuestion(new NewQuestion() { Id = 1 });
+            facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
             facade.CreateCategory("category1");
             facade.CreateCategory("category2");
             facade.CreateCategory("category3");
@@ -65,8 +65,8 @@ namespace SolidTrivia.Tests
         {
             var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreMock());
             facade.CreateCategory("category1");
-            facade.CreateQuestion(new NewQuestion() { Id = 1 });
-            facade.CreateQuestion(new NewQuestion() { Id = 2 });
+            facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
+            facade.CreateNewQuestion(new NewQuestion() { Id = 2 });
             facade.AddQuestionToCategory(1, 1);
             Assert.Throws<ArgumentException>(() => facade.AddQuestionToCategory(1, 1)); //should fail
             facade.AddQuestionToCategory(2, 1);

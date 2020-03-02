@@ -11,7 +11,7 @@ namespace SolidTrivia.Game
     {
         private readonly List<GameSession> gameSessions;
 
-        private IdGeneratorService IdGeneratorService;
+        private readonly IdGeneratorService IdGeneratorService;
 
         public SolidTriviaGame()
         {

@@ -1,5 +1,5 @@
 ﻿@page "/createquestion"
-@inherits CreateQuestionBase
+@inject ICreateQuestionViewModel viewModel
 
 <style>
     .markdown-editor, .markdown-view {
@@ -24,7 +24,7 @@
             <h1>Create New Question</h1>
         </div>
         <div class="ml-auto">
-            <button class="btn btn-primary" @onclick="SaveChanges">Save</button>
+            <button class="btn btn-primary" @onclick="SaveChanges" disabled="@(!ViewModel.SaveCommand.CanExecute(null))">Save</button>
             <button class="btn btn-light">Cancel</button>
         </div>
 
@@ -33,14 +33,44 @@
         <div class="col-sm-6">
             <span class="label label-default label-hint">Editor</span>
             <div class="markdown-editor">
-                <Editor OnChange=@TextChanged InitialValue=@ContentValue />
+                <Editor OnChange=@TextChanged InitialValue=@ViewModel.UserInputMarkdown />
             </div>
         </div>
         <div class="col-sm-6">
             <span class="label label-default label-hint">HTML Preview</span>
             <div class="markdown-view">
-                <Markdown Content="@ContentValue"></Markdown>
+                <Markdown Content="@ViewModel.SanitizedHtml"></Markdown>
             </div>
         </div>
     </div>
 </div>
+
+@code {
+
+    [Parameter]
+    public ICreateQuestionViewModel ViewModel { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+        ViewModel.UserInputMarkdown = "Enter your question in Markdown format.";
+        ViewModel.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
+    }
+
+    protected void TextChanged(ChangeEventArgs e)
+    {
+        var val = string.Empty;
+        if (e.Value != null)
+        {
+            val = e.Value.ToString();
+        }
+        ViewModel.UserInputMarkdown = val;
+    }
+
+    protected void SaveChanges()
+    {
+        ViewModel.SaveQuestionMarkdown();
+    }
+}

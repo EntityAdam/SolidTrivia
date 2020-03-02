@@ -13,7 +13,7 @@ namespace SolidTrivia.Tests
         {
             var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
             Assert.Throws<ArgumentNullException>(() => facade.CreateQuestion(null));
-            facade.CreateQuestion(new NewQuestion() { Id = 1 });
+            facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
         }
     }
 }
