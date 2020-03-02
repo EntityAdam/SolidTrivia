@@ -1,0 +1,22 @@
+﻿@inject ICreateTagViewModel viewModel
+
+<div class="form-group">
+    <input type="text" class="form-control" placeholder="Tag" @bind="ViewModel.TagName" />
+    <button class="btn btn-primary" disabled="@ViewModel.CreateCommand.CanExecute(null)" @onclick="@Create">Create</button>
+</div>
+
+@code {
+    protected ICreateTagViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+    }
+
+    protected void Create()
+    {
+        ViewModel.CreateCommand.Execute(null);
+        ViewModel.TagName = null;
+    }
+}

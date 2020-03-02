@@ -1,0 +1,50 @@
+﻿@page "/tags"
+@inject ITagsViewModel viewmodel
+
+<h3>Create Tag</h3>
+
+<SolidTrivia.Questions.Web.Tag.CreateTagComponent />
+
+<h3>Tags List <i class="oi oi-reload" aria-hidden="true" @onclick="Refresh"></i></h3>
+
+@if (ViewModel == null || ViewModel.Tags == null)
+{
+    <span>Loading...</span>
+}
+else if (!ViewModel.Tags.Any())
+{
+    <span>Nothing to see here..</span>
+}
+else
+{
+    <table class="table table-hover table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var tag in ViewModel.Tags)
+        {
+            <tr>
+                <td>@tag.Id</td>
+                <td>@tag.Name</td>
+                <td>Edit | Delete</td>
+            </tr>
+        }
+    </table>
+}
+
+@code {
+    protected ITagsViewModel ViewModel { get; set; }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewmodel;
+        ViewModel.Load();
+    }
+
+    protected void Refresh()
+    {
+        ViewModel.UpdateCommand.Execute(null);
+    }
+}

@@ -5,6 +5,7 @@ namespace SolidTrivia.Questions
     public interface ITagStore
     {
         void Create(string tagName);
+        IEnumerable<NewTag> ListTags();
         void TagQuestion(int questionId, int tagId);
         IEnumerable<NewTag> ListAvailableTags(int questionId);
         bool Exists(string tagName);

@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Questions", "So
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Questions.Web", "SolidTrivia.Questions.Web\SolidTrivia.Questions.Web.csproj", "{3AAAEC3B-A900-40F5-B687-15EA611C653D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidTrivia.Common", "SolidTrivia.Common\SolidTrivia.Common.csproj", "{5273FF83-0E17-4820-ADA5-CD4A22FE1BE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Common", "SolidTrivia.Common\SolidTrivia.Common.csproj", "{5273FF83-0E17-4820-ADA5-CD4A22FE1BE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidTrivia.Common.Tests", "SolidTrivia.Common.Tests\SolidTrivia.Common.Tests.csproj", "{7E45E262-645D-4655-A3AD-46AF4BC0835F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Common.Tests", "SolidTrivia.Common.Tests\SolidTrivia.Common.Tests.csproj", "{7E45E262-645D-4655-A3AD-46AF4BC0835F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

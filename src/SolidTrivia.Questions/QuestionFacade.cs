@@ -36,12 +36,15 @@ namespace SolidTrivia.Questions
         }
 
         //tags
+        //TODO : Tags must be case insensitive
         public void CreateTag(string tagName)
         {
             if (string.IsNullOrEmpty(tagName)) throw new ArgumentNullException(nameof(tagName));
             if (tagStore.Exists(tagName)) throw new ArgumentException(nameof(tagName), $"A tag with '{tagName}' already exists");
             tagStore.Create(tagName);
         }
+
+        public IEnumerable<NewTag> ListTags() => tagStore.ListTags();
 
         //tags and questions
         public IEnumerable<NewTag> ListAvailableTags(int questionId)
@@ -82,7 +85,8 @@ namespace SolidTrivia.Questions
         public void DeleteCategoryOfBoard(int boardId, int categoryId) => categoryStore.DeleteCategoryOfBoard(boardId, categoryId);
 
         //category and questions
-        public void AddQuestionToCategory(int questionId, int categoryId) {
+        public void AddQuestionToCategory(int questionId, int categoryId)
+        {
             if (!questionStore.Exists(questionId)) throw new ArgumentException(nameof(questionId), $"Question with id '{questionId}' does not exist");
             if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{questionId}' does not exist");
             if (questionStore.IsQuestionInCategory(questionId, categoryId)) throw new ArgumentException($"Question with id '{questionId}' already exists in Category with id '{categoryId}'");
@@ -108,5 +112,7 @@ namespace SolidTrivia.Questions
         }
 
         public NewBoard GetBoard(string name) => boardStore.GetBoardByName(name);
+
+        public bool TagExists(string tagName) => tagStore.Exists(tagName);
     }
 }

@@ -32,6 +32,11 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
+        public IEnumerable<NewTag> ListTags()
+        {
+            throw new NotImplementedException();
+        }
+
         public void TagQuestion(int questionId, int tagId)
         {
             throw new NotImplementedException();
