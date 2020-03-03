@@ -1,4 +1,5 @@
 ﻿@page "/tags"
+@inject NavigationManager NavigationManager
 @inject ITagsViewModel viewmodel
 
 <h3>Create Tag</h3>
@@ -28,7 +29,10 @@ else
             <tr>
                 <td>@tag.Id</td>
                 <td>@tag.Name</td>
-                <td>Edit | <button class="btn btn-danger" @onclick="(() => Delete(tag.Id))">Delete</button></td>
+                <td>
+                    <button class="btn btn-info" @onclick="(() => Edit(tag.Id))">Edit</button> |
+                    <button class="btn btn-danger" @onclick="(() => Delete(tag.Id))">Delete</button>
+                </td>
             </tr>
         }
     </table>
@@ -51,5 +55,10 @@ else
     protected void Delete(int tagId)
     {
         ViewModel.DeleteCommand.Execute(tagId);
+    }
+
+    protected void Edit(int tagId)
+    {
+        NavigationManager.NavigateTo($"tags/{tagId}");
     }
 }
