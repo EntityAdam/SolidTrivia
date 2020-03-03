@@ -1,4 +1,5 @@
-﻿@inject ICreateTagViewModel viewModel
+﻿@page "/tag/create"
+@inject ITagCreateViewModel viewModel
 
 <div class="form-group">
     <input type="text" class="form-control" placeholder="Tag" @bind="ViewModel.TagName" />
@@ -6,7 +7,7 @@
 </div>
 
 @code {
-    protected ICreateTagViewModel ViewModel { get; set; }
+    protected ITagCreateViewModel ViewModel { get; set; }
 
     protected override void OnInitialized()
     {

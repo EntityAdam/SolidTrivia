@@ -13,7 +13,7 @@ namespace SolidTrivia.Common.Tests
         public void Test()
         {
             var questionFacade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreMock(), new CommentStoreMock(), new CategoryStoreMock(), new BoardStoreMock());
-            var viewModel = new CreateTagViewModel(questionFacade);
+            var viewModel = new TagCreateViewModel(questionFacade);
 
             //new vm
             //tagname should be empty

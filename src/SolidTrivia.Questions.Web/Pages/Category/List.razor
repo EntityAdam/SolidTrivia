@@ -1,0 +1,46 @@
+﻿
+@page "/category/list"
+@inject NavigationManager NavigationManager
+@inject ICategoryListViewModel viewmodel
+
+<h3>Categories</h3>
+@if (ViewModel == null || ViewModel.Page == null)
+{
+    <span>Loading...</span>
+}
+else
+{
+    <table class="table table-hover table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var cat in ViewModel.Page)
+        {
+            <tr>
+                <td>@cat.Id</td>
+                <td>@cat.Name</td>
+                <td>
+                    <button class="btn btn-info" @onclick="(() => Edit(cat.Id))">Edit</button> |
+                    <button class="btn btn-danger" @onclick="(() => Delete(cat.Id))">Delete</button>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@code {
+    protected ICategoryListViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewmodel;
+        ViewModel.Load();
+    }
+
+    protected void Delete(int categoryId) => NavigationManager.NavigateTo($"category/delete/{categoryId}");
+
+    protected void Edit(int categoryId) => NavigationManager.NavigateTo($"category/edit/{categoryId}");
+}

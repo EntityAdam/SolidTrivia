@@ -10,7 +10,7 @@ namespace SolidTrivia.Questions
         void DeleteCategory(int categoryId);
         void DeleteCategoryOfBoard(int boardId, int categoryId);
 
-        NewCategory GetCategory(int categoryId);
+        NewCategory GetById(int categoryId);
         NewCategory GetCategoryOfBoard(int boardId, int categoryId);
 
 
@@ -18,5 +18,6 @@ namespace SolidTrivia.Questions
         IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId);
         void AddCategoryToBoard(int boardId, int categoryId);
         bool Exists(int categoryId);
+        void Rename(int categoryId, string newName);
     }
 }

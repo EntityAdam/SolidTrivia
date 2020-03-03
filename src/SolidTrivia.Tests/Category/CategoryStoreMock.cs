@@ -17,7 +17,7 @@ namespace SolidTrivia.Tests
         public void Create(string categoryName) => Categories.Add(new NewCategory() { Id = NewId(), Name = categoryName });
         public void DeleteCategory(int categoryId) => Categories.RemoveAll(c => c.Id == categoryId && c.BoardId == null);
         public void DeleteCategoryOfBoard(int boardId, int categoryId) => Categories.RemoveAll(c => c.Id == categoryId && c.BoardId == boardId);
-        public NewCategory GetCategory(int categoryId) => Categories.Where(c => c.BoardId == null).First(c => c.Id == categoryId);
+        public NewCategory GetById(int categoryId) => Categories.Where(c => c.BoardId == null).First(c => c.Id == categoryId);
         public NewCategory GetCategoryOfBoard(int boardId, int categoryId) => Categories.Where(c => c.BoardId == boardId).First(c => c.Id == categoryId);
         public IEnumerable<NewCategory> ListCategories() => Categories.Where(c => c.BoardId == null);
         public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId) => Categories.Where(c => c.BoardId == boardId);
@@ -34,5 +34,7 @@ namespace SolidTrivia.Tests
         }
 
         public bool Exists(int categoryId) => Categories.Any(c => c.Id == categoryId);
+
+        public void Rename(int categoryId, string newName) => GetById(categoryId).Name = newName;
     }
 }

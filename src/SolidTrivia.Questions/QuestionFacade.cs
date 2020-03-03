@@ -94,7 +94,7 @@ namespace SolidTrivia.Questions
         public void AddQuestionToCategory(int questionId, int categoryId)
         {
             if (!questionStore.Exists(questionId)) throw new ArgumentException(nameof(questionId), $"Question with id '{questionId}' does not exist");
-            if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{questionId}' does not exist");
+            if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{categoryId}' does not exist");
             if (questionStore.IsQuestionInCategory(questionId, categoryId)) throw new ArgumentException($"Question with id '{questionId}' already exists in Category with id '{categoryId}'");
             questionStore.AddQuestionToCategory(questionId, categoryId);
         }
@@ -121,5 +121,14 @@ namespace SolidTrivia.Questions
 
         public bool TagExists(string tagName) => tagStore.ExistsOrdinalIgnoreCase(tagName);
         public bool TagExists(int tagId) => tagStore.Exists(tagId);
+
+        public NewCategory GetCategory(int categoryId) => categoryStore.GetById(categoryId);
+
+        public void RenameCategory(int categoryId, string newName)
+        {
+            if (string.IsNullOrEmpty(newName)) throw new ArgumentException(nameof(newName));
+            if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{categoryId}' does not exist");
+            categoryStore.Rename(categoryId, newName);
+        }
     }
 }

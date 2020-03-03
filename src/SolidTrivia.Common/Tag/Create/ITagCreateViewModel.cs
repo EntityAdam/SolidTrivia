@@ -1,6 +1,6 @@
 ﻿namespace SolidTrivia.Common
 {
-    public interface ICreateTagViewModel
+    public interface ITagCreateViewModel
     {
         IBlazorCommand CreateCommand { get; set; }
         string TagName { get; set; }

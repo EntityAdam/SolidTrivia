@@ -1,0 +1,49 @@
+﻿@*
+    @page "/tag/edit/{tagId:int}"
+    @inject NavigationManager NavigationManager
+    @inject IEditCategoryViewModel viewmodel
+
+    <h3>Edit Tag</h3>
+    <h4>Tag Id: @ViewModel.EditModel.Id</h4>
+
+    <p>TODO : Create Edit View Model</p>
+    <p>TODO : Fetch Current Tag Text </p>
+    <p>TODO : Invalidate Save if text is the same</p>
+    <p>TODO : Maybe allow case correction somehow?</p>
+    <p>TODO : Cancel goes back to list</p>
+    <p>TODO : Inline Form</p>
+    <p>TODO : Make into component, inject it into the list instead of a separate page?</p>
+
+    <div class="form-group">
+        <label for="current">Currently</label>
+        <input id="current" type="text" readonly class="form-control mb-2" placeholder="Old text" />
+    </div>
+    <div class="form-group">
+        <label for="changeto">Rename To</label>
+        <input id="changeto" class="form-control mb-2" type="text" />
+    </div>
+    <button class="btn btn-primary" @onclick="Save">Save</button>
+    <button class="btn btn-primary" @onclick="Delete">Delete</button>
+    <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+
+
+    @code {
+        [Parameter]
+        public int tagId { get; set; }
+
+        protected IEditCategoryViewModel ViewModel { get; set; }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            ViewModel = viewmodel;
+            ViewModel.Load(tagId);
+        }
+
+        protected void Cancel() => NavigationManager.NavigateTo($"tag/list");
+
+        protected void Delete() => NavigationManager.NavigateTo($"tag/delete/{ViewModel.EditModel.Id}");
+
+        protected void Save() => ViewModel.RenameCategory();
+    }
+*@

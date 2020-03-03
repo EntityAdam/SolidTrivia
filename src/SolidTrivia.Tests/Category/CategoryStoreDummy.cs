@@ -32,7 +32,7 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public NewCategory GetCategory(int categoryId)
+        public NewCategory GetById(int categoryId)
         {
             throw new NotImplementedException();
         }
@@ -48,6 +48,11 @@ namespace SolidTrivia.Tests
         }
 
         public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Rename(int categoryId, string newName)
         {
             throw new NotImplementedException();
         }

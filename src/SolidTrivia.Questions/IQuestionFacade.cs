@@ -16,10 +16,12 @@ namespace SolidTrivia.Questions
         void DeleteCategoryOfBoard(int boardId, int categoryId);
         void DownVote(string userId, int questionId);
         NewBoard GetBoard(string name);
+        NewCategory GetCategory(int categoryId);
         bool TagExists(string tagName);
         bool TagExists(int tagId);
         NewCategory GetCategoryOfBoard(int boardId, int categoryId);
         (int, int) GetVotes(int questionId);
+        void RenameCategory(int id, string newName);
         IEnumerable<NewTag> ListAvailableTags(int questionId);
         IEnumerable<NewCategory> ListCategories();
         IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId);

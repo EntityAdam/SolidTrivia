@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="HtmlSanitizer" Version="5.0.298" />
     <PackageReference Include="Markdig" Version="0.18.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,10 +15,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Board\" />
-    <Folder Include="Category\" />
+    <Folder Include="Board\Create\" />
+    <Folder Include="Board\List\" />
+    <Folder Include="Board\Edit\" />
+    <Folder Include="Board\Delete\" />
+    <Folder Include="Category\Delete\" />
+    <Folder Include="Category\Create\" />
     <Folder Include="Comment\" />
-    <Folder Include="Vote\" />
+    <Folder Include="Questionn\Create\" />
+    <Folder Include="Questionn\List\" />
+    <Folder Include="Questionn\Edit\" />
+    <Folder Include="Questionn\Delete\" />
+    <Folder Include="Tag\List\" />
+    <Folder Include="Tag\Delete\" />
+    <Folder Include="Vote\Create\" />
+    <Folder Include="Vote\List\" />
+    <Folder Include="Vote\Edit\" />
+    <Folder Include="Vote\Delete\" />
   </ItemGroup>
 
 </Project>
