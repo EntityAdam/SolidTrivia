@@ -1,8 +1,6 @@
 ﻿using SolidTrivia.Questions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace SolidTrivia.Tests
@@ -21,7 +19,14 @@ namespace SolidTrivia.Tests
             var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
             facade.CreateTag("tag1");
             Assert.Throws<ArgumentException>(() => facade.CreateTag("tag1"));
-            
+        }
+
+        [Fact]
+        public void TagsShouldBeCaseInsensitive()
+        {
+            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+            facade.CreateTag("tag");
+            Assert.Throws<ArgumentException>(() => facade.CreateTag("TAG"));
         }
 
         [Fact]

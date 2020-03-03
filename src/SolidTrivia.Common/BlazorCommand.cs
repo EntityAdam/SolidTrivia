@@ -22,14 +22,11 @@ namespace SolidTrivia.Common
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter) =>_canExecute == null ? true : _canExecute();
+        public bool CanExecute(object parameter) => _canExecute == null ? true : _canExecute();
 
         public void Execute(object parameter) => _execute();
 
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
+        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public class BlazorCommand<T> : IBlazorCommand

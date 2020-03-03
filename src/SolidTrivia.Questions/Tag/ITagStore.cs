@@ -8,8 +8,9 @@ namespace SolidTrivia.Questions
         IEnumerable<NewTag> ListTags();
         void TagQuestion(int questionId, int tagId);
         IEnumerable<NewTag> ListAvailableTags(int questionId);
-        bool Exists(string tagName);
+        bool ExistsOrdinalIgnoreCase(string tagName);
         bool Exists(int tagId);
         bool IsTagged(int questionId, int tagId);
+        void Delete(int tagId);
     }
 }

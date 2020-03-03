@@ -40,8 +40,14 @@ namespace SolidTrivia.Questions
         public void CreateTag(string tagName)
         {
             if (string.IsNullOrEmpty(tagName)) throw new ArgumentNullException(nameof(tagName));
-            if (tagStore.Exists(tagName)) throw new ArgumentException(nameof(tagName), $"A tag with '{tagName}' already exists");
+            if (tagStore.ExistsOrdinalIgnoreCase(tagName)) throw new ArgumentException(nameof(tagName), $"A tag with '{tagName}' already exists");
             tagStore.Create(tagName);
+        }
+
+        public void DeleteTag(int tagId)
+        {
+            if (!tagStore.Exists(tagId)) throw new ArgumentException(nameof(tagId), $"A tag with '{tagId}' does not exist");
+            tagStore.Delete(tagId);
         }
 
         public IEnumerable<NewTag> ListTags() => tagStore.ListTags();
@@ -113,6 +119,7 @@ namespace SolidTrivia.Questions
 
         public NewBoard GetBoard(string name) => boardStore.GetBoardByName(name);
 
-        public bool TagExists(string tagName) => tagStore.Exists(tagName);
+        public bool TagExists(string tagName) => tagStore.ExistsOrdinalIgnoreCase(tagName);
+        public bool TagExists(int tagId) => tagStore.Exists(tagId);
     }
 }

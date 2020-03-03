@@ -2,7 +2,7 @@
 
 <div class="form-group">
     <input type="text" class="form-control" placeholder="Tag" @bind="ViewModel.TagName" />
-    <button class="btn btn-primary" disabled="@ViewModel.CreateCommand.CanExecute(null)" @onclick="@Create">Create</button>
+    <button class="btn btn-primary" disabled="@(!ViewModel.CreateCommand.CanExecute(null))" @onclick="@Create">Create</button>
 </div>
 
 @code {

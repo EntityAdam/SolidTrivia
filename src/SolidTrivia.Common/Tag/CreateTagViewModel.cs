@@ -11,6 +11,7 @@ namespace SolidTrivia.Common
 
         public IBlazorCommand CreateCommand { get; set; }
 
+
         public string TagName { get; set; }
 
 
@@ -19,12 +20,11 @@ namespace SolidTrivia.Common
             this.facade = facade;
             CreateCommand = new BlazorCommand(
                 () => Create(),
-                () => string.IsNullOrEmpty(TagName) || TagExists()
+                () => !string.IsNullOrEmpty(TagName) && !TagExists() && InputValidator.IsValidTagName(TagName)
            );
         }
 
         private bool TagExists() => facade.TagExists(this.TagName);
-
         private void Create() => facade.CreateTag(this.TagName);
     }
 }

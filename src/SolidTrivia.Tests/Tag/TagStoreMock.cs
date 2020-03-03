@@ -22,7 +22,7 @@ namespace SolidTrivia.Tests
 
         public void TagQuestion(int questionId, int tagId) => TaggedQuestions.Add(new NewTaggedQuestion() { QuestionId = questionId, TagId = tagId });
 
-        public bool Exists(string tagName) => Tags.Any(t => t.Name == tagName);
+        public bool ExistsOrdinalIgnoreCase(string tagName) => Tags.Any(t => string.Equals(t.Name, tagName, StringComparison.OrdinalIgnoreCase));
 
         public IEnumerable<NewTag> ListAvailableTags(int questionId) => Tags.Where(t => !TaggedQuestions.Any(tq => tq.QuestionId == questionId && tq.TagId == t.Id));
 
@@ -39,5 +39,11 @@ namespace SolidTrivia.Tests
         public bool Exists(int tagId) => Tags.Any(t => t.Id == tagId);
 
         public bool IsTagged(int questionId, int tagId) => TaggedQuestions.Any(tq => tq.QuestionId == questionId && tq.TagId == tagId);
+
+        public void Delete(int tagId)
+        {
+            var questions = TaggedQuestions.RemoveAll(tq=>tq.TagId == tagId); //remove tags from questions
+            Tags.RemoveAll(t=>t.Id == tagId);
+        }
     }
 }

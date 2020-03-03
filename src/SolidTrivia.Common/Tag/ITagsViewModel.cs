@@ -10,6 +10,8 @@ namespace SolidTrivia.Common
 
         IBlazorCommand UpdateCommand { get; set; }
 
+        IBlazorCommand DeleteCommand { get; set; }
+
         BindingList<TagModel> Tags { get; set; }
 
         void Load();

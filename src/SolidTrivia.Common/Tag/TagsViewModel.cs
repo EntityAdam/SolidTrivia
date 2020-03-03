@@ -9,7 +9,7 @@ namespace SolidTrivia.Common
 {
     public class TagsViewModel : BindableBase, ITagsViewModel
     {
-        private const int defaultPageSize = 2;
+        private const int defaultPageSize = 4;
 
         private readonly IQuestionFacade facade;
 
@@ -28,6 +28,11 @@ namespace SolidTrivia.Common
                 () => (PagedTags != null) ? PagedTags.CanExecutePrev : false
             );
             UpdateCommand = new BlazorCommand(() => Load());
+
+            DeleteCommand = new BlazorCommand<int>(
+                (id) => Delete(id),
+                (id) => TagExists(id)
+            );
         }
 
         public BindingList<TagModel> Tags { get; set; } = new BindingList<TagModel>();
@@ -35,6 +40,7 @@ namespace SolidTrivia.Common
         public IBlazorCommand NextPageCommand { get; set; }
         public IBlazorCommand PrevPageCommand { get; set; }
         public IBlazorCommand UpdateCommand { get; set; }
+        public IBlazorCommand DeleteCommand { get; set; }
 
         private void Prev() => UpdateList(PagedTags.Prev());
 
@@ -60,6 +66,9 @@ namespace SolidTrivia.Common
                 });
             }
         }
+
+        private bool TagExists(int id) => facade.TagExists(id);
+        private void Delete(int tagId) => facade.DeleteTag(tagId);
     }
 
     public class TagModel

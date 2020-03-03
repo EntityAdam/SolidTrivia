@@ -12,7 +12,7 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public bool Exists(string tagName)
+        public bool ExistsOrdinalIgnoreCase(string tagName)
         {
             throw new NotImplementedException();
         }
@@ -38,6 +38,11 @@ namespace SolidTrivia.Tests
         }
 
         public void TagQuestion(int questionId, int tagId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int tagId)
         {
             throw new NotImplementedException();
         }

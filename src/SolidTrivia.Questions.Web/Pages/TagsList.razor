@@ -28,7 +28,7 @@ else
             <tr>
                 <td>@tag.Id</td>
                 <td>@tag.Name</td>
-                <td>Edit | Delete</td>
+                <td>Edit | <button class="btn btn-danger" @onclick="(() => Delete(tag.Id))">Delete</button></td>
             </tr>
         }
     </table>
@@ -46,5 +46,10 @@ else
     protected void Refresh()
     {
         ViewModel.UpdateCommand.Execute(null);
+    }
+
+    protected void Delete(int tagId)
+    {
+        ViewModel.DeleteCommand.Execute(tagId);
     }
 }
