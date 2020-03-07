@@ -44,10 +44,14 @@ namespace SolidTrivia.Questions.Web
 
 
 
-            //ui
+            //ui question
             services.AddScoped<ICreateQuestionViewModel, CreateQuestionViewModel>();
-            services.AddScoped<ITagsViewModel, TagsViewModel>();
-            services.AddScoped<ITagCreateViewModel, TagCreateViewModel>();
+            
+            //ui tags
+            services.AddScoped<TagCreateViewModel>();
+            services.AddScoped<TagDeleteViewModel>();
+            services.AddScoped<TagEditViewModel>();
+            services.AddScoped<TagListViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

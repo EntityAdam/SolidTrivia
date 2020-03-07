@@ -45,5 +45,9 @@ namespace SolidTrivia.Tests
             var questions = TaggedQuestions.RemoveAll(tq=>tq.TagId == tagId); //remove tags from questions
             Tags.RemoveAll(t=>t.Id == tagId);
         }
+
+        public NewTag GetById(int tagId) => Tags.Single(t=>t.Id == tagId);
+
+        public void Rename(int tagId, string newTagName) => GetById(tagId).Name = newTagName;
     }
 }

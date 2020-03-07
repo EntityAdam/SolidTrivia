@@ -12,5 +12,7 @@ namespace SolidTrivia.Questions
         bool Exists(int tagId);
         bool IsTagged(int questionId, int tagId);
         void Delete(int tagId);
+        NewTag GetById(int tagId);
+        void Rename(int tagId, string newTagName);
     }
 }

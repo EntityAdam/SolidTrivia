@@ -2,7 +2,8 @@
 {
     public class TagEditModel
     {
-        public int Id { get; internal set; }
-        public string Name { get; internal set; }
+        public int Id { get; set; }
+        public string OldName { get; set; }
+        public string NewName { get; set; }
     }
 }

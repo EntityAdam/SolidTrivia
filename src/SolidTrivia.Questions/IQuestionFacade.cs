@@ -13,6 +13,7 @@ namespace SolidTrivia.Questions
         void CreateTag(string tagName);
         void DeleteTag(int tagId);
         void DeleteCategory(int categoryId);
+        NewTag GetTag(int tagId);
         void DeleteCategoryOfBoard(int boardId, int categoryId);
         void DownVote(string userId, int questionId);
         NewBoard GetBoard(string name);
@@ -21,7 +22,8 @@ namespace SolidTrivia.Questions
         bool TagExists(int tagId);
         NewCategory GetCategoryOfBoard(int boardId, int categoryId);
         (int, int) GetVotes(int questionId);
-        void RenameCategory(int id, string newName);
+        void RenameTag(int tagId, string newTagName);
+        void RenameCategory(int categoryId, string newCategoryName);
         IEnumerable<NewTag> ListAvailableTags(int questionId);
         IEnumerable<NewCategory> ListCategories();
         IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId);

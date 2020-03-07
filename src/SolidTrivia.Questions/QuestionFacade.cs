@@ -124,11 +124,24 @@ namespace SolidTrivia.Questions
 
         public NewCategory GetCategory(int categoryId) => categoryStore.GetById(categoryId);
 
-        public void RenameCategory(int categoryId, string newName)
+        public void RenameCategory(int categoryId, string newCategoryName)
         {
-            if (string.IsNullOrEmpty(newName)) throw new ArgumentException(nameof(newName));
+            if (string.IsNullOrEmpty(newCategoryName)) throw new ArgumentException(nameof(newCategoryName));
             if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{categoryId}' does not exist");
-            categoryStore.Rename(categoryId, newName);
+            categoryStore.Rename(categoryId, newCategoryName);
+        }
+
+        public NewTag GetTag(int tagId)
+        {
+            if (!tagStore.Exists(tagId)) throw new ArgumentException(nameof(tagId), $"Tag with id '{tagId}' does not exist");
+            return tagStore.GetById(tagId);
+        }
+
+        public void RenameTag(int tagId, string newTagName)
+        {
+            if (string.IsNullOrEmpty(newTagName)) throw new ArgumentException(nameof(newTagName));
+            if (!tagStore.Exists(tagId)) throw new ArgumentException(nameof(tagId), $"Tag with id '{tagId}' does not exist");
+            tagStore.Rename(tagId, newTagName);
         }
     }
 }

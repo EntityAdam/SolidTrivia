@@ -26,8 +26,6 @@
     <Folder Include="Questionn\List\" />
     <Folder Include="Questionn\Edit\" />
     <Folder Include="Questionn\Delete\" />
-    <Folder Include="Tag\List\" />
-    <Folder Include="Tag\Delete\" />
     <Folder Include="Vote\Create\" />
     <Folder Include="Vote\List\" />
     <Folder Include="Vote\Edit\" />

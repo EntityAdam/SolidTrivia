@@ -5,33 +5,35 @@ using System.Text;
 
 namespace SolidTrivia.Common
 {
-    public class EditTagViewModel : BindableBase, ITagEditViewModel
+    public class TagEditViewModel : BindableBase
     {
         private readonly IQuestionFacade facade;
 
-        public EditTagViewModel(IQuestionFacade facade)
+        public TagEditViewModel(IQuestionFacade facade)
         {
             this.facade = facade;
-        }
-
-        public TagEditModel EditModel { get; set; }
-        public IBlazorCommand RenameCommand { get; set; }
-
-        public void Load(int categoryId)
-        {
-            var cat = facade.GetCategory(categoryId);
-            EditModel = new TagEditModel()
-            {
-                Id = cat.Id,
-                Name = cat.Name
-            };
 
             RenameCommand = new BlazorCommand(
                 () => RenameCategory(),
-                () => !string.IsNullOrEmpty(EditModel.Name) // and category exists.
+                () => !string.IsNullOrEmpty(EditModel.NewName) && !string.Equals(EditModel.OldName, EditModel.NewName, StringComparison.OrdinalIgnoreCase)
             );
         }
 
-        public void RenameCategory() => facade.RenameCategory(EditModel.Id, EditModel.Name);
+        public TagEditModel EditModel { get; set; }
+
+        public IBlazorCommand RenameCommand { get; set; }
+
+        public void Load(int tagId)
+        {
+            var cat = facade.GetTag(tagId);
+            EditModel = new TagEditModel()
+            {
+                Id = cat.Id,
+                OldName = cat.Name,
+                NewName = cat.Name
+            };
+        }
+
+        public void RenameCategory() => facade.RenameTag(EditModel.Id, EditModel.NewName);
     }
 }

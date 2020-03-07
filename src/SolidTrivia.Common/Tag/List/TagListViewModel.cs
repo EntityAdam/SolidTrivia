@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace SolidTrivia.Common
 {
-    public class TagsViewModel : BindableBase, ITagsViewModel
+    public class TagListViewModel : BindableBase
     {
         private const int defaultPageSize = 4;
 
@@ -15,7 +15,7 @@ namespace SolidTrivia.Common
 
         private PagedEnumerable<TagModel> PagedTags { get; set; }
 
-        public TagsViewModel(IQuestionFacade facade)
+        public TagListViewModel(IQuestionFacade facade)
         {
             this.facade = facade;
 
@@ -27,6 +27,7 @@ namespace SolidTrivia.Common
                 () => Prev(),
                 () => (PagedTags != null) ? PagedTags.CanExecutePrev : false
             );
+
             UpdateCommand = new BlazorCommand(() => Load());
 
             DeleteCommand = new BlazorCommand<int>(
@@ -42,19 +43,18 @@ namespace SolidTrivia.Common
         public IBlazorCommand UpdateCommand { get; set; }
         public IBlazorCommand DeleteCommand { get; set; }
 
-        private void Prev() => UpdateList(PagedTags.Prev());
+        private void Prev() => SetCurrentPageTo(PagedTags.Prev());
+        private void Next() => SetCurrentPageTo(PagedTags.Next());
 
-        private void Next() => UpdateList(PagedTags.Next());
 
         public void Load()
         {
             var tags = facade.ListTags().Select(x => new TagModel() { Id = x.Id, Name = x.Name });
             PagedTags = new PagedEnumerable<TagModel>(tags, defaultPageSize);
-            UpdateList(PagedTags.Next());
+            SetCurrentPageTo(PagedTags.Next());
         }
 
-
-        private void UpdateList(IEnumerable<TagModel> page)
+        private void SetCurrentPageTo(IEnumerable<TagModel> page)
         {
             Tags.Clear();
             foreach (var c in page)
@@ -69,20 +69,5 @@ namespace SolidTrivia.Common
 
         private bool TagExists(int id) => facade.TagExists(id);
         private void Delete(int tagId) => facade.DeleteTag(tagId);
-    }
-
-    public class TagModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
-
-    //REAL TIME TAG CLOUD?
-    public class TagCloudModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int QuestionCount { get; set; }
     }
 }

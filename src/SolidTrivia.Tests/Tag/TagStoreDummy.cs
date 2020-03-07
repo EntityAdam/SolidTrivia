@@ -46,5 +46,15 @@ namespace SolidTrivia.Tests
         {
             throw new NotImplementedException();
         }
+
+        public NewTag GetById(int tagId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Rename(int tagId, string newTagName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
