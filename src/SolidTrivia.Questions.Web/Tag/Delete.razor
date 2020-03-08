@@ -1,6 +1,29 @@
 ﻿@page "/tag/delete/{tagId:int}"
+@inject NavigationManager NavigationManager
+@inject TagDeleteViewModel viewModel
 <h3>Delete</h3>
-
+<h4>Are you sure you want to delete the tag '<span style="font-weight: bold">@ViewModel.DeleteModel.Name</span>'?</h4>
+<button class="btn btn-danger" @onclick="ConfirmDelete">Confirm</button>
+<button class="btn btn-light" @onclick="Cancel">Cancel</button>
 @code {
 
+    [Parameter]
+    public int tagId { get; set; }
+
+    protected TagDeleteViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+        ViewModel.Load(tagId);
+    }
+
+    protected void Cancel() => NavigationManager.NavigateTo($"tag/list");
+
+    protected void ConfirmDelete()
+    {
+        ViewModel.DeleteCommand.Execute(tagId);
+        NavigationManager.NavigateTo($"tag/list");
+    }
 }

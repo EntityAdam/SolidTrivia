@@ -1,6 +1,6 @@
 ﻿namespace SolidTrivia.Common
 {
-    internal class TagDeleteModel
+    public class TagDeleteModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

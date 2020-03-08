@@ -18,7 +18,7 @@ namespace SolidTrivia.Common
             );
         }
 
-        internal TagDeleteModel DeleteModel { get; set; }
+        public TagDeleteModel DeleteModel { get; set; }
 
         public IBlazorCommand DeleteCommand { get; set; }
 

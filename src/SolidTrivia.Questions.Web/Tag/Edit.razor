@@ -31,5 +31,9 @@
 
     protected void Delete() => NavigationManager.NavigateTo($"tag/delete/{ViewModel.EditModel.Id}");
 
-    protected void Save() => ViewModel.RenameCategory();
+    protected void Save()
+    {
+        ViewModel.RenameCategory();
+        NavigationManager.NavigateTo($"tag/list");
+    }
 }
