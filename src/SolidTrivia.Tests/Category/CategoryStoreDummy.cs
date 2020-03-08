@@ -32,6 +32,11 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
+        public bool ExistsOrdinalIgnoreCase(string categoryName)
+        {
+            throw new NotImplementedException();
+        }
+
         public NewCategory GetById(int categoryId)
         {
             throw new NotImplementedException();

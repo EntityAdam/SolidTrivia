@@ -13,7 +13,7 @@ namespace SolidTrivia.Common
         private static Regex Tag => new Regex(TagPattern, RegexOptions.Compiled);
         public static bool IsValidTagName(string tagName) => Tag.IsMatch(tagName);
 
-        private const string CategoryPattern = @"/^[\w\s-&]+$/";
+        private const string CategoryPattern = @"^[\w\s-&]+$";
         private static Regex Category => new Regex(CategoryPattern, RegexOptions.Compiled);
         public static bool IsValidCategory(string categoryName) => Category.IsMatch(categoryName);
     }

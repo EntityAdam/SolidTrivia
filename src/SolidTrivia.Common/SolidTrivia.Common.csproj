@@ -19,13 +19,11 @@
     <Folder Include="Board\List\" />
     <Folder Include="Board\Edit\" />
     <Folder Include="Board\Delete\" />
-    <Folder Include="Category\Delete\" />
-    <Folder Include="Category\Create\" />
     <Folder Include="Comment\" />
-    <Folder Include="Questionn\Create\" />
-    <Folder Include="Questionn\List\" />
-    <Folder Include="Questionn\Edit\" />
-    <Folder Include="Questionn\Delete\" />
+    <Folder Include="Question\Create\" />
+    <Folder Include="Question\List\" />
+    <Folder Include="Question\Edit\" />
+    <Folder Include="Question\Delete\" />
     <Folder Include="Vote\Create\" />
     <Folder Include="Vote\List\" />
     <Folder Include="Vote\Edit\" />

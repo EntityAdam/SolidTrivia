@@ -19,5 +19,6 @@ namespace SolidTrivia.Questions
         void AddCategoryToBoard(int boardId, int categoryId);
         bool Exists(int categoryId);
         void Rename(int categoryId, string newName);
+        bool ExistsOrdinalIgnoreCase(string categoryName);
     }
 }

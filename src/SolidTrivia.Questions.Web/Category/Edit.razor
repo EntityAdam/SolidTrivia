@@ -1,0 +1,39 @@
+﻿@page "/category/edit/{categoryId:int}"
+@inject NavigationManager NavigationManager
+@inject CategoryEditViewModel viewModel
+
+<h3>Edit Category</h3>
+<h4>Rename: @ViewModel.EditModel.OldName</h4>
+<h4>To: @ViewModel.EditModel.NewName</h4>
+
+<div class="form-group mb-3">
+    <input type="text" class="form-control" @bind-value="@ViewModel.EditModel.NewName" @bind-value:event="oninput" />
+</div>
+<button class="btn btn-primary" @onclick="Save">Save</button>
+<button class="btn btn-primary" @onclick="Delete">Delete</button>
+<button class="btn btn-light" @onclick="Cancel">Cancel</button>
+
+
+@code {
+    [Parameter]
+    public int categoryId { get; set; }
+
+    protected CategoryEditViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+        ViewModel.Load(categoryId);
+    }
+
+    protected void Cancel() => NavigationManager.NavigateTo($"category/list");
+
+    protected void Delete() => NavigationManager.NavigateTo($"category/delete/{ViewModel.EditModel.Id}");
+
+    protected void Save()
+    {
+        ViewModel.RenameCategory();
+        NavigationManager.NavigateTo($"category/list");
+    }
+}

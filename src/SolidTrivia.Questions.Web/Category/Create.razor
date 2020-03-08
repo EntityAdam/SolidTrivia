@@ -1,0 +1,34 @@
+﻿@page "/category/create"
+@inject CategoryCreateViewModel viewModel
+@inject NavigationManager NavigationManager
+
+<h1>Create New Category</h1>
+<div class="form-inline">
+    <div class="form-group mb-2">
+        <input @attributes="InputAttributes" type="text" class="@ViewModel.InputClasses" placeholder="Tag" @bind="ViewModel.CreateModel.Name" tabindex="0" />
+        <button class="btn btn-primary" disabled="@(!ViewModel.CreateCommand.CanExecute(null))" @onclick="@CreateCategory" tabindex="1">Create</button>
+    </div>
+</div>
+
+@code {
+    protected CategoryCreateViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+
+    }
+
+    protected void CreateCategory()
+    {
+        ViewModel.CreateCommand.Execute(null);
+        NavigationManager.NavigateTo($"category/list");
+    }
+
+    [Parameter]
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>() {
+                { "tabindex", "0" },
+                { "placeholder", "Tag" }
+            };
+}

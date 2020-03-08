@@ -25,22 +25,22 @@ namespace SolidTrivia.Common.Tests
             var viewModel = new CategoryListViewModel(facade);
 
             //page should be empty
-            Assert.Empty(viewModel.Page);
+            Assert.Empty(viewModel.Categories);
             Assert.False(viewModel.PrevPageCommand.CanExecute(null));
             Assert.False(viewModel.NextPageCommand.CanExecute(null));
 
             viewModel.Load();
-            Assert.Equal(4, viewModel.Page.Count());
+            Assert.Equal(4, viewModel.Categories.Count());
             Assert.False(viewModel.PrevPageCommand.CanExecute(null));
             Assert.True(viewModel.NextPageCommand.CanExecute(null));
 
             viewModel.NextPageCommand.Execute(null);
-            Assert.Equal(2, viewModel.Page.Count());
+            Assert.Equal(2, viewModel.Categories.Count());
             Assert.True(viewModel.PrevPageCommand.CanExecute(null));
             Assert.False(viewModel.NextPageCommand.CanExecute(null));
 
             viewModel.PrevPageCommand.Execute(null);
-            Assert.Equal(4, viewModel.Page.Count());
+            Assert.Equal(4, viewModel.Categories.Count());
             Assert.False(viewModel.PrevPageCommand.CanExecute(null));
             Assert.True(viewModel.NextPageCommand.CanExecute(null));
         }

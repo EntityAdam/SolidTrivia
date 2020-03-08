@@ -1,40 +1,41 @@
-﻿
-@page "/category/edit/{categoryId:int}"
-@inject NavigationManager NavigationManager
-@inject ICategoryEditViewModel viewmodel
+﻿@*
+    @page "/category/edit/{categoryId:int}"
+    @inject NavigationManager NavigationManager
+    @inject ICategoryEditViewModel viewmodel
 
-<h3>Edit Category</h3>
-<h4>Tag Id: @ViewModel.EditModel.Id</h4>
+    <h3>Edit Category</h3>
+    <h4>Tag Id: @ViewModel.EditModel.Id</h4>
 
-<div class="form-group">
-    <label for="current">Currently</label>
-    <input id="current" type="text" readonly class="form-control mb-2" placeholder="Old text" />
-</div>
-<div class="form-group">
-    <label for="changeto">Rename To</label>
-    <input id="changeto" class="form-control mb-2" type="text" />
-</div>
-<button class="btn btn-primary" @onclick="Save">Save</button>
-<button class="btn btn-primary" @onclick="Delete">Delete</button>
-<button class="btn btn-light" @onclick="Cancel">Cancel</button>
+    <div class="form-group">
+        <label for="current">Currently</label>
+        <input id="current" type="text" readonly class="form-control mb-2" placeholder="Old text" />
+    </div>
+    <div class="form-group">
+        <label for="changeto">Rename To</label>
+        <input id="changeto" class="form-control mb-2" type="text" />
+    </div>
+    <button class="btn btn-primary" @onclick="Save">Save</button>
+    <button class="btn btn-primary" @onclick="Delete">Delete</button>
+    <button class="btn btn-light" @onclick="Cancel">Cancel</button>
 
-@code {
-    [Parameter]
-    public int categoryId { get; set; }
+    @code {
+        [Parameter]
+        public int categoryId { get; set; }
 
-    protected ICategoryEditViewModel ViewModel { get; set; }
+        protected ICategoryEditViewModel ViewModel { get; set; }
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        ViewModel = viewmodel;
-        ViewModel.Load(categoryId);
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            ViewModel = viewmodel;
+            ViewModel.Load(categoryId);
+        }
+
+        protected void Cancel() => NavigationManager.NavigateTo($"category/list");
+
+        protected void Delete() => NavigationManager.NavigateTo($"category/delete/{ViewModel.EditModel.Id}");
+
+        protected void Save() => ViewModel.RenameCategory();
     }
 
-    protected void Cancel() => NavigationManager.NavigateTo($"category/list");
-
-    protected void Delete() => NavigationManager.NavigateTo($"category/delete/{ViewModel.EditModel.Id}");
-
-    protected void Save() => ViewModel.RenameCategory();
-}
-
+*@

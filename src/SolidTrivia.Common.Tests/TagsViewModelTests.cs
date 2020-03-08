@@ -1,17 +1,15 @@
 ﻿using SolidTrivia.Questions;
-using SolidTrivia.Tests;
-using System;
 using System.Collections.Generic;
 using Xunit;
 using System.Linq;
 
 namespace SolidTrivia.Common.Tests
 {
-    public class TagsViewModelTests : IClassFixture<FacadeFixture>
+    public class TagsViewModelTests : IClassFixture<TagFacadeFixture>
     {
-        FacadeFixture fixture;
+        TagFacadeFixture fixture;
 
-        public TagsViewModelTests(FacadeFixture fixture)
+        public TagsViewModelTests(TagFacadeFixture fixture)
         {
             this.fixture = fixture;
         }
@@ -152,43 +150,6 @@ namespace SolidTrivia.Common.Tests
 
             ListVm.Load(pageSize: 99);
             Assert.DoesNotContain("tagToDelete", ListVm.Tags.Select(x => x.Name));
-        }
-    }
-
-    public class FacadeFixture : IDisposable
-    {
-
-        public FacadeFixture()
-        {
-            Facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreMock(), new CommentStoreMock(), new CategoryStoreMock(), new BoardStoreMock());
-            CreateVm = new TagCreateViewModel(Facade);
-            EditVm = new TagEditViewModel(Facade);
-            DeleteVm = new TagDeleteViewModel(Facade);
-            ListVm = new TagListViewModel(Facade);
-
-            CreateTags();
-
-        }
-
-        private void CreateTags()
-        {
-            Facade.CreateTag("TagA");
-            Facade.CreateTag("TagB");
-            Facade.CreateTag("TagC");
-            Facade.CreateTag("TagD");
-            Facade.CreateTag("TagE");
-            Facade.CreateTag("TagF");
-        }
-
-        public IQuestionFacade Facade { get; }
-        public TagCreateViewModel CreateVm { get; }
-        public TagEditViewModel EditVm { get; }
-        public TagDeleteViewModel DeleteVm { get; }
-        public TagListViewModel ListVm { get; }
-
-        public void Dispose()
-        {
-            //nothing to clean up
         }
     }
 }

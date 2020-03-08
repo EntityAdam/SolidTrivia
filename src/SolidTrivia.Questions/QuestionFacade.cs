@@ -143,5 +143,7 @@ namespace SolidTrivia.Questions
             if (!tagStore.Exists(tagId)) throw new ArgumentException(nameof(tagId), $"Tag with id '{tagId}' does not exist");
             tagStore.Rename(tagId, newTagName);
         }
+
+        public bool CategoryExists(string categoryName) => categoryStore.ExistsOrdinalIgnoreCase(categoryName);
     }
 }

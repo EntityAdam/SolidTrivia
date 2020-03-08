@@ -36,5 +36,7 @@ namespace SolidTrivia.Tests
         public bool Exists(int categoryId) => Categories.Any(c => c.Id == categoryId);
 
         public void Rename(int categoryId, string newName) => GetById(categoryId).Name = newName;
+
+        public bool ExistsOrdinalIgnoreCase(string categoryName) => Categories.Any(c=> string.Equals(c.Name, categoryName, StringComparison.OrdinalIgnoreCase));
     }
 }

@@ -1,8 +1,9 @@
 ﻿using SolidTrivia.Questions;
+using System;
 
 namespace SolidTrivia.Common
 {
-    public class CategoryEditViewModel : BindableBase, ICategoryEditViewModel
+    public class CategoryEditViewModel : BindableBase
     {
         private readonly IQuestionFacade facade;
 
@@ -20,16 +21,17 @@ namespace SolidTrivia.Common
             EditModel = new CategoryEditModel()
             {
                 Id = cat.Id,
-                Name = cat.Name
+                OldName = cat.Name,
+                NewName = cat.Name
             };
 
             RenameCommand = new BlazorCommand(
                 () => RenameCategory(),
-                () => !string.IsNullOrEmpty(EditModel.Name) // and category exists.
+                () => !string.IsNullOrEmpty(EditModel.NewName) && !string.Equals(EditModel.OldName, EditModel.NewName, StringComparison.OrdinalIgnoreCase)
             );
         }
 
-        public void RenameCategory() => facade.RenameCategory(EditModel.Id, EditModel.Name);
+        public void RenameCategory() => facade.RenameCategory(EditModel.Id, EditModel.NewName);
     }
 
 }

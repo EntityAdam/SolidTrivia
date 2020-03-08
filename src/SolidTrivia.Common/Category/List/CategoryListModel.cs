@@ -1,8 +1,11 @@
-﻿namespace SolidTrivia.Common
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SolidTrivia.Common
 {
     public class CategoryListModel
     {
-        public int Id { get; internal set; }
-        public string Name { get; internal set; }
+        [Required]
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

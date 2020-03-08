@@ -5,11 +5,13 @@ using System.ComponentModel;
 
 namespace SolidTrivia.Common
 {
-    public class CategoryListViewModel : BindableBase, ICategoryListViewModel
+    public class CategoryListViewModel : BindableBase
     {
-        private const int defaultPageSize = 4;
+        private const int defaultPageSize = 4; // TODO : Add PageSize to UI
 
         private readonly IQuestionFacade facade;
+
+        private PagedEnumerable<CategoryListModel> PagedCategories { get; set; }
 
         public CategoryListViewModel(IQuestionFacade facade)
         {
@@ -23,33 +25,34 @@ namespace SolidTrivia.Common
                 () => Prev(),
                 () => (PagedCategories != null) ? PagedCategories.CanExecutePrev : false
             );
+
+            UpdateCommand = new BlazorCommand(() => Load());
         }
 
         private void Prev() => UpdateList(PagedCategories.Prev());
 
         private void Next() => UpdateList(PagedCategories.Next());
 
-        public BindingList<CategoryListModel> Page { get; set; } = new BindingList<CategoryListModel>();
-
-        private PagedEnumerable<CategoryListModel> PagedCategories { get; set; }
+        public BindingList<CategoryListModel> Categories { get; set; } = new BindingList<CategoryListModel>();
 
         public IBlazorCommand NextPageCommand { get; set; }
         public IBlazorCommand PrevPageCommand { get; set; }
+        public IBlazorCommand UpdateCommand { get; set; }
 
-        public void Load()
+        public void Load(int pageSize = defaultPageSize)
         {
-            PagedCategories = new PagedEnumerable<CategoryListModel>(EnumerateAll(), defaultPageSize);
+            var categories = facade.ListCategories().Select(c => new CategoryListModel() { Id = c.Id, Name = c.Name });
+            PagedCategories = new PagedEnumerable<CategoryListModel>(categories, pageSize);
             UpdateList(PagedCategories.Next());
         }
 
-        private IEnumerable<CategoryListModel> EnumerateAll() => facade.ListCategories().Select(c => new CategoryListModel() { Id = c.Id, Name = c.Name });
 
         private void UpdateList(IEnumerable<CategoryListModel> page)
         {
-            Page.Clear();
+            Categories.Clear();
             foreach (var c in page)
             {
-                Page.Add(new CategoryListModel()
+                Categories.Add(new CategoryListModel()
                 {
                     Id = c.Id,
                     Name = c.Name

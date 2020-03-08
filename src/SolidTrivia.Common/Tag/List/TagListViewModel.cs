@@ -9,7 +9,7 @@ namespace SolidTrivia.Common
 {
     public class TagListViewModel : BindableBase
     {
-        private const int defaultPageSize = 4;
+        private const int defaultPageSize = 4; // TODO : Add PageSize to UI
 
         private readonly IQuestionFacade facade;
 

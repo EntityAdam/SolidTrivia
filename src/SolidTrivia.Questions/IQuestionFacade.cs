@@ -26,6 +26,7 @@ namespace SolidTrivia.Questions
         void RenameCategory(int categoryId, string newCategoryName);
         IEnumerable<NewTag> ListAvailableTags(int questionId);
         IEnumerable<NewCategory> ListCategories();
+        bool CategoryExists(string name);
         IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId);
         IEnumerable<NewComment> ListComments(int questionId);
         IEnumerable<NewQuestion> ListQuestionsOfCategory(int categoryId);
