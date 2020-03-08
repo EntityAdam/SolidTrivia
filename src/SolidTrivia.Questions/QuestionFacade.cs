@@ -145,5 +145,26 @@ namespace SolidTrivia.Questions
         }
 
         public bool CategoryExists(string categoryName) => categoryStore.ExistsOrdinalIgnoreCase(categoryName);
+
+        public NewBoard GetBoard(int boardId)
+        {
+            if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
+            return boardStore.GetBoardById(boardId);
+        }
+
+        public void DeleteBoard(int boardId)
+        {
+            if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
+            boardStore.Delete(boardId);
+
+            //TODO : Remove boardId from categories too
+        }
+
+        public void RenameBoard(int boardId, string newBoardName)
+        {
+            if (string.IsNullOrEmpty(newBoardName)) throw new ArgumentException(nameof(newBoardName));
+            if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
+            boardStore.Rename(boardId, newBoardName);
+        }
     }
 }

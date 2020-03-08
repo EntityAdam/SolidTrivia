@@ -8,5 +8,9 @@ namespace SolidTrivia.Questions
     {
         void Create(string name);
         NewBoard GetBoardByName(string name);
+        bool Exists(int boardId);
+        NewBoard GetBoardById(int boardId);
+        void Delete(int boardId);
+        void Rename(int boardId, string newBoardName);
     }
 }

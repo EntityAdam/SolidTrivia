@@ -12,12 +12,6 @@ namespace SolidTrivia.Common
 
         private Dictionary<string, bool> inputClasses { get; set; } = new Dictionary<string, bool>() { { "form-control", true }, { "is-valid", false }, { "is-invalid", false } };
 
-        public IBlazorCommand CreateCommand { get; set; }
-
-        public string TagName { get; set; }
-
-        public bool? IsValid { get; set; } = null;
-
         public TagCreateViewModel(IQuestionFacade facade)
         {
             this.facade = facade;
@@ -26,8 +20,14 @@ namespace SolidTrivia.Common
                 () => Create(),
                 () => !string.IsNullOrEmpty(TagName) && !TagExists() && InputValidator.IsValidTagName(TagName)
             );
-            
+
         }
+
+        public IBlazorCommand CreateCommand { get; set; }
+
+        public string TagName { get; set; }
+
+        public bool? IsValid { get; set; } = null;
 
         private bool TagExists() => facade.TagExists(this.TagName);
 
