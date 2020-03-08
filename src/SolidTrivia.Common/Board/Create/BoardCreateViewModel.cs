@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace SolidTrivia.Common.Board.Create
+namespace SolidTrivia.Common
 {
     public class BoardCreateViewModel
     {

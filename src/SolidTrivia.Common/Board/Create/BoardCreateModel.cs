@@ -1,4 +1,4 @@
-﻿namespace SolidTrivia.Common.Board.Create
+﻿namespace SolidTrivia.Common
 {
     public class BoardCreateModel
     {

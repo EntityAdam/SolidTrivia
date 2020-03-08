@@ -51,6 +51,12 @@ namespace SolidTrivia.Questions.Web
             services.AddScoped<TagEditViewModel>();
             services.AddScoped<TagListViewModel>();
 
+            //ui board
+            services.AddScoped<BoardCreateViewModel>();
+            services.AddScoped<BoardDeleteViewModel>();
+            services.AddScoped<BoardEditViewModel>();
+            services.AddScoped<BoardListViewModel>();
+
             //ui category
             services.AddScoped<CategoryCreateViewModel>();
             services.AddScoped<CategoryDeleteViewModel>();
