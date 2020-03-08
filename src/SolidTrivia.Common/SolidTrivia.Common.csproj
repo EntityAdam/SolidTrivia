@@ -15,12 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Board\Create\" />
     <Folder Include="Board\List\" />
     <Folder Include="Board\Edit\" />
     <Folder Include="Board\Delete\" />
     <Folder Include="Comment\" />
-    <Folder Include="Question\Create\" />
     <Folder Include="Question\List\" />
     <Folder Include="Question\Edit\" />
     <Folder Include="Question\Delete\" />
