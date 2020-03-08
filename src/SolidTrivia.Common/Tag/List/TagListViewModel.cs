@@ -13,7 +13,7 @@ namespace SolidTrivia.Common
 
         private readonly IQuestionFacade facade;
 
-        private PagedEnumerable<TagModel> PagedTags { get; set; }
+        private PagedEnumerable<TagListModel> PagedTags { get; set; }
 
         public TagListViewModel(IQuestionFacade facade)
         {
@@ -29,45 +29,36 @@ namespace SolidTrivia.Common
             );
 
             UpdateCommand = new BlazorCommand(() => Load());
-
-            DeleteCommand = new BlazorCommand<int>(
-                (id) => Delete(id),
-                (id) => TagExists(id)
-            );
         }
 
-        public BindingList<TagModel> Tags { get; set; } = new BindingList<TagModel>();
+        public BindingList<TagListModel> Tags { get; set; } = new BindingList<TagListModel>();
 
         public IBlazorCommand NextPageCommand { get; set; }
         public IBlazorCommand PrevPageCommand { get; set; }
         public IBlazorCommand UpdateCommand { get; set; }
-        public IBlazorCommand DeleteCommand { get; set; }
 
         private void Prev() => SetCurrentPageTo(PagedTags.Prev());
         private void Next() => SetCurrentPageTo(PagedTags.Next());
 
 
-        public void Load()
+        public void Load(int pageSize = defaultPageSize)
         {
-            var tags = facade.ListTags().Select(x => new TagModel() { Id = x.Id, Name = x.Name });
-            PagedTags = new PagedEnumerable<TagModel>(tags, defaultPageSize);
+            var tags = facade.ListTags().Select(x => new TagListModel() { Id = x.Id, Name = x.Name });
+            PagedTags = new PagedEnumerable<TagListModel>(tags, pageSize);
             SetCurrentPageTo(PagedTags.Next());
         }
 
-        private void SetCurrentPageTo(IEnumerable<TagModel> page)
+        private void SetCurrentPageTo(IEnumerable<TagListModel> page)
         {
             Tags.Clear();
             foreach (var c in page)
             {
-                Tags.Add(new TagModel()
+                Tags.Add(new TagListModel()
                 {
                     Id = c.Id,
                     Name = c.Name
                 });
             }
         }
-
-        private bool TagExists(int id) => facade.TagExists(id);
-        private void Delete(int tagId) => facade.DeleteTag(tagId);
     }
 }

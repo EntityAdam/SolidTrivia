@@ -2,60 +2,193 @@
 using SolidTrivia.Tests;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
+using System.Linq;
 
 namespace SolidTrivia.Common.Tests
 {
-    public class TagsViewModelTests
+    public class TagsViewModelTests : IClassFixture<FacadeFixture>
     {
-        [Fact]
-        public void Test()
+        FacadeFixture fixture;
+
+        public TagsViewModelTests(FacadeFixture fixture)
         {
-            var questionFacade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreMock(), new CommentStoreMock(), new CategoryStoreMock(), new BoardStoreMock());
-            var viewModel = new TagCreateViewModel(questionFacade);
+            this.fixture = fixture;
+        }
+        public IQuestionFacade Facade => fixture.Facade;
+        public TagCreateViewModel CreateVm => fixture.CreateVm;
+        public TagEditViewModel EditVm => fixture.EditVm;
+        public TagDeleteViewModel DeleteVm => fixture.DeleteVm;
+        public TagListViewModel ListVm => fixture.ListVm;
 
-            //new vm
-            //tagname should be empty
-            Assert.True(string.IsNullOrEmpty(viewModel.TagName));
-            //create command should not work with an empty tagname
-            Assert.False(viewModel.CreateCommand.CanExecute(null));  
+        [Fact]
+        public void CreateCommand_CanExecute_Exercise()
+        {
+            CreateVm.TagName = "tag";
+            Assert.True(CreateVm.CreateCommand.CanExecute(null));
 
-            //enter tag name
-            viewModel.TagName = "tag";
+            CreateVm.TagName = "";
+            Assert.False(CreateVm.CreateCommand.CanExecute(null));
+        }
 
-            //assert create button enabled
-            Assert.True(viewModel.CreateCommand.CanExecute(null));
+        [Fact]
+        public void CreateCommand_CanExecute_ShouldBeFalse_WithInvalidTags()
+        {
+            //XSS
+            CreateVm.TagName = "<script>";
+            Assert.False(CreateVm.CreateCommand.CanExecute(null));
 
-            //execute
-            viewModel.CreateCommand.Execute(null);
+            //invalid chars
+            CreateVm.TagName = "tim^tebow";
+            Assert.False(CreateVm.CreateCommand.CanExecute(null));
+        }
 
-            //assert create button disabled, because 'tag' already exists  //TODO : THIS EXECUTES IO CALL. DO I WANT THAT?
-            Assert.False(viewModel.CreateCommand.CanExecute(null));
+        [Fact]
+        public void CreateCommand_CanExecute_ShouldBeTrue_WithSpecialChars()
+        {
+            //allowed chars
+            CreateVm.TagName = "c++";
+            Assert.True(CreateVm.CreateCommand.CanExecute(null));
 
-            //change tag name
-            viewModel.TagName = "tag1";
-
-            //assert create button is again enabled
-            Assert.True(viewModel.CreateCommand.CanExecute(null));
+            CreateVm.TagName = "c#";
+            Assert.True(CreateVm.CreateCommand.CanExecute(null));
+        }
 
 
-            //checking invalid tag names
-            viewModel.TagName = "control";
-            Assert.True(viewModel.CreateCommand.CanExecute(null));
+        [Fact]
+        public void CreateCommand_Execute_ShouldCreateTags()
+        {
+            CreateVm.TagName = "tag1";
+            CreateVm.CreateCommand.Execute(null);
 
-            //oh no you don't XSS attack!
-            viewModel.TagName = "<script>";
-            Assert.False(viewModel.CreateCommand.CanExecute(null));
+            CreateVm.TagName = "tag2";
+            CreateVm.CreateCommand.Execute(null);
 
-            viewModel.TagName = "tim^tebow";
-            Assert.False(viewModel.CreateCommand.CanExecute(null));
+            CreateVm.TagName = "tag3";
+            CreateVm.CreateCommand.Execute(null);
 
-            viewModel.TagName = "c++";
-            Assert.True(viewModel.CreateCommand.CanExecute(null));
+            ListVm.Load(pageSize: 25);
+            Assert.Contains("tag1", ListVm.Tags.Select(x => x.Name));
+            Assert.Contains("tag2", ListVm.Tags.Select(x => x.Name));
+            Assert.Contains("tag3", ListVm.Tags.Select(x => x.Name));
+        }
 
-            viewModel.TagName = "c#";
-            Assert.True(viewModel.CreateCommand.CanExecute(null));
+        [Fact]
+        public void Tags_Paging()
+        {
+            ListVm.Load(pageSize: 3);
+
+            Assert.True(ListVm.NextPageCommand.CanExecute(null));
+            Assert.False(ListVm.PrevPageCommand.CanExecute(null));
+            Assert.Equal(3, ListVm.Tags.Count());
+            Assert.Contains("TagA", ListVm.Tags.Select(x => x.Name));
+            Assert.Contains("TagB", ListVm.Tags.Select(x => x.Name));
+            Assert.Contains("TagC", ListVm.Tags.Select(x => x.Name));
+
+            ListVm.NextPageCommand.Execute(null);
+
+            Assert.Equal(3, ListVm.Tags.Count());
+            Assert.Contains("TagD", ListVm.Tags.Select(x => x.Name));
+            Assert.Contains("TagE", ListVm.Tags.Select(x => x.Name));
+            Assert.Contains("TagF", ListVm.Tags.Select(x => x.Name));
+
+            Assert.True(ListVm.PrevPageCommand.CanExecute(null));
+
+            ListVm.PrevPageCommand.Execute(null);
+            
+            Assert.Equal(3, ListVm.Tags.Count());
+            Assert.Contains("TagA", ListVm.Tags.Select(x => x.Name));
+            Assert.Contains("TagB", ListVm.Tags.Select(x => x.Name));
+            Assert.Contains("TagC", ListVm.Tags.Select(x => x.Name));
+        }
+
+        [Fact]
+        public void Tags_Paging2()
+        {
+            ListVm.Load(pageSize: 99);
+            Assert.False(ListVm.NextPageCommand.CanExecute(null));
+            Assert.False(ListVm.PrevPageCommand.CanExecute(null));
+        }
+
+        [Fact]
+        public void Tags_Rename()
+        {
+            ListVm.Load(pageSize: 99);
+
+            var tag = ListVm.Tags.First();
+            Assert.True(tag.Id == 1);
+            Assert.True(tag.Name == "TagA");
+
+            EditVm.Load(tag.Id);
+            
+            Assert.True(EditVm.EditModel.NewName == EditVm.EditModel.OldName);
+            Assert.False(EditVm.RenameCommand.CanExecute(null));
+
+            EditVm.EditModel.NewName = "TagZ";
+            Assert.True(EditVm.RenameCommand.CanExecute(null));
+
+            EditVm.RenameCommand.Execute(null);
+
+            ListVm.Load(pageSize: 99);
+            var renamedTag = ListVm.Tags.First();
+            Assert.True(renamedTag.Id == 1);
+            Assert.True(renamedTag.Name == "TagZ");
+        }
+
+        [Fact]
+        public void Tags_Delete()
+        {
+            CreateVm.TagName = "tagToDelete";
+            CreateVm.CreateCommand.Execute(null);
+            ListVm.Load(pageSize: 99);
+            Assert.Contains("tagToDelete", ListVm.Tags.Select(x => x.Name));
+
+            var tagModel = ListVm.Tags.Single(x=>x.Name == "tagToDelete");
+
+            DeleteVm.Load(tagModel.Id);
+
+            Assert.True(DeleteVm.DeleteCommand.CanExecute(null));
+            DeleteVm.DeleteCommand.Execute(null);
+
+            ListVm.Load(pageSize: 99);
+            Assert.DoesNotContain("tagToDelete", ListVm.Tags.Select(x => x.Name));
+        }
+    }
+
+    public class FacadeFixture : IDisposable
+    {
+
+        public FacadeFixture()
+        {
+            Facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreMock(), new CommentStoreMock(), new CategoryStoreMock(), new BoardStoreMock());
+            CreateVm = new TagCreateViewModel(Facade);
+            EditVm = new TagEditViewModel(Facade);
+            DeleteVm = new TagDeleteViewModel(Facade);
+            ListVm = new TagListViewModel(Facade);
+
+            CreateTags();
+
+        }
+
+        private void CreateTags()
+        {
+            Facade.CreateTag("TagA");
+            Facade.CreateTag("TagB");
+            Facade.CreateTag("TagC");
+            Facade.CreateTag("TagD");
+            Facade.CreateTag("TagE");
+            Facade.CreateTag("TagF");
+        }
+
+        public IQuestionFacade Facade { get; }
+        public TagCreateViewModel CreateVm { get; }
+        public TagEditViewModel EditVm { get; }
+        public TagDeleteViewModel DeleteVm { get; }
+        public TagListViewModel ListVm { get; }
+
+        public void Dispose()
+        {
+            //nothing to clean up
         }
     }
 }
