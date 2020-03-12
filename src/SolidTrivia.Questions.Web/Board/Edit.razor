@@ -1,0 +1,39 @@
+﻿@page "/board/edit/{boardId:int}"
+@inject NavigationManager NavigationManager
+@inject BoardEditViewModel viewModel
+
+<h3>Edit Board</h3>
+<h4>Rename: @ViewModel.EditModel.OldName</h4>
+<h4>To: @ViewModel.EditModel.NewName</h4>
+
+<div class="form-group mb-3">
+    <input type="text" class="form-control" @bind-value="@ViewModel.EditModel.NewName" @bind-value:event="oninput" />
+</div>
+<button class="btn btn-primary" @onclick="Save">Save</button>
+<button class="btn btn-danger" @onclick="Delete">Delete</button>
+<button class="btn btn-light" @onclick="Cancel">Cancel</button>
+
+
+@code {
+    [Parameter]
+    public int boardId { get; set; }
+
+    protected BoardEditViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+        ViewModel.Load(boardId);
+    }
+
+    protected void Cancel() => NavigationManager.NavigateTo($"board/list");
+
+    protected void Delete() => NavigationManager.NavigateTo($"board/delete/{ViewModel.EditModel.Id}");
+
+    protected void Save()
+    {
+        ViewModel.RenameBoard();
+        NavigationManager.NavigateTo($"board/list");
+    }
+}

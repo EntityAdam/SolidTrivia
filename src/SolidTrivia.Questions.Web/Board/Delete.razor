@@ -1,0 +1,29 @@
+﻿@page "/board/delete/{boardId:int}"
+@inject NavigationManager NavigationManager
+@inject BoardDeleteViewModel viewModel
+<h3>Delete</h3>
+<h4>Are you sure you want to delete the board '<span style="font-weight: bold">@ViewModel.DeleteModel.Name</span>'?</h4>
+<button class="btn btn-danger" @onclick="ConfirmDelete">Confirm</button>
+<button class="btn btn-light" @onclick="Cancel">Cancel</button>
+@code {
+
+    [Parameter]
+    public int boardId { get; set; }
+
+    protected BoardDeleteViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+        ViewModel.Load(boardId);
+    }
+
+    protected void Cancel() => NavigationManager.NavigateTo($"board/list");
+
+    protected void ConfirmDelete()
+    {
+        ViewModel.DeleteCommand.Execute(boardId);
+        NavigationManager.NavigateTo($"board/list");
+    }
+}
