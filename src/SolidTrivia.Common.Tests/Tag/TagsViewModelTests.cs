@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Xunit;
 using System.Linq;
+using System;
 
 namespace SolidTrivia.Common.Tests
 {
@@ -69,6 +70,19 @@ namespace SolidTrivia.Common.Tests
             Assert.Contains("tag1", ListVm.Tags.Select(x => x.Name));
             Assert.Contains("tag2", ListVm.Tags.Select(x => x.Name));
             Assert.Contains("tag3", ListVm.Tags.Select(x => x.Name));
+        }
+
+        [Fact]
+        public void CreateCommand_Execute_CantCreateDuplicateTags()
+        {
+            CreateVm.TagName = "duplicateTag";
+            CreateVm.CreateCommand.Execute(null);
+
+            CreateVm.TagName = "duplicateTag";
+            Assert.Throws<ArgumentException>(() => CreateVm.CreateCommand.Execute(null));
+
+            ListVm.Load(pageSize: 25);
+            Assert.Contains("duplicateTag", ListVm.Tags.Select(x => x.Name));
         }
 
         [Fact]

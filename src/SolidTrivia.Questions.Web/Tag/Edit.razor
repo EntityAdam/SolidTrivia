@@ -9,8 +9,8 @@
 <div class="form-group mb-3">
     <input type="text" class="form-control" @bind-value="@ViewModel.EditModel.NewName" @bind-value:event="oninput" />
 </div>
-<button class="btn btn-primary" @onclick="Save">Save</button>
-<button class="btn btn-primary" @onclick="Delete">Delete</button>
+<button class="btn btn-primary" @onclick="Save" disabled="@(!ViewModel.RenameCommand.CanExecute(null))">Save</button>
+<button class="btn btn-danger" @onclick="Delete">Delete</button>
 <button class="btn btn-light" @onclick="Cancel">Cancel</button>
 
 

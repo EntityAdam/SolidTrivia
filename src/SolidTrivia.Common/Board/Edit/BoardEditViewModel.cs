@@ -17,7 +17,7 @@ namespace SolidTrivia.Common
 
         public void Load(int boardId)
         {
-            var cat = facade.GetCategory(boardId);
+            var cat = facade.GetBoard(boardId);
             EditModel = new BoardEditModel()
             {
                 Id = cat.Id,

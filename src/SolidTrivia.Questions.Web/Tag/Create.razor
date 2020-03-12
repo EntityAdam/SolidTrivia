@@ -22,8 +22,16 @@
 
     protected void CreateTag()
     {
-        ViewModel.CreateCommand.Execute(null);
-        NavigationManager.NavigateTo($"tag/list");
+        try
+        {
+            ViewModel.CreateCommand.Execute(null);
+            NavigationManager.NavigateTo($"tag/list");
+        }
+        catch (Exception ex)
+        {
+            NavigationManager.NavigateTo($"error");
+        }
+
     }
 
     [Parameter]
