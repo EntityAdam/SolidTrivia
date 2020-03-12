@@ -2,7 +2,7 @@
 @inject NavigationManager NavigationManager
 @inject CategoryDeleteViewModel viewModel
 <h3>Delete</h3>
-<h4>Are you sure you want to delete the tag '<span style="font-weight: bold">@ViewModel.DeleteModel.Name</span>'?</h4>
+<h4>Are you sure you want to delete the category '<span style="font-weight: bold">@ViewModel.DeleteModel.Name</span>'?</h4>
 <button class="btn btn-danger" @onclick="ConfirmDelete">Confirm</button>
 <button class="btn btn-light" @onclick="Cancel">Cancel</button>
 @code {

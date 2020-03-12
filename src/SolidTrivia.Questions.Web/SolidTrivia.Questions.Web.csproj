@@ -16,4 +16,8 @@
     <ProjectReference Include="..\SolidTrivia.Tests\SolidTrivia.Tests.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Board\" />
+  </ItemGroup>
+
 </Project>
