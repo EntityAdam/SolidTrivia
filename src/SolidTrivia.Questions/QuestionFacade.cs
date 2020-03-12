@@ -166,5 +166,7 @@ namespace SolidTrivia.Questions
             if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
             boardStore.Rename(boardId, newBoardName);
         }
+
+        public IEnumerable<NewBoard> ListBoards() => boardStore.List();
     }
 }

@@ -12,5 +12,6 @@ namespace SolidTrivia.Questions
         NewBoard GetBoardById(int boardId);
         void Delete(int boardId);
         void Rename(int boardId, string newBoardName);
+        IEnumerable<NewBoard> List();
     }
 }

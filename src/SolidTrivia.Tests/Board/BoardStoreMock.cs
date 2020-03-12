@@ -20,6 +20,8 @@ namespace SolidTrivia.Tests
 
         public NewBoard GetBoardByName(string name) => Boards.First(b => b.Name == name);
 
+        public IEnumerable<NewBoard> List() => Boards;
+
         public void Rename(int boardId, string newBoardName) => GetBoardById(boardId).Name = newBoardName;
 
         private int NewId()

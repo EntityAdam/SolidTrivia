@@ -30,6 +30,11 @@ namespace SolidTrivia.Tests
             throw new System.NotImplementedException();
         }
 
+        public IEnumerable<NewBoard> List()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Rename(int boardId, string newBoardName)
         {
             throw new System.NotImplementedException();

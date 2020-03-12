@@ -41,7 +41,7 @@ namespace SolidTrivia.Common
 
         public void Load(int pageSize = defaultPageSize)
         {
-            var boards = facade.ListCategories().Select(c => new BoardListModel() { Id = c.Id, Name = c.Name });
+            var boards = facade.ListBoards().Select(c => new BoardListModel() { Id = c.Id, Name = c.Name });
             PagedBoards = new PagedEnumerable<BoardListModel>(boards, pageSize);
             UpdateList(PagedBoards.Next());
         }

@@ -18,13 +18,13 @@ namespace SolidTrivia.Common
 
             CreateCommand = new BlazorCommand(
             () => Create(),
-            () => !string.IsNullOrEmpty(Board.Name) && !BoardExists() && true //InputValidator.IsValidBoard(Board.Name)
+            () => !string.IsNullOrEmpty(CreateModel.Name) && !BoardExists() && true //InputValidator.IsValidBoard(Board.Name)
         );
         }
 
         public IBlazorCommand CreateCommand { get; set; }
 
-        public BoardCreateModel Board { get; set; }
+        public BoardCreateModel CreateModel { get; set; } = new BoardCreateModel();
 
         public bool? IsValid { get; set; } = null;
 
@@ -32,11 +32,11 @@ namespace SolidTrivia.Common
 
         private void Create()
         {
-            facade.CreateBoard(Board.Name);
+            facade.CreateBoard(CreateModel.Name);
             Clear();
         }
 
-        private void Clear() => Board.Name = string.Empty;
+        private void Clear() => CreateModel.Name = string.Empty;
 
         public string InputClasses => string.Join(" ", inputClasses.Where(x => x.Value == true).Select(x => x.Key));
 
