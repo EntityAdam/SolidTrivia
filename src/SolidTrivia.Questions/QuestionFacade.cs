@@ -29,8 +29,6 @@ namespace SolidTrivia.Questions
             boardStore.Create(name);
         }
 
-        public NewBoard GetBoard(string name) => boardStore.GetBoardByName(name);
-
         public NewBoard GetBoard(int boardId)
         {
             if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
@@ -56,10 +54,11 @@ namespace SolidTrivia.Questions
         #endregion
 
         #region Category
-        public void CreateCategory(string category)
+        public void CreateCategory(string categoryName)
         {
-            if (string.IsNullOrEmpty(category)) throw new ArgumentNullException(nameof(category));
-            categoryStore.Create(category);
+            if (string.IsNullOrEmpty(categoryName)) throw new ArgumentNullException(nameof(categoryName));
+            if (CategoryExists(categoryName)) throw new ArgumentException(nameof(categoryName), $"Category with name '{categoryName}' already exists");
+            categoryStore.Create(categoryName);
         }
 
         public IEnumerable<NewCategory> ListCategories() => categoryStore.ListCategories();

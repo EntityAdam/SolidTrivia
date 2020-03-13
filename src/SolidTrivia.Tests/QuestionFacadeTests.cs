@@ -71,9 +71,27 @@ namespace SolidTrivia.Tests
             Assert.Throws<ArgumentNullException>(() => facade.CreateBoard(null));
             Assert.Throws<ArgumentNullException>(() => facade.CreateBoard(string.Empty));
             facade.CreateBoard("name");
-
-            var board = facade.GetBoard("name");
+            var board = facade.GetBoard(1);
             Assert.True(board.Id == 1 && board.Name == "name");
+        }
+
+        [Fact]
+        public void DeleteBoard()
+        {
+            var facade = new QuestionFacade(new BoardStoreMock(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
+            facade.CreateBoard("name");
+            facade.DeleteBoard(1);
+            Assert.Empty(facade.ListBoards());
+        }
+
+        [Fact]
+        public void RenameBoard()
+        {
+            var facade = new QuestionFacade(new BoardStoreMock(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
+            facade.CreateBoard("name");
+            facade.RenameBoard(1, "newName");
+            var board = facade.GetBoard(1);
+            Assert.True(board.Id == 1 && board.Name == "newName");
         }
     }
 }

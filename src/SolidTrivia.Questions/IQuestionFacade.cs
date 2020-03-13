@@ -17,7 +17,6 @@ namespace SolidTrivia.Questions
         void DeleteCategoryOfBoard(int boardId, int categoryId);
         void DownVote(string userId, int questionId);
         NewQuestion GetQuestion(int questionId);
-        NewBoard GetBoard(string name);
         NewBoard GetBoard(int boardId);
         NewCategory GetCategory(int categoryId);
         void DeleteQuestion(int questionId);

@@ -26,8 +26,21 @@ namespace SolidTrivia.Tests
             facade.CreateCategory("category2");
             facade.CreateCategory("category3");
 
+            var category1 = facade.GetCategory(1);
+            Assert.Equal(1, category1.Id);
+            Assert.Equal("category1", category1.Name);
+
             var catagories = facade.ListCategories();
             Assert.Equal(3, catagories.Count());
+        }
+
+        [Fact]
+        public void CreateCategory_CantCreateDuplicate()
+        {
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
+            facade.CreateCategory("category1");
+            Assert.True(facade.CategoryExists("category1"));
+            Assert.Throws<ArgumentException>(() => facade.CreateCategory("category1"));
         }
 
         [Fact]
@@ -46,6 +59,17 @@ namespace SolidTrivia.Tests
             catagories = facade.ListCategories();
             Assert.Equal(2, catagories.Count());
         }
+
+        [Fact]
+        public void RenameCategory()
+        {
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy());
+            facade.CreateCategory("category1");
+            var category1 = facade.GetCategory(1);
+            facade.RenameCategory(1, "newName");
+            Assert.Equal("newName", category1.Name);
+        }
+
         [Fact]
         public void AddCategoryToBoard()
         {
@@ -58,6 +82,7 @@ namespace SolidTrivia.Tests
             List<NewCategory> categories = facade.ListCategoriesOfBoard(1).ToList();
             Assert.Equal(2, categories.Count());
         }
+
 
 
         [Fact]
