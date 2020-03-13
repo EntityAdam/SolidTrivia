@@ -2,11 +2,10 @@
 @inject NavigationManager NavigationManager
 @inject BoardAddCategoryViewModel viewModel
 
-<h2>Add Category</h2>
-<h3>Board Name: @ViewModel.AddCategoryModel.BoardId</h3>
+<h3>Board Name: @ViewModel.AddCategoryModel.Name</h3>
 <h4 class="text-muted">Board Id: @ViewModel.AddCategoryModel.BoardId</h4>
-
-
+<hr />
+<h4>Edit Board Categories</h4>
 @if (ViewModel == null || ViewModel.BoardCategories == null)
 {
     <span>Loading...</span>
@@ -32,7 +31,7 @@ else
                     <td>@category.Id</td>
                     <td>@category.Name</td>
                     <td>
-                        <button class="btn btn-info" @onclick="(() => Remove(category.Id))" disabled="@(!ViewModel.RemoveCategoryCommand.CanExecute(category.Id))">Remove</button> |
+                        <button class="btn btn-info" @onclick="(() => Remove(category.Id))" disabled="@(!ViewModel.RemoveCategoryCommand.CanExecute(category.Id))">Remove</button>
                     </td>
                 </tr>
             }
@@ -41,7 +40,7 @@ else
 }
 <hr />
 
-<h3>Category List</h3>
+<h3>Available Categories</h3>
 @if (ViewModel == null || ViewModel.Categories == null)
 {
     <span>Loading...</span>

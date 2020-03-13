@@ -16,15 +16,52 @@ namespace SolidTrivia.Tests
 
         }
 
+        #region Category
+        //create
         public void Create(string categoryName) => Categories.Add(new NewCategory() { Id = NewId(), Name = categoryName });
-        public void DeleteCategory(int categoryId) => Categories.RemoveAll(c => c.Id == categoryId && c.BoardId == null);
-        public void DeleteCategoryOfBoard(int boardId, int categoryId) => Categories.RemoveAll(c => c.Id == categoryId && c.BoardId == boardId);
-        public NewCategory GetById(int categoryId) => Categories.First(c => c.Id == categoryId);
 
-        public NewCategory GetCategoryOfBoard(int boardId, int categoryId) => Categories.Where(c => c.BoardId == boardId).First(c => c.Id == categoryId);
-        public IEnumerable<NewCategory> ListCategories() => Categories.Where(c => c.BoardId == null);
-        public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId) => Categories.Where(c => c.BoardId == boardId);
-        public void AddCategoryToBoard(int boardId, int categoryId) => Categories.Single(c => c.Id == categoryId).BoardId = boardId;
+        //edit
+        public void Rename(int categoryId, string newName) => GetById(categoryId).Name = newName;
+
+        //delete
+        public void Delete(int categoryId) => Categories.RemoveAll(c => c.Id == categoryId);
+
+        //list
+        public NewCategory GetById(int categoryId) => Categories.First(c => c.Id == categoryId);
+        public bool Exists(int categoryId) => Categories.Any(c => c.Id == categoryId);
+        public bool ExistsOrdinalIgnoreCase(string categoryName) => Categories.Any(c => string.Equals(c.Name, categoryName, StringComparison.OrdinalIgnoreCase));
+        public IEnumerable<NewCategory> ListCategories() => Categories;
+        #endregion
+
+        #region Board Categories
+        //create
+        public void AddToBoard(int boardId, int categoryId)
+        {
+            if (BoardCategories.Any(x => x.BoardId == boardId && x.CategoryId == categoryId))
+                throw new InvalidOperationException($"Cannot add duplicate category '{categoryId}' to board '{boardId}'");
+
+            BoardCategories.Add(new BoardCategory() { BoardId = boardId, CategoryId = categoryId });
+        }
+
+        //edit
+
+        //delete
+        public void RemoveFromBoard(int boardId, int categoryId) => BoardCategories.RemoveAll(bc=>bc.BoardId == boardId && bc.CategoryId == categoryId);
+
+        //list
+
+        public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId)
+        {
+            var boardCategoriesIds = BoardCategories.Where(bc => bc.BoardId == boardId).Select(bc => bc.CategoryId);
+            return Categories.Where(c => boardCategoriesIds.Contains(c.Id));
+        }
+
+        public IEnumerable<NewCategory> ListAvailable(int boardId)
+        {
+            var boardCategoriesIds = BoardCategories.Where(bc => bc.BoardId == boardId).Select(bc => bc.CategoryId);
+            return Categories.Where(c => !boardCategoriesIds.Contains(c.Id));
+        }
+        #endregion
 
         private int NewId()
         {
@@ -34,22 +71,6 @@ namespace SolidTrivia.Tests
                 id = Categories.Max(c => c.Id) + 1;
             }
             return id;
-        }
-
-        public bool Exists(int categoryId) => Categories.Any(c => c.Id == categoryId);
-
-        public void Rename(int categoryId, string newName) => GetById(categoryId).Name = newName;
-
-        public bool ExistsOrdinalIgnoreCase(string categoryName) => Categories.Any(c => string.Equals(c.Name, categoryName, StringComparison.OrdinalIgnoreCase));
-
-        public void Remove(int boardId, int categoryId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<NewCategory> ListAvailable(int boardId)
-        {
-            throw new NotImplementedException();
         }
     }
 

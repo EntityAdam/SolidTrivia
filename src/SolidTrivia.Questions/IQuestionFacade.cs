@@ -23,7 +23,6 @@ namespace SolidTrivia.Questions
         bool TagExists(string tagName);
         void DeleteBoard(int boardId);
         bool TagExists(int tagId);
-        NewCategory GetCategoryOfBoard(int boardId, int categoryId);
         void RenameBoard(int boardId, string newBoardName);
         (int, int) GetVotes(int questionId);
         void RenameTag(int tagId, string newTagName);

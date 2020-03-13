@@ -7,7 +7,7 @@ namespace SolidTrivia.Tests
 {
     internal class CategoryStoreDummy : ICategoryStore
     {
-        public void AddCategoryToBoard(int boardId, int categoryId)
+        public void AddToBoard(int boardId, int categoryId)
         {
             throw new NotImplementedException();
         }
@@ -17,12 +17,7 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public void DeleteCategory(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteCategoryOfBoard(int boardId, int categoryId)
+        public void Delete(int categoryId)
         {
             throw new NotImplementedException();
         }
@@ -38,11 +33,6 @@ namespace SolidTrivia.Tests
         }
 
         public NewCategory GetById(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public NewCategory GetCategoryOfBoard(int boardId, int categoryId)
         {
             throw new NotImplementedException();
         }
@@ -63,6 +53,11 @@ namespace SolidTrivia.Tests
         }
 
         public void Remove(int boardId, int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveFromBoard(int boardId, int categoryId)
         {
             throw new NotImplementedException();
         }

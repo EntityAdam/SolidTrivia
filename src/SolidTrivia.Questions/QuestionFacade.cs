@@ -63,7 +63,11 @@ namespace SolidTrivia.Questions
 
         public IEnumerable<NewCategory> ListCategories() => categoryStore.ListCategories();
 
-        public void DeleteCategory(int categoryId) => categoryStore.DeleteCategory(categoryId);
+        public void DeleteCategory(int categoryId)
+        {
+            if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{categoryId}' does not exist");
+            categoryStore.Delete(categoryId);
+        }
 
         public NewCategory GetCategory(int categoryId) => categoryStore.GetById(categoryId);
 
@@ -165,10 +169,24 @@ namespace SolidTrivia.Questions
         }
 
         //category and boards
-        public NewCategory GetCategoryOfBoard(int boardId, int categoryId) => categoryStore.GetCategoryOfBoard(boardId, categoryId);
-        public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId) => categoryStore.ListCategoriesOfBoard(boardId);
-        public void AddCategoryToBoard(int boardId, int categoryId) => categoryStore.AddCategoryToBoard(boardId, categoryId);
-        public void DeleteCategoryOfBoard(int boardId, int categoryId) => categoryStore.DeleteCategoryOfBoard(boardId, categoryId);
+
+        public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId)
+        {
+            if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
+            return categoryStore.ListCategoriesOfBoard(boardId);
+        }
+        public void AddCategoryToBoard(int boardId, int categoryId)
+        {
+            if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
+            if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{categoryId}' does not exist");
+            categoryStore.AddToBoard(boardId, categoryId);
+        }
+        public void DeleteCategoryOfBoard(int boardId, int categoryId)
+        {
+            if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
+            if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{categoryId}' does not exist");
+            categoryStore.RemoveFromBoard(boardId, categoryId);
+        }
 
         //category and questions
         public void AddQuestionToCategory(int questionId, int categoryId)
@@ -192,7 +210,7 @@ namespace SolidTrivia.Questions
         {
             if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
             if (!categoryStore.Exists(categoryId)) throw new ArgumentException(nameof(categoryId), $"Category with id '{categoryId}' does not exist");
-            categoryStore.Remove(boardId, categoryId);
+            categoryStore.RemoveFromBoard(boardId, categoryId);
         }
 
         public IEnumerable<NewCategory> ListAvailableCategories(int boardId)

@@ -59,21 +59,28 @@ namespace SolidTrivia.Common
 
         public void Load(int boardId)
         {
+            //lookup board
             var board = facade.GetBoard(boardId);
 
-            var selected = facade.ListCategoriesOfBoard(boardId);
+            //get the categories
+            var boardCategories = facade.ListCategoriesOfBoard(boardId);
 
+            //add them to the view
+            UpdateBoardCategories(boardCategories.Select(x => new CategoryListModel() { Id = x.Id, Name = x.Name }));
+
+            //get the available categories
             var available = facade.ListAvailableCategories(boardId).Select(c => new CategoryListModel() { Id = c.Id, Name = c.Name });
 
+            //page them
             PagedCategories = new PagedEnumerable<CategoryListModel>(available, defaultPageSize);
 
+            //update the page
             UpdateList(PagedCategories.Next());
 
             AddCategoryModel = new BoardAddCategoryModel()
             {
                 BoardId = board.Id,
-                SelectedCategoryId = null,
-                BoardCategories = available
+                Name = board.Name
             };
         }
 
@@ -83,29 +90,44 @@ namespace SolidTrivia.Common
 
         public void AddCategory(int categoryId)
         {
-            try
-            {
-                facade.AddCategoryToBoard(AddCategoryModel.BoardId, categoryId);
-                var cat = facade.GetCategory(categoryId);
-                BoardCategories.Add(new CategoryListModel() { Id = cat.Id, Name = cat.Name });
-            }
-            catch (Exception)
-            {
+            //lookup category
+            var domainCat = facade.GetCategory(categoryId);
 
-                throw;
-            }
+            //add to the view
+            BoardCategories.Add(new CategoryListModel() { Id = domainCat.Id, Name = domainCat.Name });
+
+            //remove it from the page ::: //todo is this going to cause problems with the paging? TEST IT! 
+            var displayCat = Categories.First(x => x.Id == categoryId);
+            Categories.Remove(displayCat);
+
+            //persist it
+            facade.AddCategoryToBoard(AddCategoryModel.BoardId, categoryId);
+
         }
 
         public void RemoveCategory(int categoryId)
         {
-            try
-            {
-                facade.RemoveCategoryFromBoard(AddCategoryModel.BoardId, categoryId);
-            }
-            catch (Exception)
-            {
+            //remove from the view
+            var cat = BoardCategories.First(x => x.Id == categoryId);
+            BoardCategories.Remove(cat);
 
-                throw;
+            //todo how do I add this back to the page??
+            //todo what if I switch pages then remove a cat from the board?? 
+
+            //persist it
+            facade.RemoveCategoryFromBoard(AddCategoryModel.BoardId, categoryId);
+        }
+
+        private void UpdateBoardCategories(IEnumerable<CategoryListModel> page)
+        {
+            BoardCategories.Clear();
+            foreach (var c in page)
+            {
+                BoardCategories.Add(new CategoryListModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                });
             }
         }
 

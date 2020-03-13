@@ -126,8 +126,8 @@ namespace SolidTrivia.Tests
             facade.AddCategoryToBoard(1, 1);
             facade.AddCategoryToBoard(2, 2);
 
-            facade.GetCategoryOfBoard(1, 1);
-            facade.GetCategoryOfBoard(2, 2);
+            facade.RemoveCategoryFromBoard(1, 1);
+            facade.RemoveCategoryFromBoard(2, 2);
         }
     }
 }
