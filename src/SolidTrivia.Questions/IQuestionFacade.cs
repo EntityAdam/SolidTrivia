@@ -16,9 +16,11 @@ namespace SolidTrivia.Questions
         NewTag GetTag(int tagId);
         void DeleteCategoryOfBoard(int boardId, int categoryId);
         void DownVote(string userId, int questionId);
+        NewQuestion GetQuestion(int questionId);
         NewBoard GetBoard(string name);
         NewBoard GetBoard(int boardId);
         NewCategory GetCategory(int categoryId);
+        void DeleteQuestion(int questionId);
         bool TagExists(string tagName);
         void DeleteBoard(int boardId);
         bool TagExists(int tagId);
@@ -30,6 +32,7 @@ namespace SolidTrivia.Questions
         IEnumerable<NewTag> ListAvailableTags(int questionId);
         IEnumerable<NewCategory> ListCategories();
         bool CategoryExists(string name);
+        IEnumerable<NewQuestion> ListQuestions();
         IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId);
         IEnumerable<NewBoard> ListBoards();
         IEnumerable<NewComment> ListComments(int questionId);
@@ -40,5 +43,7 @@ namespace SolidTrivia.Questions
         void ReplyToQuestion(int questionId, string comment);
         void TagQuestion(int questionId, int tagId);
         void UpVote(string userId, int questionId);
+        void RemoveCategoryFromBoard(int boardId, int categoryId);
+        IEnumerable<NewCategory> ListAvailableCategories(int boardId);
     }
 }

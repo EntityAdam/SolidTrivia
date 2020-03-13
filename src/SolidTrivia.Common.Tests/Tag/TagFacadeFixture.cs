@@ -9,7 +9,7 @@ namespace SolidTrivia.Common.Tests
 
         public TagFacadeFixture()
         {
-            Facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreMock(), new CommentStoreMock(), new CategoryStoreMock(), new BoardStoreMock());
+            Facade = new QuestionFacade(new BoardStoreMock(), new CategoryStoreMock(), new CommentStoreMock(), new QuestionStoreMock(), new TagStoreMock(), new VoteStoreMock());
             CreateVm = new TagCreateViewModel(Facade);
             EditVm = new TagEditViewModel(Facade);
             DeleteVm = new TagDeleteViewModel(Facade);

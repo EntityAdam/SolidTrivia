@@ -133,6 +133,11 @@ namespace SolidTrivia.Common.Tests
             var renamedBoard = ListVm.Boards.First();
             Assert.True(renamedBoard.Id == 1);
             Assert.True(renamedBoard.Name == "BoardZ");
+
+
+            //put it back for paging tests :: fix this later so I can take it out
+            EditVm.EditModel.NewName = "BoardA";
+            EditVm.RenameCommand.Execute(null);
         }
 
         [Fact]

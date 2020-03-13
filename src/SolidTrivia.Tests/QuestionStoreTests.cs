@@ -11,7 +11,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void CreateQuestion()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             Assert.Throws<ArgumentNullException>(() => facade.CreateQuestion(null));
             facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
         }

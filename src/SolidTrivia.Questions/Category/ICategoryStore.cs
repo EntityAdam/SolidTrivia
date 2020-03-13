@@ -20,5 +20,7 @@ namespace SolidTrivia.Questions
         bool Exists(int categoryId);
         void Rename(int categoryId, string newName);
         bool ExistsOrdinalIgnoreCase(string categoryName);
+        void Remove(int boardId, int categoryId);
+        IEnumerable<NewCategory> ListAvailable(int boardId);
     }
 }

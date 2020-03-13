@@ -47,12 +47,22 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
+        public IEnumerable<NewCategory> ListAvailable(int boardId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<NewCategory> ListCategories()
         {
             throw new NotImplementedException();
         }
 
         public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int boardId, int categoryId)
         {
             throw new NotImplementedException();
         }

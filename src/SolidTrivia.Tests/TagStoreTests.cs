@@ -10,13 +10,13 @@ namespace SolidTrivia.Tests
         [Fact]
         public void TagQuestionNulls()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy());
         }
 
         [Fact]
         public void DupeTagThrowsException()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy());
             facade.CreateTag("tag1");
             Assert.Throws<ArgumentException>(() => facade.CreateTag("tag1"));
         }
@@ -24,7 +24,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void TagsShouldBeCaseInsensitive()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy());
             facade.CreateTag("tag");
             Assert.Throws<ArgumentException>(() => facade.CreateTag("TAG"));
         }
@@ -32,7 +32,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void TagQuestion()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreMock(), new VoteStoreDummy());
 
             facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
             facade.CreateTag("tag1");

@@ -11,7 +11,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void VoteQuestion()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreMock(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreMock());
             facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
             facade.UpVote("test", 1);
             var (up, down) = facade.GetVotes(1);

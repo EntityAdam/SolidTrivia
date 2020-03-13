@@ -1,0 +1,28 @@
+﻿@page "/question/edit/{questionId:int}"
+@inject NavigationManager NavigationManager
+@inject QuestionEditViewModel viewModel
+
+<h3>Edit Question</h3>
+<h4>Edit: @ViewModel.EditModel.Id</h4>
+
+<button class="btn btn-danger" @onclick="Delete">Delete</button>
+<button class="btn btn-light" @onclick="Cancel">Cancel</button>
+
+
+@code {
+    [Parameter]
+    public int questionId { get; set; }
+
+    protected QuestionEditViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+        ViewModel.Load(questionId);
+    }
+
+    protected void Cancel() => NavigationManager.NavigateTo($"question/list");
+
+    protected void Delete() => NavigationManager.NavigateTo($"question/delete/{ViewModel.EditModel.Id}");
+}

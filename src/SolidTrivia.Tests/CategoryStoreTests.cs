@@ -12,7 +12,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void CatagoryNullChecks()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             Assert.Throws<ArgumentNullException>(() => facade.CreateCategory(null));
             Assert.Throws<ArgumentNullException>(() => facade.CreateCategory(""));
         }
@@ -20,7 +20,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void CreateCategory()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
             facade.CreateCategory("category1");
             facade.CreateCategory("category2");
@@ -33,7 +33,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void DeleteCategory()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
             facade.CreateCategory("category1");
             facade.CreateCategory("category2");
@@ -49,7 +49,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void AddCategoryToBoard()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreMock());
+            var facade = new QuestionFacade(new BoardStoreMock(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             facade.CreateBoard("name");
             facade.CreateCategory("category1");
             facade.CreateCategory("category2");
@@ -63,7 +63,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void AddQuestionToCategory()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreMock());
+            var facade = new QuestionFacade(new BoardStoreMock(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             facade.CreateCategory("category1");
             facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
             facade.CreateNewQuestion(new NewQuestion() { Id = 2 });
@@ -77,7 +77,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void DeleteCategoryOfBoard()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreMock());
+            var facade = new QuestionFacade(new BoardStoreMock(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             facade.CreateBoard("name");
             facade.CreateCategory("category1");
             facade.CreateCategory("category2");
@@ -93,7 +93,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void CategoryBoard()
         {
-            var facade = new QuestionFacade(new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreMock());
+            var facade = new QuestionFacade(new BoardStoreMock(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy());
             facade.CreateBoard("name1");
             facade.CreateBoard("name2");
             facade.CreateCategory("category1");

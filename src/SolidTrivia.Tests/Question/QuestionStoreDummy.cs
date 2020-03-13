@@ -17,12 +17,27 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
+        public void Delete(int questionId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Exists(int questionId)
         {
             throw new NotImplementedException();
         }
 
+        public NewQuestion GetById(int questionId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool IsQuestionInCategory(int questionId, int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<NewQuestion> List()
         {
             throw new NotImplementedException();
         }

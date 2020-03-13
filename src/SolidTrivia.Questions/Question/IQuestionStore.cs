@@ -14,5 +14,8 @@ namespace SolidTrivia.Questions
         IEnumerable<NewQuestion> ListQuestionsOfCategory(int categoryId);
         void AddQuestionToCategory(int questionId, int categoryId);
         bool IsQuestionInCategory(int questionId, int categoryId);
+        NewQuestion GetById(int questionId);
+        void Delete(int questionId);
+        IEnumerable<NewQuestion> List();
     }
 }

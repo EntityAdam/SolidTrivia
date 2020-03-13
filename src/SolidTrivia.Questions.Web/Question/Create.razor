@@ -1,5 +1,6 @@
-﻿@page "/createquestion"
-@inject ICreateQuestionViewModel viewModel
+﻿@page "/question/create"
+@inject QuestionCreateViewModel viewModel
+@inject NavigationManager NavigationManager
 
 <style>
     .markdown-editor, .markdown-view {
@@ -39,17 +40,14 @@
         <div class="col-sm-6">
             <span class="label label-default label-hint">HTML Preview</span>
             <div class="markdown-view">
-                <Markdown Content="@ViewModel.SanitizedHtml"></Markdown>
+                <Markdown Content="@ViewModel.SanitizedHtmlDisplay"></Markdown>
             </div>
         </div>
     </div>
 </div>
 
 @code {
-
-    [Parameter]
-    public ICreateQuestionViewModel ViewModel { get; set; }
-
+    protected QuestionCreateViewModel ViewModel { get; set; }
 
     protected override void OnInitialized()
     {
@@ -72,5 +70,12 @@
     protected void SaveChanges()
     {
         ViewModel.SaveQuestionMarkdown();
+        NavigationManager.NavigateTo($"question/list");
     }
+
+    [Parameter]
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>() {
+                { "tabindex", "0" },
+                { "placeholder", "Question" }
+            };
 }

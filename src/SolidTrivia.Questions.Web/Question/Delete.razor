@@ -1,0 +1,29 @@
+﻿@page "/question/delete/{questionId:int}"
+@inject NavigationManager NavigationManager
+@inject QuestionDeleteViewModel viewModel
+<h3>Delete</h3>
+<h4>Are you sure you want to delete the question '<span style="font-weight: bold">@ViewModel.DeleteModel.Id</span>'?</h4>
+<button class="btn btn-danger" @onclick="ConfirmDelete">Confirm</button>
+<button class="btn btn-light" @onclick="Cancel">Cancel</button>
+@code {
+
+    [Parameter]
+    public int questionId { get; set; }
+
+    protected QuestionDeleteViewModel ViewModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+        ViewModel.Load(questionId);
+    }
+
+    protected void Cancel() => NavigationManager.NavigateTo($"question/list");
+
+    protected void ConfirmDelete()
+    {
+        ViewModel.DeleteCommand.Execute(questionId);
+        NavigationManager.NavigateTo($"question/list");
+    }
+}

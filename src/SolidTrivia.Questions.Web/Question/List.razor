@@ -1,0 +1,62 @@
+﻿@page "/question/list"
+@inject NavigationManager NavigationManager
+@inject QuestionListViewModel viewModel
+
+<h1>Questions</h1>
+<button class="btn btn-primary" @onclick="NavigateToCreate">Create New</button>
+<hr />
+<h3>Questions List</h3>
+<div style="cursor: pointer; margin: 5px 0 10px 0; font-size: 1.2rem" @onclick="Refresh"><span style="color: blue">Refresh</span> <i class="oi oi-reload" aria-hidden="true"></i></div>
+
+@if (ViewModel == null || ViewModel.Questions == null)
+{
+    <span>Loading...</span>
+}
+else if (!ViewModel.Questions.Any())
+{
+    <span>Nothing to see here..</span>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in ViewModel.Questions)
+            {
+                <tr>
+                    <td>@question.Id</td>
+                    <td>
+                        <button class="btn btn-info" @onclick="(() => Edit(question.Id))">Edit</button> |
+                        <button class="btn btn-danger" @onclick="(() => Delete(question.Id))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    protected QuestionListViewModel ViewModel { get; set; }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel = viewModel;
+        ViewModel.Load();
+    }
+
+    protected void Refresh()
+    {
+        ViewModel.UpdateCommand.Execute(null);
+    }
+
+    protected void NavigateToCreate() => NavigationManager.NavigateTo($"question/create");
+
+    protected void Delete(int questionId) => NavigationManager.NavigateTo($"question/delete/{questionId}");
+
+    protected void Edit(int questionId) => NavigationManager.NavigateTo($"question/edit/{questionId}");
+}

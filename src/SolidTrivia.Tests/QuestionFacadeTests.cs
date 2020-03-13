@@ -17,34 +17,34 @@ namespace SolidTrivia.Tests
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var facade = new QuestionFacade(null, new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+                var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), null, new TagStoreDummy(), new VoteStoreDummy());
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var facade = new QuestionFacade(new QuestionStoreDummy(), null, new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+                var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreDummy(), null, new VoteStoreDummy());
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var facade = new QuestionFacade(new QuestionStoreDummy(), new TagStoreDummy(), null, new CommentStoreDummy(), new CategoryStoreDummy(), new BoardStoreDummy());
+                var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreDummy(), new TagStoreDummy(), null);
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var facade = new QuestionFacade(new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy(), null, new CategoryStoreDummy(), new BoardStoreDummy());
+                var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), null, new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy());
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var facade = new QuestionFacade(new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), null, new BoardStoreDummy());
+                var facade = new QuestionFacade(new BoardStoreDummy(), null, new CommentStoreDummy(), new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy());
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var facade = new QuestionFacade(new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreDummy(), null);
+                var facade = new QuestionFacade(null, new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreDummy(), new TagStoreDummy(), new VoteStoreDummy());
             });
         }
 
         [Fact]
         public void CreateComment()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreMock(), new CategoryStoreDummy(), new BoardStoreDummy());
+            var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreMock(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
 
             facade.ReplyToQuestion(1, "comment1");
@@ -67,7 +67,7 @@ namespace SolidTrivia.Tests
         [Fact]
         public void CreateBoard()
         {
-            var facade = new QuestionFacade(new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy(), new CommentStoreDummy(), new CategoryStoreMock(), new BoardStoreMock());
+            var facade = new QuestionFacade(new BoardStoreMock(), new CategoryStoreMock(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             Assert.Throws<ArgumentNullException>(() => facade.CreateBoard(null));
             Assert.Throws<ArgumentNullException>(() => facade.CreateBoard(string.Empty));
             facade.CreateBoard("name");

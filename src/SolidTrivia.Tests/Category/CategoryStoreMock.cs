@@ -9,6 +9,8 @@ namespace SolidTrivia.Tests
     {
         public List<NewCategory> Categories { get; set; } = new List<NewCategory>();
 
+        public List<BoardCategory> BoardCategories { get; set; } = new List<BoardCategory>();
+
         public CategoryStoreMock()
         {
 
@@ -17,7 +19,8 @@ namespace SolidTrivia.Tests
         public void Create(string categoryName) => Categories.Add(new NewCategory() { Id = NewId(), Name = categoryName });
         public void DeleteCategory(int categoryId) => Categories.RemoveAll(c => c.Id == categoryId && c.BoardId == null);
         public void DeleteCategoryOfBoard(int boardId, int categoryId) => Categories.RemoveAll(c => c.Id == categoryId && c.BoardId == boardId);
-        public NewCategory GetById(int categoryId) => Categories.Where(c => c.BoardId == null).First(c => c.Id == categoryId);
+        public NewCategory GetById(int categoryId) => Categories.First(c => c.Id == categoryId);
+
         public NewCategory GetCategoryOfBoard(int boardId, int categoryId) => Categories.Where(c => c.BoardId == boardId).First(c => c.Id == categoryId);
         public IEnumerable<NewCategory> ListCategories() => Categories.Where(c => c.BoardId == null);
         public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId) => Categories.Where(c => c.BoardId == boardId);
@@ -37,6 +40,22 @@ namespace SolidTrivia.Tests
 
         public void Rename(int categoryId, string newName) => GetById(categoryId).Name = newName;
 
-        public bool ExistsOrdinalIgnoreCase(string categoryName) => Categories.Any(c=> string.Equals(c.Name, categoryName, StringComparison.OrdinalIgnoreCase));
+        public bool ExistsOrdinalIgnoreCase(string categoryName) => Categories.Any(c => string.Equals(c.Name, categoryName, StringComparison.OrdinalIgnoreCase));
+
+        public void Remove(int boardId, int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<NewCategory> ListAvailable(int boardId)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class BoardCategory
+    {
+        public int BoardId { get; set; }
+        public int CategoryId { get; set; }
     }
 }

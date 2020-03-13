@@ -12,6 +12,8 @@
 <button class="btn btn-primary" @onclick="Save">Save</button>
 <button class="btn btn-danger" @onclick="Delete">Delete</button>
 <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+<hr />
+<button class="btn btn-primary" @onclick="AddCategory">Add Category</button>
 
 
 @code {
@@ -36,4 +38,6 @@
         ViewModel.RenameBoard();
         NavigationManager.NavigateTo($"board/list");
     }
+
+    protected void AddCategory() => NavigationManager.NavigateTo($"board/category/{boardId}");
 }

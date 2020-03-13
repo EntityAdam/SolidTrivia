@@ -42,9 +42,6 @@ namespace SolidTrivia.Questions.Web
             services.AddSingleton<ICategoryStore, CategoryStoreMock>(); //MOCKS FOR DEVELOPMENT
             services.AddSingleton<IVoteStore, VoteStoreMock>(); //MOCKS FOR DEVELOPMENT
 
-            //ui question
-            services.AddScoped<ICreateQuestionViewModel, CreateQuestionViewModel>();
-            
             //ui tags
             services.AddScoped<TagCreateViewModel>();
             services.AddScoped<TagDeleteViewModel>();
@@ -56,12 +53,19 @@ namespace SolidTrivia.Questions.Web
             services.AddScoped<BoardDeleteViewModel>();
             services.AddScoped<BoardEditViewModel>();
             services.AddScoped<BoardListViewModel>();
-
+            services.AddScoped<BoardAddCategoryViewModel>();
+            
             //ui category
             services.AddScoped<CategoryCreateViewModel>();
             services.AddScoped<CategoryDeleteViewModel>();
             services.AddScoped<CategoryEditViewModel>();
             services.AddScoped<CategoryListViewModel>();
+
+            //ui question
+            services.AddScoped<QuestionCreateViewModel>();
+            services.AddScoped<QuestionDeleteViewModel>();
+            services.AddScoped<QuestionEditViewModel>();
+            services.AddScoped<QuestionListViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

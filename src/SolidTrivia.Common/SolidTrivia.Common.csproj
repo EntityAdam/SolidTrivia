@@ -16,9 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Comment\" />
-    <Folder Include="Question\List\" />
-    <Folder Include="Question\Edit\" />
-    <Folder Include="Question\Delete\" />
     <Folder Include="Vote\Create\" />
     <Folder Include="Vote\List\" />
     <Folder Include="Vote\Edit\" />

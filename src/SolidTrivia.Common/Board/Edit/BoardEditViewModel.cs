@@ -10,20 +10,6 @@ namespace SolidTrivia.Common
         public BoardEditViewModel(IQuestionFacade facade)
         {
             this.facade = facade;
-        }
-
-        public BoardEditModel EditModel { get; set; }
-        public IBlazorCommand RenameCommand { get; set; }
-
-        public void Load(int boardId)
-        {
-            var cat = facade.GetBoard(boardId);
-            EditModel = new BoardEditModel()
-            {
-                Id = cat.Id,
-                OldName = cat.Name,
-                NewName = cat.Name
-            };
 
             RenameCommand = new BlazorCommand(
                 () => RenameBoard(),
@@ -31,7 +17,20 @@ namespace SolidTrivia.Common
             );
         }
 
+        public BoardEditModel EditModel { get; set; }
+        public IBlazorCommand RenameCommand { get; set; }
+
+        public void Load(int boardId)
+        {
+            var board = facade.GetBoard(boardId);
+            EditModel = new BoardEditModel()
+            {
+                Id = board.Id,
+                OldName = board.Name,
+                NewName = board.Name
+            };
+        }
+
         public void RenameBoard() => facade.RenameBoard(EditModel.Id, EditModel.NewName);
     }
-
 }
