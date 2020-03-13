@@ -40,9 +40,32 @@ else
             }
         </tbody>
     </table>
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item @PrevButtonCssState">
+                <a class="page-link" href="javascript: void(0)" tabindex="-1" @onclick="@Prev">Previous</a>
+            </li>
+            @*<li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>*@
+            <li class="page-item @NextButtonCssState">
+                <a class="page-link" href="javascript: void(0)" @onclick="@Next">Next</a>
+            </li>
+        </ul>
+    </nav>
 }
 
 @code {
+
+    private const string ActiveCssClass = "active";
+    private const string DisabledCssClass = "disabled";
+
+    protected string PrevButtonCssState => ViewModel.PrevPageCommand.CanExecute(null) ? "" : DisabledCssClass;
+    protected string NextButtonCssState => ViewModel.NextPageCommand.CanExecute(null) ? "" : DisabledCssClass;
+
+
     protected BoardListViewModel ViewModel { get; set; }
     protected override void OnInitialized()
     {
@@ -61,4 +84,8 @@ else
     protected void Delete(int boardId) => NavigationManager.NavigateTo($"board/delete/{boardId}");
 
     protected void Edit(int boardId) => NavigationManager.NavigateTo($"board/edit/{boardId}");
+
+    protected void Prev() => ViewModel.PrevPageCommand.Execute(null);
+
+    protected void Next() => ViewModel.NextPageCommand.Execute(null);
 }
