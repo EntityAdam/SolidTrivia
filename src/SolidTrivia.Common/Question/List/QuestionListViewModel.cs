@@ -41,7 +41,7 @@ namespace SolidTrivia.Common
 
         public void Load(int pageSize = defaultPageSize)
         {
-            var questions = facade.ListQuestions().Select(c => new QuestionListModel() { Id = c.Id });
+            var questions = facade.ListQuestions().Select(c => new QuestionListModel() { Id = c.Id, Content = c.MarkdownContent });
             PagedQuestions = new PagedEnumerable<QuestionListModel>(questions, pageSize);
             UpdateList(PagedQuestions.Next());
         }
@@ -54,7 +54,8 @@ namespace SolidTrivia.Common
             {
                 Questions.Add(new QuestionListModel()
                 {
-                    Id = c.Id
+                    Id = c.Id,
+                    Content = c.Content
                 });
             }
         }

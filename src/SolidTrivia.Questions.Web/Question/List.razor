@@ -22,6 +22,7 @@ else
         <thead>
             <tr>
                 <th>Id</th>
+                <th style="width: 80%;">Content</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,6 +31,7 @@ else
             {
                 <tr>
                     <td>@question.Id</td>
+                    <td>@question.Content</td>
                     <td>
                         <button class="btn btn-info" @onclick="(() => Edit(question.Id))">Edit</button> |
                         <button class="btn btn-danger" @onclick="(() => Delete(question.Id))">Delete</button>

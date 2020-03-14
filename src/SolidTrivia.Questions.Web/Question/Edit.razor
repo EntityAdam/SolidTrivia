@@ -2,12 +2,52 @@
 @inject NavigationManager NavigationManager
 @inject QuestionEditViewModel viewModel
 
-<h3>Edit Question</h3>
-<h4>Edit: @ViewModel.EditModel.Id</h4>
+<style>
+    .markdown-editor, .markdown-view {
+        max-height: 100%;
+        height: calc(100vh - 154px);
+        padding: 30px;
+        overflow: scroll;
+    }
 
-<button class="btn btn-danger" @onclick="Delete">Delete</button>
-<button class="btn btn-light" @onclick="Cancel">Cancel</button>
+        .markdown-editor textarea {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            width: 100%;
+            background-color: transparent;
+        }
+</style>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="float-left">
+            <h3>Edit Question</h3>
+            <h4>Edit: @ViewModel.EditModel.Id</h4>
+        </div>
+        <div class="ml-auto">
+            <button class="btn btn-primary" @onclick="SaveChanges" disabled="@(!ViewModel.SaveCommand.CanExecute(null))">Save</button>
+            <button class="btn btn-danger" @onclick="Delete">Delete</button>
+            <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+        </div>
+
+    </div>
+    <div class="row flex-grow-1">
+        <div class="col-sm-6">
+            <span class="label label-default label-hint">Editor</span>
+            <div class="markdown-editor">
+                <Editor OnChange=@TextChanged InitialValue=@ViewModel.UserInputMarkdown />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <span class="label label-default label-hint">HTML Preview</span>
+            <div class="markdown-view">
+                <Markdown Content="@ViewModel.SanitizedHtmlDisplay"></Markdown>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
     [Parameter]
@@ -20,9 +60,28 @@
         base.OnInitialized();
         ViewModel = viewModel;
         ViewModel.Load(questionId);
+
+        ViewModel.PropertyChanged += (o, e) => base.InvokeAsync(StateHasChanged);
     }
 
     protected void Cancel() => NavigationManager.NavigateTo($"question/list");
 
     protected void Delete() => NavigationManager.NavigateTo($"question/delete/{ViewModel.EditModel.Id}");
+
+    protected void TextChanged(ChangeEventArgs e)
+    {
+        var val = string.Empty;
+        if (e.Value != null)
+        {
+            val = e.Value.ToString();
+        }
+        ViewModel.UserInputMarkdown = val;
+    }
+
+    protected void SaveChanges()
+    {
+        ViewModel.SaveQuestionMarkdown();
+        NavigationManager.NavigateTo($"question/list");
+    }
+
 }

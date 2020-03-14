@@ -22,6 +22,11 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
+        public void EditContent(int questionId, string userInputMarkdown)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Exists(int questionId)
         {
             throw new NotImplementedException();

@@ -32,6 +32,7 @@ namespace SolidTrivia.Questions
         bool CategoryExists(string name);
         IEnumerable<NewQuestion> ListQuestions();
         IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId);
+        void EditQuestionContent(int questionId, string userInputMarkdown);
         IEnumerable<NewBoard> ListBoards();
         IEnumerable<NewComment> ListComments(int questionId);
         IEnumerable<NewQuestion> ListQuestionsOfCategory(int categoryId);

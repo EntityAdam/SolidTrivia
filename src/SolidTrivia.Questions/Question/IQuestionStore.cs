@@ -17,5 +17,6 @@ namespace SolidTrivia.Questions
         NewQuestion GetById(int questionId);
         void Delete(int questionId);
         IEnumerable<NewQuestion> List();
+        void EditContent(int questionId, string userInputMarkdown);
     }
 }

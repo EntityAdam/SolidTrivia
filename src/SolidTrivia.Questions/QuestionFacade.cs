@@ -218,5 +218,12 @@ namespace SolidTrivia.Questions
             if (!boardStore.Exists(boardId)) throw new ArgumentException(nameof(boardId), $"Board with id '{boardId}' does not exist");
             return categoryStore.ListAvailable(boardId);
         }
+
+        public void EditQuestionContent(int questionId, string userInputMarkdown)
+        {
+            if (string.IsNullOrEmpty(userInputMarkdown)) throw new ArgumentNullException("Question content cannot be empty");
+            if(!questionStore.Exists(questionId)) throw new ArgumentException(nameof(questionId), $"Question with id '{questionId}' does not exist");
+            questionStore.EditContent(questionId, userInputMarkdown);
+        }
     }
 }

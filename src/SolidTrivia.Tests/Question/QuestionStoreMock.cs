@@ -51,5 +51,11 @@ namespace SolidTrivia.Tests
             }
             return id;
         }
+
+        public void EditContent(int questionId, string userInputMarkdown)
+        {
+            var question = GetById(questionId);
+            question.MarkdownContent = userInputMarkdown;
+        }
     }
 }
