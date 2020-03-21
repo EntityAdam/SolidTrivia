@@ -18,12 +18,12 @@ namespace SolidTrivia.Common
         public BoardAddCategoryViewModel(IQuestionFacade facade)
         {
             this.facade = facade;
-            AddCategoryCommand = new BlazorCommand<int>(
+            AddCategoryCommand = new BlazorCommand<Guid>(
                 (categoryId) => AddCategory(categoryId),
                 (categoryId) => BoardCategories.Count() < 6
             );
 
-            RemoveCategoryCommand = new BlazorCommand<int>(
+            RemoveCategoryCommand = new BlazorCommand<Guid>(
                 (categoryId) => RemoveCategory(categoryId),
                 (categoryId) => BoardCategories.Count() > 0
             );
@@ -57,7 +57,7 @@ namespace SolidTrivia.Common
 
         public IBlazorCommand RemoveCategoryCommand { get; set; }
 
-        public void Load(int boardId)
+        public void Load(Guid boardId)
         {
             //lookup board
             var board = facade.GetBoard(boardId);
@@ -88,7 +88,7 @@ namespace SolidTrivia.Common
 
         private void Next() => UpdateList(PagedCategories.Next());
 
-        public void AddCategory(int categoryId)
+        public void AddCategory(Guid categoryId)
         {
             //lookup category
             var domainCat = facade.GetCategory(categoryId);
@@ -105,7 +105,7 @@ namespace SolidTrivia.Common
 
         }
 
-        public void RemoveCategory(int categoryId)
+        public void RemoveCategory(Guid categoryId)
         {
             //remove from the view
             var cat = BoardCategories.First(x => x.Id == categoryId);

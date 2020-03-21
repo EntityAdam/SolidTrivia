@@ -8,15 +8,15 @@ namespace SolidTrivia.Questions
     {
         //category
         void Create(NewQuestion question);
-        bool Exists(int questionId);
+        bool Exists(Guid questionId);
 
         //category and question
-        IEnumerable<NewQuestion> ListQuestionsOfCategory(int categoryId);
-        void AddQuestionToCategory(int questionId, int categoryId);
-        bool IsQuestionInCategory(int questionId, int categoryId);
-        NewQuestion GetById(int questionId);
-        void Delete(int questionId);
+        IEnumerable<NewQuestion> ListQuestionsOfCategory(Guid categoryId);
+        void AddQuestionToCategory(Guid questionId, Guid categoryId);
+        bool IsQuestionInCategory(Guid questionId, Guid categoryId);
+        NewQuestion GetById(Guid questionId);
+        void Delete(Guid questionId);
         IEnumerable<NewQuestion> List();
-        void EditContent(int questionId, string userInputMarkdown);
+        void EditContent(Guid questionId, string userInputMarkdown);
     }
 }

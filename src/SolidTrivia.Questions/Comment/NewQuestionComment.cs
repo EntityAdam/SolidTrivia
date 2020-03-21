@@ -6,9 +6,9 @@ namespace SolidTrivia.Questions
 {
     public class NewComment
     {
-        public int Id { get; set; }
-        public int? QuestionId { get; set; }
-        public int? CommentId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? QuestionId { get; set; }
+        public Guid? CommentId { get; set; }
         public string Text { get; set; }
     }
 }

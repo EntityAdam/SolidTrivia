@@ -1,0 +1,585 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Which company was established on April 1st, 1976 by Steve Jobs, Steve Wozniak and Ronald Wayne?",
+      "correct_answer": "Apple",
+      "incorrect_answers": [
+        "Microsoft",
+        "Atari",
+        "Commodore"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What does the &quot;MP&quot; stand for in MP3?",
+      "correct_answer": "Moving Picture",
+      "incorrect_answers": [
+        "Music Player",
+        "Multi Pass",
+        "Micro Point"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "The first computer bug was formed by faulty wires.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What was the name of the security vulnerability found in Bash in 2014?",
+      "correct_answer": "Shellshock",
+      "incorrect_answers": [
+        "Heartbleed",
+        "Bashbug",
+        "Stagefright"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What does GHz stand for?",
+      "correct_answer": "Gigahertz",
+      "incorrect_answers": [
+        "Gigahotz",
+        "Gigahetz",
+        "Gigahatz"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What does AD stand for in relation to Windows Operating Systems? ",
+      "correct_answer": "Active Directory",
+      "incorrect_answers": [
+        "Alternative Drive",
+        "Automated Database",
+        "Active Department"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "HTML is what type of language?",
+      "correct_answer": "Markup Language",
+      "incorrect_answers": [
+        "Macro Language",
+        "Programming Language",
+        "Scripting Language"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "On which computer hardware device is the BIOS chip located?",
+      "correct_answer": "Motherboard",
+      "incorrect_answers": [
+        "Hard Disk Drive",
+        "Central Processing Unit",
+        "Graphics Processing Unit"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Linus Torvalds created Linux and Git.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
+      "correct_answer": "Final",
+      "incorrect_answers": [
+        "Static",
+        "Private",
+        "Public"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which of the following languages is used as a scripting language in the Unity 3D game engine?",
+      "correct_answer": "C#",
+      "incorrect_answers": [
+        "Java",
+        "C++",
+        "Objective-C"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "The computer OEM manufacturer Clevo, known for its Sager notebook line, is based in which country?",
+      "correct_answer": "Taiwan",
+      "incorrect_answers": [
+        "United States",
+        "Germany",
+        "China (People&#039;s Republic of)"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "&quot;Windows NT&quot; is a monolithic kernel.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "To bypass US Munitions Export Laws, the creator of the PGP published all the source code in book form. ",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "RAM stands for Random Access Memory.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "The internet domain .fm is the country-code top-level domain for which Pacific Ocean island nation?",
+      "correct_answer": "Micronesia",
+      "incorrect_answers": [
+        "Fiji",
+        "Tuvalu",
+        "Marshall Islands"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How many kilobytes in one gigabyte?",
+      "correct_answer": "1000000",
+      "incorrect_answers": [
+        "1024",
+        "1000",
+        "1048576"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "MacOS is based on Linux.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which one of these is not an official development name for a Ubuntu release?",
+      "correct_answer": "Mystic Mansion",
+      "incorrect_answers": [
+        "Trusty Tahr",
+        "Utopic Unicorn",
+        "Wily Werewolf"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "The open source program Redis is a relational database server.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "AMD created the first consumer 64-bit processor.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the name of the default theme that is installed with Windows XP?",
+      "correct_answer": "Luna",
+      "incorrect_answers": [
+        "Neptune",
+        "Whistler",
+        "Bliss"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What port does HTTP run on?",
+      "correct_answer": "80",
+      "incorrect_answers": [
+        "53",
+        "443",
+        "23"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In the programming language &quot;Python&quot;, which of these statements would display the string &quot;Hello World&quot; correctly?",
+      "correct_answer": "print(&quot;Hello World&quot;)",
+      "incorrect_answers": [
+        "console.log(&quot;Hello World&quot;)",
+        "echo &quot;Hello World&quot;",
+        "printf(&quot;Hello World&quot;)"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In HTML, which non-standard tag used to be be used to make elements scroll across the viewport?",
+      "correct_answer": "&lt;marquee&gt;&lt;\\/marquee&gt;",
+      "incorrect_answers": [
+        "&lt;scroll&gt;&lt;\\/scroll&gt;",
+        "&lt;move&gt;&lt;\\/move&gt;",
+        "&lt;slide&gt;&lt;\\/slide&gt;"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of these was the name of a bug found in April 2014 in the publicly available OpenSSL cryptography library?",
+      "correct_answer": "Heartbleed",
+      "incorrect_answers": [
+        "Shellshock",
+        "Corrupted Blood",
+        "Shellscript"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the correct term for the metal object in between the CPU and the CPU fan within a computer system?",
+      "correct_answer": "Heat Sink",
+      "incorrect_answers": [
+        "CPU Vent",
+        "Temperature Decipator",
+        "Heat Vent"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In programming, the ternary operator is mostly defined with what symbol(s)?",
+      "correct_answer": "?:",
+      "incorrect_answers": [
+        "??",
+        "if then",
+        "?"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": ".at is the top-level domain for what country?",
+      "correct_answer": "Austria",
+      "incorrect_answers": [
+        "Argentina",
+        "Australia",
+        "Angola"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "It&#039;s not possible to format a write-protected DVD-R Hard Disk.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "The numbering system with a radix of 16 is more commonly referred to as ",
+      "correct_answer": "Hexidecimal",
+      "incorrect_answers": [
+        "Binary",
+        "Duodecimal",
+        "Octal"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which data structure does FILO apply to?",
+      "correct_answer": "Stack",
+      "incorrect_answers": [
+        "Queue",
+        "Heap",
+        "Tree"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Linux was first created as an alternative to Windows XP.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of these is not a key value of Agile software development?",
+      "correct_answer": "Comprehensive documentation",
+      "incorrect_answers": [
+        "Individuals and interactions",
+        "Customer collaboration",
+        "Responding to change"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the main CPU is the Sega Mega Drive \\/ Sega Genesis?",
+      "correct_answer": "Motorola 68000",
+      "incorrect_answers": [
+        "Zilog Z80",
+        "Yamaha YM2612",
+        "Intel 8088"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "This mobile OS held the largest market share in 2012.",
+      "correct_answer": "iOS",
+      "incorrect_answers": [
+        "Android",
+        "BlackBerry",
+        "Symbian"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What was the first Android version specifically optimized for tablets?",
+      "correct_answer": "Honeycomb",
+      "incorrect_answers": [
+        "Eclair",
+        "Froyo",
+        "Marshmellow"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which of these people was NOT a founder of Apple Inc?",
+      "correct_answer": "Jonathan Ive",
+      "incorrect_answers": [
+        "Steve Jobs",
+        "Ronald Wayne",
+        "Steve Wozniak"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Laserjet and inkjet printers are both examples of what type of printer?",
+      "correct_answer": "Non-impact printer",
+      "incorrect_answers": [
+        "Impact printer",
+        "Daisywheel printer",
+        "Dot matrix printer"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What was the first company to use the term &quot;Golden Master&quot;?",
+      "correct_answer": "Apple",
+      "incorrect_answers": [
+        "IBM",
+        "Microsoft",
+        "Google"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How many values can a single byte represent?",
+      "correct_answer": "256",
+      "incorrect_answers": [
+        "8",
+        "1",
+        "1024"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Released in 2001, the first edition of Apple&#039;s Mac OS X operating system (version 10.0) was given what animal code name?",
+      "correct_answer": "Cheetah",
+      "incorrect_answers": [
+        "Puma",
+        "Tiger",
+        "Leopard"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What vulnerability ranked #1 on the OWASP Top 10 in 2013?",
+      "correct_answer": "Injection ",
+      "incorrect_answers": [
+        "Broken Authentication",
+        "Cross-Site Scripting",
+        "Insecure Direct Object References"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Approximately how many Apple I personal computers were created?",
+      "correct_answer": "200",
+      "incorrect_answers": [
+        "100",
+        "500",
+        "1000"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In programming, what do you call functions with the same name but different implementations?",
+      "correct_answer": "Overloading",
+      "incorrect_answers": [
+        "Overriding",
+        "Abstracting",
+        "Inheriting"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "According to DeMorgan&#039;s Theorem, the Boolean expression (AB)&#039; is equivalent to:",
+      "correct_answer": "A&#039; + B&#039;",
+      "incorrect_answers": [
+        "A&#039;B + B&#039;A",
+        "A&#039;B&#039;",
+        "AB&#039; + AB"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What major programming language does Unreal Engine 4 use?",
+      "correct_answer": "C++",
+      "incorrect_answers": [
+        "Assembly",
+        "C#",
+        "ECMAScript"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the number of keys on a standard Windows Keyboard?",
+      "correct_answer": "104",
+      "incorrect_answers": [
+        "64",
+        "94",
+        "76"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What was the name of the first Bulgarian personal computer?",
+      "correct_answer": "IMKO-1",
+      "incorrect_answers": [
+        "Pravetz 82",
+        "Pravetz 8D",
+        "IZOT 1030"
+      ]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What does the computer software acronym JVM stand for?",
+      "correct_answer": "Java Virtual Machine",
+      "incorrect_answers": [
+        "Java Vendor Machine",
+        "Java Visual Machine",
+        "Just Virtual Machine"
+      ]
+    }
+  ]
+}

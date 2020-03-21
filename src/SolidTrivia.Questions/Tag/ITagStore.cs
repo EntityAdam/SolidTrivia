@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SolidTrivia.Questions
 {
@@ -6,13 +7,13 @@ namespace SolidTrivia.Questions
     {
         void Create(string tagName);
         IEnumerable<NewTag> ListTags();
-        void TagQuestion(int questionId, int tagId);
-        IEnumerable<NewTag> ListAvailableTags(int questionId);
+        void TagQuestion(Guid questionId, Guid tagId);
+        IEnumerable<NewTag> ListAvailableTags(Guid questionId);
         bool ExistsOrdinalIgnoreCase(string tagName);
-        bool Exists(int tagId);
-        bool IsTagged(int questionId, int tagId);
-        void Delete(int tagId);
-        NewTag GetById(int tagId);
-        void Rename(int tagId, string newTagName);
+        bool Exists(Guid tagId);
+        bool IsTagged(Guid questionId, Guid tagId);
+        void Delete(Guid tagId);
+        NewTag GetById(Guid tagId);
+        void Rename(Guid tagId, string newTagName);
     }
 }

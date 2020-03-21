@@ -23,6 +23,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Common", "Solid
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Common.Tests", "SolidTrivia.Common.Tests\SolidTrivia.Common.Tests.csproj", "{7E45E262-645D-4655-A3AD-46AF4BC0835F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Questions.Storage", "SolidTrivia.Questions.Storage\SolidTrivia.Questions.Storage.csproj", "{F3215383-3A52-4DDE-8F6F-E0A8D9C8A907}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Questions.Import", "SolidTrivia.Questions.Import\SolidTrivia.Questions.Import.csproj", "{68543A95-1501-4E49-B0CD-2E8F0E686A67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidTrivia.Questions.Import.Tests", "SolidTrivia.Questions.Import.Tests\SolidTrivia.Questions.Import.Tests.csproj", "{F68EAB99-35FF-4B24-ABE7-3F71590DA0C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidTrivia.Questions.Storage.Tests", "SolidTrivia.Questions.Storage.Tests\SolidTrivia.Questions.Storage.Tests.csproj", "{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +77,22 @@ Global
 		{7E45E262-645D-4655-A3AD-46AF4BC0835F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E45E262-645D-4655-A3AD-46AF4BC0835F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E45E262-645D-4655-A3AD-46AF4BC0835F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3215383-3A52-4DDE-8F6F-E0A8D9C8A907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3215383-3A52-4DDE-8F6F-E0A8D9C8A907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3215383-3A52-4DDE-8F6F-E0A8D9C8A907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3215383-3A52-4DDE-8F6F-E0A8D9C8A907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68543A95-1501-4E49-B0CD-2E8F0E686A67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68543A95-1501-4E49-B0CD-2E8F0E686A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68543A95-1501-4E49-B0CD-2E8F0E686A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68543A95-1501-4E49-B0CD-2E8F0E686A67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F68EAB99-35FF-4B24-ABE7-3F71590DA0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F68EAB99-35FF-4B24-ABE7-3F71590DA0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F68EAB99-35FF-4B24-ABE7-3F71590DA0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F68EAB99-35FF-4B24-ABE7-3F71590DA0C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

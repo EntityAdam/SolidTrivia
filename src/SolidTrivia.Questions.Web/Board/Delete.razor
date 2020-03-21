@@ -1,4 +1,4 @@
-﻿@page "/board/delete/{boardId:int}"
+﻿@page "/board/delete/{boardId:guid}"
 @inject NavigationManager NavigationManager
 @inject BoardDeleteViewModel viewModel
 <h3>Delete</h3>
@@ -8,7 +8,7 @@
 @code {
 
     [Parameter]
-    public int boardId { get; set; }
+    public Guid boardId { get; set; }
 
     protected BoardDeleteViewModel ViewModel { get; set; }
 

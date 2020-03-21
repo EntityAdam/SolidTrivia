@@ -80,9 +80,9 @@ else
 
     protected void NavigateToCreate() => NavigationManager.NavigateTo($"question/create");
 
-    protected void Delete(int questionId) => NavigationManager.NavigateTo($"question/delete/{questionId}");
+    protected void Delete(Guid questionId) => NavigationManager.NavigateTo($"question/delete/{questionId}");
 
-    protected void Edit(int questionId) => NavigationManager.NavigateTo($"question/edit/{questionId}");
+    protected void Edit(Guid questionId) => NavigationManager.NavigateTo($"question/edit/{questionId}");
 
     protected void Prev() => ViewModel.PrevPageCommand.Execute(null);
 

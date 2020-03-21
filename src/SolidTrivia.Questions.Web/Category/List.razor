@@ -81,9 +81,9 @@ else
 
     protected void NavigateToCreate() => NavigationManager.NavigateTo($"category/create");
 
-    protected void Delete(int categoryId) => NavigationManager.NavigateTo($"category/delete/{categoryId}");
+    protected void Delete(Guid categoryId) => NavigationManager.NavigateTo($"category/delete/{categoryId}");
 
-    protected void Edit(int categoryId) => NavigationManager.NavigateTo($"category/edit/{categoryId}");
+    protected void Edit(Guid categoryId) => NavigationManager.NavigateTo($"category/edit/{categoryId}");
 
     protected void Prev() => ViewModel.PrevPageCommand.Execute(null);
 

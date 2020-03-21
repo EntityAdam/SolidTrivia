@@ -1,8 +1,10 @@
-﻿namespace SolidTrivia.Common
+﻿using System;
+
+namespace SolidTrivia.Common
 {
     public class TagDeleteModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -79,9 +79,9 @@ else
 
     protected void NavigateToCreate() => NavigationManager.NavigateTo($"tag/create");
 
-    protected void Delete(int tagId) => NavigationManager.NavigateTo($"tag/delete/{tagId}");
+    protected void Delete(Guid tagId) => NavigationManager.NavigateTo($"tag/delete/{tagId}");
 
-    protected void Edit(int tagId) => NavigationManager.NavigateTo($"tag/edit/{tagId}");
+    protected void Edit(Guid tagId) => NavigationManager.NavigateTo($"tag/edit/{tagId}");
 
     protected void Prev() => ViewModel.PrevPageCommand.Execute(null);
 

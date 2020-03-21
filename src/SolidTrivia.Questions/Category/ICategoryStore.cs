@@ -7,16 +7,16 @@ namespace SolidTrivia.Questions
     public interface ICategoryStore
     {
 
-        void Create(string categoryName);
-        void Delete(int categoryId);
-        void RemoveFromBoard(int boardId, int categoryId);
-        NewCategory GetById(int categoryId);
+        void Create(string name);
+        void Delete(Guid id);
+        void RemoveFromBoard(Guid id, Guid boardId);
+        NewCategory GetById(Guid id);
         IEnumerable<NewCategory> ListCategories();
-        IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId);
-        void AddToBoard(int boardId, int categoryId);
-        bool Exists(int categoryId);
-        void Rename(int categoryId, string newName);
-        bool ExistsOrdinalIgnoreCase(string categoryName);
-        IEnumerable<NewCategory> ListAvailable(int boardId);
+        IEnumerable<NewCategory> ListCategoriesOfBoard(Guid boardId);
+        void AddToBoard(Guid id, Guid boardId);
+        void Rename(Guid id, string newName);
+        bool ExistsOrdinalIgnoreCase(string name);
+        IEnumerable<NewCategory> ListAvailable(Guid boardId);
+        bool Exists(Guid id);
     }
 }

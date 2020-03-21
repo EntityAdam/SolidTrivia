@@ -20,39 +20,39 @@ namespace SolidTrivia.Tests
         {
             var x = new NewQuestion()
             {
-                Id = NewId(),
+                Id = Guid.NewGuid(),
                 MarkdownContent = question.MarkdownContent
 
             };
             Questions.Add(x);
         }
 
-        public bool Exists(int questionId) => Questions.Any(q => q.Id == questionId);
+        public bool Exists(Guid questionId) => Questions.Any(q => q.Id == questionId);
 
         //questions and categories
-        public IEnumerable<NewQuestion> ListQuestionsOfCategory(int categoryId) => Questions.Where(q => QuestionsCategories.Any(cq => cq.CategoryId == categoryId));
+        public IEnumerable<NewQuestion> ListQuestionsOfCategory(Guid categoryId) => Questions.Where(q => QuestionsCategories.Any(cq => cq.CategoryId == categoryId));
 
-        public void AddQuestionToCategory(int questionId, int categoryId) => QuestionsCategories.Add(new NewQuestionsCategory() { QuestionId = questionId, CategoryId = categoryId });
+        public void AddQuestionToCategory(Guid questionId, Guid categoryId) => QuestionsCategories.Add(new NewQuestionsCategory() { QuestionId = questionId, CategoryId = categoryId });
 
-        public bool IsQuestionInCategory(int questionId, int categoryId) => QuestionsCategories.Any(qc => qc.QuestionId == questionId && qc.CategoryId == categoryId);
+        public bool IsQuestionInCategory(Guid questionId, Guid categoryId) => QuestionsCategories.Any(qc => qc.QuestionId == questionId && qc.CategoryId == categoryId);
 
-        public NewQuestion GetById(int questionId) => Questions.Single(q => q.Id == questionId);
+        public NewQuestion GetById(Guid questionId) => Questions.Single(q => q.Id == questionId);
 
-        public void Delete(int questionId) => Questions.RemoveAll(q => q.Id == questionId);
+        public void Delete(Guid questionId) => Questions.RemoveAll(q => q.Id == questionId);
 
         public IEnumerable<NewQuestion> List() => Questions;
 
-        private int NewId()
-        {
-            var id = 1;
-            if (Questions.Count() > 0)
-            {
-                id = Questions.Max(c => c.Id) + 1;
-            }
-            return id;
-        }
+        //private int NewId()
+        //{
+        //    var id = 1;
+        //    if (Questions.Count() > 0)
+        //    {
+        //        id = Questions.Max(c => c.Id) + 1;
+        //    }
+        //    return id;
+        //}
 
-        public void EditContent(int questionId, string userInputMarkdown)
+        public void EditContent(Guid questionId, string userInputMarkdown)
         {
             var question = GetById(questionId);
             question.MarkdownContent = userInputMarkdown;

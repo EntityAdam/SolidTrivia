@@ -1,4 +1,4 @@
-﻿@page "/tag/edit/{tagId:int}"
+﻿@page "/tag/edit/{tagId:guid}"
 @inject NavigationManager NavigationManager
 @inject TagEditViewModel viewmodel
 
@@ -16,7 +16,7 @@
 
 @code {
     [Parameter]
-    public int tagId { get; set; }
+    public Guid tagId { get; set; }
 
     protected TagEditViewModel ViewModel { get; set; }
 

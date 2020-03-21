@@ -26,7 +26,7 @@ namespace SolidTrivia.Common
 
         public IBlazorCommand RenameCommand { get; set; }
 
-        public void Load(int boardId)
+        public void Load(Guid boardId)
         {
 
             //get the categories

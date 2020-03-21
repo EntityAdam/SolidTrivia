@@ -6,7 +6,7 @@ namespace SolidTrivia.Questions
 {
     public class NewQuestionsCategory
     {
-        public int QuestionId { get; set; }
-        public int CategoryId { get; set; }
+        public Guid QuestionId { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

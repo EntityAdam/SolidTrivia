@@ -17,17 +17,17 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public bool Exists(int tagId)
+        public bool Exists(Guid tagId)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsTagged(int questionId, int tagId)
+        public bool IsTagged(Guid questionId, Guid tagId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<NewTag> ListAvailableTags(int questionId)
+        public IEnumerable<NewTag> ListAvailableTags(Guid questionId)
         {
             throw new NotImplementedException();
         }
@@ -37,22 +37,22 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public void TagQuestion(int questionId, int tagId)
+        public void TagQuestion(Guid questionId, Guid tagId)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int tagId)
+        public void Delete(Guid tagId)
         {
             throw new NotImplementedException();
         }
 
-        public NewTag GetById(int tagId)
+        public NewTag GetById(Guid tagId)
         {
             throw new NotImplementedException();
         }
 
-        public void Rename(int tagId, string newTagName)
+        public void Rename(Guid tagId, string newTagName)
         {
             throw new NotImplementedException();
         }

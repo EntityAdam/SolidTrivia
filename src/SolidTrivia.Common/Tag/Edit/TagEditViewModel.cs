@@ -23,7 +23,7 @@ namespace SolidTrivia.Common
 
         public IBlazorCommand RenameCommand { get; set; }
 
-        public void Load(int tagId)
+        public void Load(Guid tagId)
         {
             var cat = facade.GetTag(tagId);
             EditModel = new TagEditModel()

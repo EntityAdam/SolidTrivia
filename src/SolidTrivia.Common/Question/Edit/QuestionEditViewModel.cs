@@ -44,7 +44,7 @@ namespace SolidTrivia.Common
 
         public void SaveQuestionMarkdown() => facade.EditQuestionContent(EditModel.Id, UserInputMarkdown);
 
-        public void Load(int questionId)
+        public void Load(Guid questionId)
         {
             var cat = facade.GetQuestion(questionId);
             EditModel = new QuestionEditModel()

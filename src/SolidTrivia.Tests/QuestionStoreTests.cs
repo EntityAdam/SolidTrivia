@@ -1,6 +1,7 @@
 ﻿using SolidTrivia.Questions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -8,6 +9,8 @@ namespace SolidTrivia.Tests
 {
     public class QuestionStoreTests
     {
+        public static Guid g1 => Guid.Parse("82734205-7b14-4922-9288-196e87513cf5");
+
         [Fact]
         public void CreateQuestion()
         {
@@ -20,20 +23,27 @@ namespace SolidTrivia.Tests
         {
             var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
             Assert.Throws<ArgumentNullException>(() => facade.CreateNewQuestion(null));
-            facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
+            facade.CreateNewQuestion(new NewQuestion());
+            facade.CreateNewQuestion(new NewQuestion());
+            facade.CreateNewQuestion(new NewQuestion());
 
-            var q = facade.GetQuestion(1);
-            Assert.Equal(1, q.Id);
+            Assert.Equal(3, facade.ListQuestions().Count());
         }
 
         [Fact]
         public void DeleteQuestion()
         {
             var facade = new QuestionFacade(new BoardStoreDummy(), new CategoryStoreDummy(), new CommentStoreDummy(), new QuestionStoreMock(), new TagStoreDummy(), new VoteStoreDummy());
-            facade.CreateNewQuestion(new NewQuestion() { Id = 1 });
-            facade.DeleteQuestion(1);
-            Assert.Empty(facade.ListQuestions());
-            Assert.Throws<ArgumentException>(() => facade.DeleteQuestion(1));
+            facade.CreateNewQuestion(new NewQuestion());
+            facade.CreateNewQuestion(new NewQuestion());
+            facade.CreateNewQuestion(new NewQuestion());
+
+            Assert.Equal(3, facade.ListQuestions().Count());
+
+            var question = facade.ListQuestions().First();
+            facade.DeleteQuestion(question.Id);
+            Assert.Equal(2, facade.ListQuestions().Count());
+            Assert.Throws<ArgumentException>(() => facade.DeleteQuestion(question.Id));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/question/edit/{questionId:int}"
+﻿@page "/question/edit/{questionId:guid}"
 @inject NavigationManager NavigationManager
 @inject QuestionEditViewModel viewModel
 
@@ -51,7 +51,7 @@
 
 @code {
     [Parameter]
-    public int questionId { get; set; }
+    public Guid questionId { get; set; }
 
     protected QuestionEditViewModel ViewModel { get; set; }
 

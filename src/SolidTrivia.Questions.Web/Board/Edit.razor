@@ -1,4 +1,4 @@
-﻿@page "/board/edit/{boardId:int}"
+﻿@page "/board/edit/{boardId:guid}"
 @inject NavigationManager NavigationManager
 @inject BoardEditViewModel viewModel
 
@@ -48,7 +48,7 @@ else
 
 @code {
     [Parameter]
-    public int boardId { get; set; }
+    public Guid boardId { get; set; }
 
     protected BoardEditViewModel ViewModel { get; set; }
 

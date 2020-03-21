@@ -1,4 +1,5 @@
 ﻿using SolidTrivia.Questions;
+using System;
 using System.Collections.Generic;
 
 namespace SolidTrivia.Tests
@@ -7,37 +8,37 @@ namespace SolidTrivia.Tests
     {
         public void Create(string name)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public void Delete(int boardId)
+        public void Delete(Guid id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public bool Exists(int boardId)
+        public bool Exists(Guid id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public NewBoard GetBoardById(int boardId)
+        public NewBoard GetBoardById(Guid id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public NewBoard GetBoardByName(string name)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public IEnumerable<NewBoard> List()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public void Rename(int boardId, string newBoardName)
+        public void Rename(Guid id, string newName)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

@@ -65,7 +65,7 @@ namespace SolidTrivia.Game
             if (string.IsNullOrEmpty(sessionId)) throw new ArgumentNullException(nameof(sessionId));
             if (smsNumber == null) throw new ArgumentNullException(nameof(smsNumber));
 
-            var session = gameSessions.SingleOrDefault(s => s.Id == sessionId);
+            var session = gameSessions.Single(s => s.Id == sessionId);
 
             if (session == null)
             {

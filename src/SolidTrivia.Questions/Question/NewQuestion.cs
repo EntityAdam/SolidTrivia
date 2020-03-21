@@ -6,10 +6,10 @@ namespace SolidTrivia.Questions
 {
     public class NewQuestion
     {
-        public int Id { get; set; }
-        public int? BoardId { get; set; }
-        public int? CategoryId { get; set; }
-        public bool Difficulty { get; set; }
+        public Guid Id { get; set; }
         public string MarkdownContent { get; set; }
+        public NewQuestionType QuestionType { get; set; }
+        public string CorrectResponse { get; set; }
+        public string Category { get; set; }
     }
 }

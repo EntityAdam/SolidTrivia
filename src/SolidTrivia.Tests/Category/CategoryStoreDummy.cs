@@ -7,37 +7,37 @@ namespace SolidTrivia.Tests
 {
     internal class CategoryStoreDummy : ICategoryStore
     {
-        public void AddToBoard(int boardId, int categoryId)
+        public void AddToBoard(Guid id, Guid boardId)
         {
             throw new NotImplementedException();
         }
 
-        public void Create(string categoryName)
+        public void Create(string name)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int categoryId)
+        public void Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Exists(int categoryId)
+        public bool Exists(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public bool ExistsOrdinalIgnoreCase(string categoryName)
+        public bool ExistsOrdinalIgnoreCase(string name)
         {
             throw new NotImplementedException();
         }
 
-        public NewCategory GetById(int categoryId)
+        public NewCategory GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<NewCategory> ListAvailable(int boardId)
+        public IEnumerable<NewCategory> ListAvailable(Guid boardId)
         {
             throw new NotImplementedException();
         }
@@ -47,22 +47,17 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<NewCategory> ListCategoriesOfBoard(int boardId)
+        public IEnumerable<NewCategory> ListCategoriesOfBoard(Guid boardId)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(int boardId, int categoryId)
+        public void RemoveFromBoard(Guid id, Guid boardId)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveFromBoard(int boardId, int categoryId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Rename(int categoryId, string newName)
+        public void Rename(Guid id, string newName)
         {
             throw new NotImplementedException();
         }

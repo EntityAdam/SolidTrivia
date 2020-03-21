@@ -1,4 +1,4 @@
-﻿@page "/category/edit/{categoryId:int}"
+﻿@page "/category/edit/{categoryId:guid}"
 @inject NavigationManager NavigationManager
 @inject CategoryEditViewModel viewModel
 
@@ -16,7 +16,7 @@
 
 @code {
     [Parameter]
-    public int categoryId { get; set; }
+    public Guid categoryId { get; set; }
 
     protected CategoryEditViewModel ViewModel { get; set; }
 

@@ -1,9 +1,11 @@
-﻿namespace SolidTrivia.Questions
+﻿using System;
+
+namespace SolidTrivia.Questions
 {
     public interface IVoteStore
     {
-        void UpVote(string userId, int questionId);
-        void DownVote(string userId, int questionId);
-        (int, int) GetVotes(int questionId);
+        void UpVote(string userId, Guid questionId);
+        void DownVote(string userId, Guid questionId);
+        (int, int) GetVotes(Guid questionId);
     }
 }

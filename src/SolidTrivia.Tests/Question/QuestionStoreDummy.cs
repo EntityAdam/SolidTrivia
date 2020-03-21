@@ -7,7 +7,7 @@ namespace SolidTrivia.Tests
 {
     internal class QuestionStoreDummy : IQuestionStore
     {
-        public void AddQuestionToCategory(int questionId, int categoryId)
+        public void AddQuestionToCategory(Guid questionId, Guid categoryId)
         {
             throw new NotImplementedException();
         }
@@ -17,27 +17,27 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public void Delete(int questionId)
+        public void Delete(Guid questionId)
         {
             throw new NotImplementedException();
         }
 
-        public void EditContent(int questionId, string userInputMarkdown)
+        public void EditContent(Guid questionId, string userInputMarkdown)
         {
             throw new NotImplementedException();
         }
 
-        public bool Exists(int questionId)
+        public bool Exists(Guid questionId)
         {
             throw new NotImplementedException();
         }
 
-        public NewQuestion GetById(int questionId)
+        public NewQuestion GetById(Guid questionId)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsQuestionInCategory(int questionId, int categoryId)
+        public bool IsQuestionInCategory(Guid questionId, Guid categoryId)
         {
             throw new NotImplementedException();
         }
@@ -47,7 +47,7 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<NewQuestion> ListQuestionsOfCategory(int categoryId)
+        public IEnumerable<NewQuestion> ListQuestionsOfCategory(Guid categoryId)
         {
             throw new NotImplementedException();
         }

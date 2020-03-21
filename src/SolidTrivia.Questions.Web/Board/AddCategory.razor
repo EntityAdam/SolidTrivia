@@ -1,4 +1,4 @@
-﻿@page "/board/category/{boardId:int}"
+﻿@page "/board/category/{boardId:guid}"
 @inject NavigationManager NavigationManager
 @inject BoardAddCategoryViewModel viewModel
 
@@ -98,7 +98,7 @@ else
     protected string NextButtonCssState => ViewModel.NextPageCommand.CanExecute(null) ? "" : DisabledCssClass;
 
     [Parameter]
-    public int boardId { get; set; }
+    public Guid boardId { get; set; }
 
     protected BoardAddCategoryViewModel ViewModel { get; set; }
 
@@ -109,13 +109,13 @@ else
         ViewModel.Load(boardId);
     }
 
-    protected void Add(int categoryId)
+    protected void Add(Guid categoryId)
     {
         ViewModel.AddCategoryCommand.Execute(categoryId);
 
     }
 
-    protected void Remove(int categoryId)
+    protected void Remove(Guid categoryId)
     {
         ViewModel.RemoveCategoryCommand.Execute(categoryId);
 

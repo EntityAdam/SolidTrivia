@@ -1,4 +1,4 @@
-﻿@page "/question/delete/{questionId:int}"
+﻿@page "/question/delete/{questionId:guid}"
 @inject NavigationManager NavigationManager
 @inject QuestionDeleteViewModel viewModel
 <h3>Delete</h3>
@@ -8,7 +8,7 @@
 @code {
 
     [Parameter]
-    public int questionId { get; set; }
+    public Guid questionId { get; set; }
 
     protected QuestionDeleteViewModel ViewModel { get; set; }
 

@@ -15,7 +15,7 @@ namespace SolidTrivia.Common
         public CategoryEditModel EditModel { get; set; }
         public IBlazorCommand RenameCommand { get; set; }
 
-        public void Load(int categoryId)
+        public void Load(Guid categoryId)
         {
             var cat = facade.GetCategory(categoryId);
             EditModel = new CategoryEditModel()

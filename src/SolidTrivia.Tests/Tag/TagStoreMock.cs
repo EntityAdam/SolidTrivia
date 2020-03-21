@@ -16,38 +16,38 @@ namespace SolidTrivia.Tests
 
         }
 
-        public void Create(string tagName) => Tags.Add(new NewTag() { Id = NewId(), Name = tagName });
+        public void Create(string tagName) => Tags.Add(new NewTag() { Id = Guid.NewGuid(), Name = tagName });
 
         public IEnumerable<NewTag> ListTags() => Tags;
 
-        public void TagQuestion(int questionId, int tagId) => TaggedQuestions.Add(new NewTaggedQuestion() { QuestionId = questionId, TagId = tagId });
+        public void TagQuestion(Guid questionId, Guid tagId) => TaggedQuestions.Add(new NewTaggedQuestion() { QuestionId = questionId, TagId = tagId });
 
         public bool ExistsOrdinalIgnoreCase(string tagName) => Tags.Any(t => string.Equals(t.Name, tagName, StringComparison.OrdinalIgnoreCase));
 
-        public IEnumerable<NewTag> ListAvailableTags(int questionId) => Tags.Where(t => !TaggedQuestions.Any(tq => tq.QuestionId == questionId && tq.TagId == t.Id));
+        public IEnumerable<NewTag> ListAvailableTags(Guid questionId) => Tags.Where(t => !TaggedQuestions.Any(tq => tq.QuestionId == questionId && tq.TagId == t.Id));
 
-        private int NewId()
-        {
-            var id = 1;
-            if (Tags.Count() > 0)
-            {
-                id = Tags.Max(c => c.Id) + 1;
-            }
-            return id;
-        }
+        //private int NewId()
+        //{
+        //    var id = 1;
+        //    if (Tags.Count() > 0)
+        //    {
+        //        id = Tags.Max(c => c.Id) + 1;
+        //    }
+        //    return id;
+        //}
 
-        public bool Exists(int tagId) => Tags.Any(t => t.Id == tagId);
+        public bool Exists(Guid tagId) => Tags.Any(t => t.Id == tagId);
 
-        public bool IsTagged(int questionId, int tagId) => TaggedQuestions.Any(tq => tq.QuestionId == questionId && tq.TagId == tagId);
+        public bool IsTagged(Guid questionId, Guid tagId) => TaggedQuestions.Any(tq => tq.QuestionId == questionId && tq.TagId == tagId);
 
-        public void Delete(int tagId)
+        public void Delete(Guid tagId)
         {
             var questions = TaggedQuestions.RemoveAll(tq=>tq.TagId == tagId); //remove tags from questions
             Tags.RemoveAll(t=>t.Id == tagId);
         }
 
-        public NewTag GetById(int tagId) => Tags.Single(t=>t.Id == tagId);
+        public NewTag GetById(Guid tagId) => Tags.Single(t=>t.Id == tagId);
 
-        public void Rename(int tagId, string newTagName) => GetById(tagId).Name = newTagName;
+        public void Rename(Guid tagId, string newTagName) => GetById(tagId).Name = newTagName;
     }
 }

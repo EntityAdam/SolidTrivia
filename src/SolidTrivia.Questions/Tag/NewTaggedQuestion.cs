@@ -1,9 +1,11 @@
-﻿namespace SolidTrivia.Questions
+﻿using System;
+
+namespace SolidTrivia.Questions
 {
     public class NewTaggedQuestion
     {
-        public int TagId { get; set; }
+        public Guid TagId { get; set; }
 
-        public int QuestionId { get; set; }
+        public Guid QuestionId { get; set; }
     }
 }

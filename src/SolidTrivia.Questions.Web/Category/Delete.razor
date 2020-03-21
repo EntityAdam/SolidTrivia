@@ -1,4 +1,4 @@
-﻿@page "/category/delete/{categoryId:int}"
+﻿@page "/category/delete/{categoryId:guid}"
 @inject NavigationManager NavigationManager
 @inject CategoryDeleteViewModel viewModel
 <h3>Delete</h3>
@@ -8,7 +8,7 @@
 @code {
 
     [Parameter]
-    public int categoryId { get; set; }
+    public Guid categoryId { get; set; }
 
     protected CategoryDeleteViewModel ViewModel { get; set; }
 

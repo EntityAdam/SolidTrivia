@@ -8,6 +8,6 @@ namespace SolidTrivia.Common
     public class QuestionDeleteModel
     {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

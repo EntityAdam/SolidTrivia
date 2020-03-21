@@ -22,7 +22,7 @@ namespace SolidTrivia.Common
 
         public IBlazorCommand DeleteCommand { get; set; }
 
-        public void Load(int tagId)
+        public void Load(Guid tagId)
         {
             var tag = facade.GetTag(tagId);
             DeleteModel = new TagDeleteModel()

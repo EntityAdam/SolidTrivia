@@ -7,17 +7,17 @@ namespace SolidTrivia.Tests
 {
     internal class VoteStoreDummy : IVoteStore
     {
-        public void DownVote(string userId, int questionId)
+        public void DownVote(string userId, Guid questionId)
         {
             throw new NotImplementedException();
         }
 
-        public (int, int) GetVotes(int questionId)
+        public (int, int) GetVotes(Guid questionId)
         {
             throw new NotImplementedException();
         }
 
-        public void UpVote(string userId, int questionId)
+        public void UpVote(string userId, Guid questionId)
         {
             throw new NotImplementedException();
         }

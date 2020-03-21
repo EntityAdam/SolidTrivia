@@ -81,9 +81,9 @@ else
 
     protected void NavigateToCreate() => NavigationManager.NavigateTo($"board/create");
 
-    protected void Delete(int boardId) => NavigationManager.NavigateTo($"board/delete/{boardId}");
+    protected void Delete(Guid boardId) => NavigationManager.NavigateTo($"board/delete/{boardId}");
 
-    protected void Edit(int boardId) => NavigationManager.NavigateTo($"board/edit/{boardId}");
+    protected void Edit(Guid boardId) => NavigationManager.NavigateTo($"board/edit/{boardId}");
 
     protected void Prev() => ViewModel.PrevPageCommand.Execute(null);
 
