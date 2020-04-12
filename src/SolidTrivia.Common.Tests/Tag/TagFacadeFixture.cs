@@ -37,7 +37,12 @@ namespace SolidTrivia.Common.Tests
 
         public void Dispose()
         {
-            //nothing to clean up
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            //nothing to dispose
         }
     }
 }

@@ -23,15 +23,5 @@ namespace SolidTrivia.Tests
         public IEnumerable<NewBoard> List() => Boards;
 
         public void Rename(Guid boardId, string newBoardName) => GetBoardById(boardId).Name = newBoardName;
-
-        //private int NewId()
-        //{
-        //    var id = 1;
-        //    if (Boards.Count() > 0)
-        //    {
-        //        id = Boards.Max(c => c.Id) + 1;
-        //    }
-        //    return id;
-        //}
     }
 }

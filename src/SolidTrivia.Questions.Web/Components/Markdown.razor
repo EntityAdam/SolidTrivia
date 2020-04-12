@@ -6,7 +6,7 @@
 }
 else
 {
-    @((MarkupString)BuildHtmlFromMarkdown(Content))
+    @(((MarkupString)Content))
 }
 
 @code {
@@ -16,5 +16,4 @@ else
         markdown: value,
         pipeline: new MarkdownPipelineBuilder().UseAdvancedExtensions().Build()
     );
-
 }

@@ -8,7 +8,7 @@ namespace SolidTrivia.Common.Tests
 {
     public class TagsViewModelTests : IClassFixture<TagFacadeFixture>
     {
-        TagFacadeFixture fixture;
+        readonly TagFacadeFixture fixture;
 
         public TagsViewModelTests(TagFacadeFixture fixture)
         {

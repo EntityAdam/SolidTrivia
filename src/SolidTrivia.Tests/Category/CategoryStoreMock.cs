@@ -18,7 +18,13 @@ namespace SolidTrivia.Tests
 
         #region Category
         //create
-        public void Create(string categoryName) => Categories.Add(new NewCategory() { Id = Guid.NewGuid(), Name = categoryName });
+        public Guid Create(string categoryName)
+        {
+            var newId = Guid.NewGuid();
+            Categories.Add(new NewCategory() { Id = newId, Name = categoryName });
+            return newId;
+
+        }
 
         //edit
         public void Rename(Guid categoryId, string newName) => GetById(categoryId).Name = newName;

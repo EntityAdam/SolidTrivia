@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -54,7 +56,7 @@ namespace SolidTrivia.Questions.Web
             services.AddScoped<BoardEditViewModel>();
             services.AddScoped<BoardListViewModel>();
             services.AddScoped<BoardAddCategoryViewModel>();
-            
+
             //ui category
             services.AddScoped<CategoryCreateViewModel>();
             services.AddScoped<CategoryDeleteViewModel>();
@@ -92,6 +94,62 @@ namespace SolidTrivia.Questions.Web
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+        }
+    }
+
+    public class MarkupStringSanitizedComponent : ComponentBase
+    {
+        private string sanitizedString;
+        [Parameter]
+        public string Text { get; set; }
+        protected override void OnParametersSet()
+        {
+            sanitizedString = Sanitize(Text);
+        }
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+            if (!string.IsNullOrEmpty(sanitizedString))
+                builder.AddMarkupContent(0, sanitizedString);
+        }
+
+        private static string Sanitize(string value)
+        {
+            var sanitizer = new HtmlSanitizer();
+            return sanitizer.Sanitize(value);
+        }
+    }
+
+    public static class MarkupStringExtensions
+    {
+        public static MarkupString Sanitize(this MarkupString markupString)
+        {
+            return new MarkupString(SanitizeInput(markupString.Value));
+        }
+
+        private static string SanitizeInput(string value)
+        {
+            var sanitizer = new HtmlSanitizer();
+            return sanitizer.Sanitize(value);
+        }
+    }
+
+    public struct MarkupStringSanitized
+    {
+        public MarkupStringSanitized(string value)
+        {
+            Value = Sanitize(value);
+        }
+
+        public string Value { get; }
+
+        public static explicit operator MarkupStringSanitized(string value) => new MarkupStringSanitized(value);
+
+        public override string ToString() => Value ?? string.Empty;
+
+        private static string Sanitize(string value)
+        {
+            var sanitizer = new HtmlSanitizer();
+            return sanitizer.Sanitize(value);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace SolidTrivia.Tests
             throw new NotImplementedException();
         }
 
-        public void Create(string name)
+        public Guid Create(string name)
         {
             throw new NotImplementedException();
         }

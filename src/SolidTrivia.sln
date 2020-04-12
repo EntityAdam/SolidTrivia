@@ -27,9 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Questions.Stora
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Questions.Import", "SolidTrivia.Questions.Import\SolidTrivia.Questions.Import.csproj", "{68543A95-1501-4E49-B0CD-2E8F0E686A67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidTrivia.Questions.Import.Tests", "SolidTrivia.Questions.Import.Tests\SolidTrivia.Questions.Import.Tests.csproj", "{F68EAB99-35FF-4B24-ABE7-3F71590DA0C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Questions.Import.Tests", "SolidTrivia.Questions.Import.Tests\SolidTrivia.Questions.Import.Tests.csproj", "{F68EAB99-35FF-4B24-ABE7-3F71590DA0C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidTrivia.Questions.Storage.Tests", "SolidTrivia.Questions.Storage.Tests\SolidTrivia.Questions.Storage.Tests.csproj", "{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidTrivia.Questions.Storage.Tests", "SolidTrivia.Questions.Storage.Tests\SolidTrivia.Questions.Storage.Tests.csproj", "{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trifle", "Trifle\Trifle.csproj", "{890BAE50-8B09-434C-A43A-F12387C330BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1D1F3E3-4014-41BB-AFEA-75353725A4B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{890BAE50-8B09-434C-A43A-F12387C330BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{890BAE50-8B09-434C-A43A-F12387C330BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{890BAE50-8B09-434C-A43A-F12387C330BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{890BAE50-8B09-434C-A43A-F12387C330BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

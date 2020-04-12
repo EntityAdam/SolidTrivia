@@ -9,7 +9,7 @@ namespace SolidTrivia.Common.Tests
 {
     public class BoardViewModelTests : IClassFixture<BoardFacadeFixture>
     {
-        BoardFacadeFixture fixture;
+        readonly BoardFacadeFixture fixture;
 
         public BoardViewModelTests(BoardFacadeFixture fixture)
         {

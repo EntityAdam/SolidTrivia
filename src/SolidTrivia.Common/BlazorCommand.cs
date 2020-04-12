@@ -17,8 +17,7 @@ namespace SolidTrivia.Common
 
         public BlazorCommand(Action execute, Func<bool> canExecute)
         {
-            if (execute == null) throw new ArgumentNullException(nameof(execute));
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 

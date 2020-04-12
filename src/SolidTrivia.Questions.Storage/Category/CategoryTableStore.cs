@@ -24,13 +24,15 @@ namespace SolidTrivia.Questions.Storage.Category
             throw new NotImplementedException();
         }
 
-        public void Create(string categoryName)
+        public Guid Create(string categoryName)
         {
-            var entity = new CategoryEntity("system", Guid.NewGuid())
+            var newId = Guid.NewGuid();
+            var entity = new CategoryEntity("system", newId)
             {
                 Name = categoryName
             };
             CategoryThing.InsertOrMergeEntityAsync(CloudTable, entity).Wait();
+            return newId;
         }
 
         public void Delete(Guid categoryId) //need to change to Guid

@@ -16,12 +16,12 @@ namespace SolidTrivia.Questions.Import.Tests
             var x = await OpenTdbImporter.ImportFromFile();
             var y = x;
         }
-        public async Task CanDeserialize() { }
-        public async Task CanDecodeBase64() { }
-        public async Task CanDecodeUrl() { }
+        public static async Task CanDeserialize() { }
+        public static async Task CanDecodeBase64() { }
+        public static async Task CanDecodeUrl() { }
 
-        //[Fact]
-        [Fact(Skip = "Actual Convert and store operation")]
+        [Fact]
+        //[Fact(Skip = "Actual Convert and store operation")]
         public async Task RunImport()
         {
 
@@ -29,10 +29,10 @@ namespace SolidTrivia.Questions.Import.Tests
             var request = await OpenTdbImporter.FetchFromApi();
             var questions = OpenTdbImporter.ConvertFromOpenTdb(request.Results);
 
-            //foreach (var q in questions)
-            //{
-            //    await store.Create(q.Category);
-            //}
+            foreach (var q in questions)
+            {
+                store.Create(q.Category);
+            }
 
         }
     }

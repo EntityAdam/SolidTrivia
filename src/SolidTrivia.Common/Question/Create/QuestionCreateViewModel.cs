@@ -28,7 +28,6 @@ namespace SolidTrivia.Common
             {
                 userInputMarkdown = value;
                 DisplaySanitizedHtml();
-                OnPropertyChanged(nameof(SanitizedHtmlDisplay));
             }
         }
 

@@ -51,10 +51,10 @@ namespace SolidTrivia.Questions.Import
             return await JsonSerializer.DeserializeAsync<OpenTdbModel>(await streamTask);
         }
 
-        public async static Task<OpenTdbModel> ConvertFromJson(string allText)
-        {
-            return JsonSerializer.Deserialize<OpenTdbModel>(allText);
-        }
+        //public async static Task<OpenTdbModel> ConvertFromJson(string allText)
+        //{
+        //    return JsonSerializer.Deserialize<OpenTdbModel>(allText);
+        //}
 
         public static IEnumerable<NewQuestion> ConvertFromOpenTdb(IEnumerable<OpenTdbResultModel> questions)
         {

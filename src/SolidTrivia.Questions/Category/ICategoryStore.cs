@@ -7,7 +7,7 @@ namespace SolidTrivia.Questions
     public interface ICategoryStore
     {
 
-        void Create(string name);
+        Guid Create(string name);
         void Delete(Guid id);
         void RemoveFromBoard(Guid id, Guid boardId);
         NewCategory GetById(Guid id);
