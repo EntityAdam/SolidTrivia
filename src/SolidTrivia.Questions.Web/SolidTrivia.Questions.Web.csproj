@@ -7,12 +7,14 @@
   <ItemGroup>
     <PackageReference Include="HtmlSanitizer" Version="5.0.298" />
     <PackageReference Include="Markdig" Version="0.18.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="System.Reactive" Version="4.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SolidTrivia.Common\SolidTrivia.Common.csproj" />
+    <ProjectReference Include="..\SolidTrivia.Questions.Storage\SolidTrivia.Questions.Storage.csproj" />
     <ProjectReference Include="..\SolidTrivia.Tests\SolidTrivia.Tests.csproj" />
   </ItemGroup>
 
